@@ -1,0 +1,18 @@
+/* xs screen menu */
+.menu_xs_screen {
+    nav {
+      div:nth-of-type(1) {
+        background-color: white;
+        a {
+          // text-decoration: none;
+          p {
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.8rem 0rem 0 0rem;
+          }
+        }
+      }
+    }
+  }
+  

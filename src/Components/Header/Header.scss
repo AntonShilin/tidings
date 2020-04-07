@@ -1,0 +1,108 @@
+.logo {
+  height: 6.875rem;
+  .logo-brand {
+    cursor: pointer;
+    p {
+      color: #000;
+      font-size: 7.375rem;
+      font-weight: 800;
+      line-height: 0.8em;
+      text-transform: uppercase;
+    }
+  }
+
+  .logo-moto {
+    p {
+      font-weight: 500;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+      line-height: 8em;
+    }
+  }
+}
+
+nav.row {
+  background: #f1f1f1;
+  div {
+    height: 3.125rem;
+    a {
+        text-decoration: none;
+      p {
+        text-transform: uppercase;
+        padding: 0.8rem 0.75rem 0 0.75rem;
+        color: #000;
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0;
+      }
+    }
+    &:hover {
+      background-color: #f7ab20;
+      cursor: pointer;
+    }
+  }
+}
+
+div.more {
+  &:hover {
+    div {
+      background-color: #000 !important;
+      a {
+        p {
+          color: white;
+          &:hover {
+            color: #f7ab20;
+          }
+        }
+      }
+    }
+    div:nth-of-type(2) {
+      visibility: visible;
+      div {
+        background-color: #000;
+        &:hover {
+          p {
+            color: #f7ab20;
+          }
+        }
+        a {
+          p {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  div:nth-of-type(2) {
+    visibility: hidden;
+  }
+}
+
+div.trending {
+  border-left-width: 0.125rem;
+  border-left-style: solid;
+  border-left-color: white;
+  border-right-width: 0.125rem;
+  border-right-style: solid;
+  border-right-color: white;
+  &:hover {
+    background-color: #ff0044 !important;
+    a {
+      p {
+        color: white !important;
+      }
+    }
+  }
+}
+
+div.search {
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
