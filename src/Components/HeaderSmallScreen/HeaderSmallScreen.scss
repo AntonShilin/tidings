@@ -1,10 +1,13 @@
 /* xs screen menu */
 .menu_xs_screen {
     nav {
+      border-bottom: 0.125rem solid white;
+      div{
+        border-right: 0.125rem solid white;
+      }
       div:nth-of-type(1) {
         background-color: white;
         a {
-          // text-decoration: none;
           p {
             color: #000;
             font-weight: 700;
@@ -16,3 +19,19 @@
     }
   }
   
+  .menu_all_xs_screen{
+    nav {
+      div {
+        background-color: #f1f1f1;
+        border-bottom: 0.125rem solid white;
+        a {
+          p {
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.8rem 0rem 0 0rem;
+          }
+        }
+      }
+    }
+  }

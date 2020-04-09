@@ -2,7 +2,9 @@ import * as React from "react";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { FiChevronsDown } from "react-icons/fi";
 import HeaderSmallScreen from "../HeaderSmallScreen/HeaderSmallScreen";
+import TitlePage from "../TitlePage/TitlePage";
 
 export interface Props {}
 
@@ -11,7 +13,6 @@ export interface State {}
 class Header extends React.Component<Props, State> {
   render() {
     return (
-      <React.Fragment>
         <div className="container d-lg-block d-md-block d-none">
           <div className="row logo">
             <div className="col-lg-6 col-md-6 logo-brand">
@@ -23,9 +24,9 @@ class Header extends React.Component<Props, State> {
           </div>
           <nav className="row">
             <div className="col">
-              <a className="">
+              <NavLink to="/news" className="">
                 <p className="text-center">News</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col">
               <a className="">
@@ -41,7 +42,18 @@ class Header extends React.Component<Props, State> {
               <div className="row">
                 <div className="col-12">
                   <a className="">
-                    <p className="text-center">More</p>
+                    <p className="text-center">
+                      More
+                      <span className="">
+                        <FiChevronsDown
+                          style={{
+                            fontSize: "1rem",
+                            marginBottom: ".2rem",
+                            marginLeft: ".1rem",
+                          }}
+                        />
+                      </span>
+                    </p>
                   </a>
                 </div>
               </div>
@@ -85,8 +97,6 @@ class Header extends React.Component<Props, State> {
             </div>
           </nav>
         </div>
-        <HeaderSmallScreen/>
-      </React.Fragment>
     );
   }
 }
