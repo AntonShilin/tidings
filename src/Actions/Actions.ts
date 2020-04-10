@@ -1,4 +1,4 @@
-import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes } from "../Types/Types";
+import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes } from "../Types/Types";
 import { Dispatch } from "redux";
 
 export const getData = (url: string) => {
@@ -34,6 +34,44 @@ export const getEntertainment = (url: string) => {
       .then((news) =>
         dispatch({
           type: GetEntertainmentTypes.GETENTERTAINMENT,
+          data: news
+        })
+      );
+  };
+};
+
+export const getTrending = (url: string) => {
+  return (dispatch: Dispatch) => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((news) =>
+        dispatch({
+          type: GetTrendingTypes.GETTRENDING,
+          data: news
+        })
+      );
+  };
+};
+
+export const getTech = (url: string) => {
+  return (dispatch: Dispatch) => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((news) =>
+        dispatch({
+          type: GetTechTypes.GETTECH,
           data: news
         })
       );

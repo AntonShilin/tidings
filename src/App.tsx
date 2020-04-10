@@ -3,8 +3,9 @@ import "./App.scss";
 import Header from "./Components/Header/Header";
 import TitlePage from "./Components/TitlePage/TitlePage";
 import { BrowserRouter } from "react-router-dom";
-import Routes from "./Reducers/Routes";
+import Routes from "./Routes/Routes";
 import HeaderSmallScreen from "./Components/HeaderSmallScreen/HeaderSmallScreen";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <HeaderSmallScreen />
       <Routes />
+      <Footer/>
     </BrowserRouter>
   );
 }

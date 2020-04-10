@@ -60,7 +60,7 @@ class Header extends React.Component<Props, State> {
               <div className="row">
                 <div className="col-12">
                   <a className="">
-                    <p className="text-center">Technology</p>
+                    <p className="text-center">Tech</p>
                   </a>
                 </div>
                 <div className="col-12">

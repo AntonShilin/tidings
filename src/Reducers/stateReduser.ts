@@ -5,12 +5,16 @@ import {
   GetDataTypes,
   isLoadingTypes,
   GetEntertainmentTypes,
+  GetTrendingTypes,
+  GetTechTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
 const initialState: IMainState = {
   data: null,
-  entertainment: null,
+    entertainment: null,
+    trendingNews: null,
+    techNews:null
 };
 
 export const stateReducer: Reducer<IMainState, MainActions> = (
@@ -35,6 +39,20 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     case isLoadingTypes.LOADING: {
       return {
         ...state,
+      };
+      }
+          
+    case GetTrendingTypes.GETTRENDING: {
+      return {
+          ...state,
+          trendingNews: action.data
+      };
+      }
+          
+    case GetTechTypes.GETTECH: {
+      return {
+          ...state,
+          techNews: action.data
       };
     }
 

@@ -4,6 +4,8 @@ import { getData, getEntertainment } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
+import Trending from "../Trending/Trending";
+import TechPage from "../TechPage/TechPage";
 
 export interface TitlePageProps {
   latestNews: any | null;
@@ -51,6 +53,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
     return this.props.latestNews === null ? (
       "Loading..."
     ) : (
+      <React.Fragment>
       <div className="container mt-5">
         <div className="row">
           <div className="col-lg-8">
@@ -67,7 +70,9 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                   />
                   <p>
                     {this.props.latestNews.articles[0].description}
-                    <FiChevronsRight  style={{color: 'orange', strokeWidth: 4 }}/>
+                    <FiChevronsRight
+                      style={{ color: "orange", strokeWidth: 4 }}
+                    />
                   </p>
                 </div>
               </div>
@@ -89,7 +94,9 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                       />
                       <p>
                         {article.description}
-                        <FiChevronsRight style={{ color: this.colors[i], strokeWidth: 4 }}/>
+                        <FiChevronsRight
+                          style={{ color: this.colors[i], strokeWidth: 4 }}
+                        />
                       </p>
                     </div>
                   ) : null
@@ -101,6 +108,9 @@ class TitlePage extends React.Component<TitlePageProps, State> {
           </div>
         </div>
       </div>
+          <Trending />
+        <TechPage />
+      </React.Fragment>
     );
   }
 }
