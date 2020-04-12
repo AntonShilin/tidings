@@ -2,38 +2,18 @@ import * as React from "react";
 import { getTech } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
-import "./TechPage.scss";
+import "./PreviewTech.scss";
 
-export interface TechPageProps {
+export interface PreviewTechProps {
   techNews: any | null;
   getTech: typeof getTech;
 }
 
 export interface State {}
 
-class TechPage extends React.Component<TechPageProps, State> {
+class PreviewTech extends React.Component<PreviewTechProps, State> {
   keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
-  colors: string[] = [
-    "blue",
-    "indigo",
-    "purple",
-    "pink",
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "teal",
-    "cyan",
-    "white",
-    "gray",
-    "gray-dark",
-    "primary",
-    "secondary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-  ];
+
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
@@ -43,13 +23,16 @@ class TechPage extends React.Component<TechPageProps, State> {
   }
   render() {
     return this.props.techNews === null ? (
-      "Loading"
+     null
     ) : (
       <div className="container">
         <div className="row mt-3 tech-news-header">
           <div className="col">
             <h3>
-              <mark>Tech</mark>
+              <mark>
+                Tech
+                <FiChevronsRight style={{ color: "white", strokeWidth: 4 }} />
+              </mark>
             </h3>
           </div>
           <div className="col">
@@ -68,7 +51,7 @@ class TechPage extends React.Component<TechPageProps, State> {
                     <mark>
                       {article.title}
                       <FiChevronsRight
-                        style={{ color: "cyan", strokeWidth: 4 }}
+                        style={{ color: "white", strokeWidth: 4 }}
                       />
                     </mark>
                   </h5>
@@ -88,7 +71,7 @@ class TechPage extends React.Component<TechPageProps, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    techNews: state.data_news.techNews,
+    techNews: state.data_news.techNews
   };
 };
 
@@ -98,4 +81,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TechPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PreviewTech);

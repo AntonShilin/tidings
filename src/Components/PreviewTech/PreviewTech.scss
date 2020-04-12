@@ -30,14 +30,19 @@
     height: 14rem;
     width: 100%;
     position: relative;
-  }
-  h5 {
-    position: absolute;
-    bottom: 1rem;
-    mark {
-      font-size: 1rem;
-      font-weight: 700;
-      background-color: cyan;
+    h5 {
+      position: absolute;
+      bottom: 1rem;
+      mark {
+        color: #000;
+        font-size: 1rem;
+        font-weight: 700;
+        background-color: cyan;
+        opacity: 0.85;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
+}
 }

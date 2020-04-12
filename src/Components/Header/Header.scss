@@ -1,13 +1,19 @@
+  
+  header{
+    position: relative;
+z-index: 5;
+
 .logo {
   height: 6.875rem;
   .logo-brand {
     cursor: pointer;
-    p {
+    a {
       color: #000;
       font-size: 7.375rem;
       font-weight: 800;
       line-height: 0.8em;
       text-transform: uppercase;
+      text-decoration: none;
     }
   }
 
@@ -106,3 +112,4 @@ div.search {
   }
 }
 
+}

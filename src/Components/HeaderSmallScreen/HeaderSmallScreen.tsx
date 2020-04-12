@@ -2,82 +2,95 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { FiChevronsDown } from "react-icons/fi";
 import "./HeaderSmallScreen.scss";
+import { connect } from "react-redux";
+import { toggleSmallScreenMenu } from "../../Actions/Actions";
 
-export interface Props {}
+export interface HeaderSmScreenProps {
+  toggleSmallScreenMenu: typeof toggleSmallScreenMenu;
+}
 
 export interface State {}
 
-class HeaderSmallScreen extends React.Component<Props, State> {
+class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
+  private submenu = React.createRef<HTMLDivElement>();
+
+
   render() {
+    console.log("ref",this.submenu)
     return (
-      <React.Fragment>
-        <div className="container d-xs-block d-sm-block d-md-none d-lg-none menu_xs_screen">
-          <nav className="row">
-            <div className="col-3">
-              <a href="#">
+      <div className="container">
+          <nav className="row main-menu-xs-screen">
+            <div className="col-4">
+              <NavLink to="/" className="">
                 <p className="text-center">Tidings</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-3">
-              <a href="#">
+              <NavLink to="/news" className="">
                 <p className="text-center">News</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-3">
-              <a href="#">
-                <p className="text-center">Sport</p>
-              </a>
+              <NavLink to="/moresport" className="">
+                <p className="text-center">Sports</p>
+              </NavLink>
             </div>
-            <div className="col-3">
-              <a href="#">
-                <p className="text-center">
+            <div
+              className="col-2"
+              onClick={(e) => this.props.toggleSmallScreenMenu(e,this.submenu.current!)}
+            >
+              <NavLink to="#" className="">
+                <p className="text-center text-nowrap"> 
                   All{" "}
-                  <span>
-                    <FiChevronsDown
-                      style={{
-                        fontSize: "1rem",
-                        marginBottom: ".2rem",
-                        marginLeft: ".1rem",
-                      }}
-                    />
-                  </span>
+                  <FiChevronsDown
+                    style={{
+                      fontSize: "1rem",
+                      marginBottom: ".2rem",
+                    }}
+                  />
                 </p>
-              </a>
+              </NavLink>
             </div>
           </nav>
-        </div>
-        <div className="container menu_all_xs_screen d-xs-block d-sm-block d-md-none d-lg-none">
-          <nav className="row">
+          <nav className="row  submenu-menu-xs-screen" ref={this.submenu}>
             <div className="col-12 text-center">
-              <a href="#">
+              <NavLink to="/morebusiness" className="">
                 <p className="text-center">Business</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-12 text-center">
-              <a href="#">
+              <NavLink to="/moreentertainment" className="">
                 <p className="text-center">Entertainment</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-12 text-center">
-              <a href="#">
+              <NavLink to="#" className="">
                 <p className="text-center">Technology</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-12 text-center">
-              <a href="#">
+              <NavLink to="#" className="">
                 <p className="text-center">Science</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-12 text-center">
-              <a href="#">
+              <NavLink to="#" className="">
                 <p className="text-center">Health</p>
-              </a>
+              </NavLink>
             </div>
           </nav>
-        </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
-export default HeaderSmallScreen;
+
+
+const mapDispatchToProps = (dispatch:any) => {
+  return {
+    toggleSmallScreenMenu: (e: React.MouseEvent, elem: HTMLDivElement) =>
+      dispatch(toggleSmallScreenMenu(e,elem))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(HeaderSmallScreen);

@@ -1,10 +1,9 @@
 import * as React from "react";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+import { FaCaretSquareRight } from "react-icons/fa";
 import { FiChevronsDown } from "react-icons/fi";
 import HeaderSmallScreen from "../HeaderSmallScreen/HeaderSmallScreen";
-import TitlePage from "../TitlePage/TitlePage";
 
 export interface Props {}
 
@@ -13,10 +12,13 @@ export interface State {}
 class Header extends React.Component<Props, State> {
   render() {
     return (
-        <div className="container d-lg-block d-md-block d-none">
+      <React.Fragment>
+        <header className="container d-lg-block d-md-block d-none">
           <div className="row logo">
             <div className="col-lg-6 col-md-6 logo-brand">
-              <p className="text-start">Tidings</p>
+              <NavLink to="/" className="">
+                Tidings
+              </NavLink>
             </div>
             <div className="col-lg-6 col-md-6 logo-moto d-sm-none d-md-none d-lg-block">
               <p className="text-center">News... but not as you know it</p>
@@ -29,14 +31,14 @@ class Header extends React.Component<Props, State> {
               </NavLink>
             </div>
             <div className="col">
-              <a className="">
+              <NavLink to="/morebusiness" className="">
                 <p className="text-center">Business</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col d-lg-block d-none">
-              <a className="">
+              <NavLink to="/moreentertainment" className="">
                 <p className="text-center">Entertainment</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col more">
               <div className="row">
@@ -74,14 +76,14 @@ class Header extends React.Component<Props, State> {
                   </a>
                 </div>
                 <div className="col-12">
-                  <a className="">
-                    <p className="text-center">Sports</p>
-                  </a>
+                  <NavLink to="/moresport" className="">
+                    <p className="text-center">Sport</p>
+                  </NavLink>
                 </div>
                 <div className="col-12 d-md-block d-lg-none">
-                  <a className="">
+                  <NavLink to="/moreentertainment" className="">
                     <p className="text-center">Entertainment</p>
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -92,11 +94,15 @@ class Header extends React.Component<Props, State> {
             </div>
             <div className="col-auto p-0 search">
               <button className="">
-                <FaSearch style={{ fontSize: "1.5rem" }} />
+                <FaCaretSquareRight
+                  style={{ fontSize: "1.5rem", color: "#007bff" }}
+                />
               </button>
             </div>
           </nav>
-        </div>
+        </header>
+        <HeaderSmallScreen />
+      </React.Fragment>
     );
   }
 }

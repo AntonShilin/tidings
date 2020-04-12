@@ -2,22 +2,21 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { getTrending } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
-import "./Trending.scss";
+import "./PreviewTrending.scss";
 
-export interface TrendingProps {
+export interface PreviewTrendingProps {
   trendingNews: any | null;
   getTrending: typeof getTrending;
 }
 
 export interface State {}
 
-class Trending extends React.Component<TrendingProps, State> {
+class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
   keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
   colors: string[] = [
     "blue",
     "indigo",
     "purple",
-    "pink",
     "red",
     "orange",
     "yellow",
@@ -44,13 +43,16 @@ class Trending extends React.Component<TrendingProps, State> {
 
   render() {
     return this.props.trendingNews === null ? (
-      "Loading"
+     null
     ) : (
       <div className="container">
         <div className="row mt-3 trending-news-header">
           <div className="col">
             <h3>
-              <mark>What is the trending now</mark>
+              <mark>
+                What is the trending now
+                <FiChevronsRight style={{ color: "white", strokeWidth: 4 }} />
+              </mark>
             </h3>
           </div>
           <div className="col">
@@ -97,4 +99,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Trending);
+export default connect(mapStateToProps, mapDispatchToProps)(PreviewTrending);

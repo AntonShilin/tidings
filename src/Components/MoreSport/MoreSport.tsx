@@ -1,59 +1,55 @@
 import * as React from "react";
-import "./TitlePage.scss";
-import { getData, getEntertainment } from "../../Actions/Actions";
+import "./MoreSport.scss";
+import { getSport } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
-import PreviewTrending from "../PreviewTrending/PreviewTrending";
-import PreviewTech from "../PreviewTech/PreviewTech";
-import PreviewBusiness from "../PreviewBusiness/PreviewBusiness";
-import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
 
-export interface TitlePageProps {
-  latestNews: any | null;
-  getData: typeof getData;
+export interface MoreSportProps {
+  sportNews: any | null;
+  getSport: typeof getSport;
   colors: string[];
 }
 
 export interface State {}
 
-class TitlePage extends React.Component<TitlePageProps, State> {
+class MoreSport extends React.Component<MoreSportProps, State> {
   keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
-  
-  constructor(props: TitlePageProps) {
+
+  constructor(props: MoreSportProps) {
     super(props);
   }
 
   componentDidMount() {
-    if (this.props.latestNews === null) {
-      this.props.getData(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.keyAPI}`
+    if (this.props.sportNews === null) {
+      this.props.getSport(
+        `http://newsapi.org/v2/top-headlines?country=gb&category=sports&apiKey=${this.keyAPI}`
       );
     }
   }
 
   render() {
-    return this.props.latestNews === null ? (
-      <Preloader/>
+    return this.props.sportNews === null ? (
+      <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container title-page">
+        <div className="container mt-5 header-sport-article">
           <div className="row">
             <div className="col-lg-8">
               <div className="row">
                 <div className="col">
-                  <div className="latest_articles">
+                  <div className="latest-sport-article">
                     <h3>
-                      <mark>{this.props.latestNews.articles[0].title}</mark>
+                      <mark>{this.props.sportNews.articles[9].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.latestNews.articles[0].urlToImage}
+                      src={this.props.sportNews.articles[9].urlToImage}
                       alt=""
                     />
                     <p>
-                      {this.props.latestNews.articles[0].description}
+                      {this.props.sportNews.articles[9].description}
                       <FiChevronsRight
                         style={{ color: "orange", strokeWidth: 4 }}
                       />
@@ -61,13 +57,19 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                   </div>
                 </div>
               </div>
-              <div className="row main-news">
-                {this.props.latestNews.articles.map(
+              <div className="row main-sport-news">
+                {this.props.sportNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                   (i>0 && i < 11) ? (
+                    i > 9 ? (
                       <div className="col-6" key={i}>
                         <h5>
-                          <mark style={{ backgroundColor: this.props.colors[i] }}>
+                          <mark
+                            style={{
+                              backgroundColor: this.props.colors[
+                                this.props.colors.length - i
+                              ],
+                            }}
+                          >
                             {article.title}
                           </mark>
                         </h5>
@@ -79,7 +81,12 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                         <p>
                           {article.description}
                           <FiChevronsRight
-                            style={{ color: this.props.colors[i], strokeWidth: 4 }}
+                            style={{
+                              color: this.props.colors[
+                                this.props.colors.length - i
+                              ],
+                              strokeWidth: 4,
+                            }}
                           />
                         </p>
                       </div>
@@ -87,15 +94,11 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-lg-4 d-lg-block d-md-none">
               <RightSidebar />
             </div>
           </div>
         </div>
-        <PreviewTrending />
-        <PreviewTech />
-        <PreviewBusiness />
-        <PreviewSport />
       </React.Fragment>
     );
   }
@@ -103,15 +106,15 @@ class TitlePage extends React.Component<TitlePageProps, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    latestNews: state.data_news.data,
+    sportNews: state.data_news.sportNews,
     colors: state.data_news.colors
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getData: (url: string) => dispatch(getData(url)),
+    getSport: (url: string) => dispatch(getSport(url)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TitlePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MoreSport);

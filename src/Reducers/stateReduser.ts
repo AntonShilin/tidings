@@ -7,14 +7,56 @@ import {
   GetEntertainmentTypes,
   GetTrendingTypes,
   GetTechTypes,
+  GetBusinessTypes,
+  GetSportTypes,
+  GetHeadlineNewsTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
 const initialState: IMainState = {
   data: null,
-    entertainment: null,
-    trendingNews: null,
-    techNews:null
+  entertainmentNews: null,
+  trendingNews: null,
+  techNews: null,
+  businessNews: null,
+  sportNews: null,
+  headlineNews: null,
+  colors: [
+    "blue",
+    "indigo",
+    "purple",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "teal",
+    "cyan",
+    "gray",
+    "gray-dark",
+    "primary",
+    "secondary",
+    "success",
+    "info",
+    "warning",
+    "danger",
+    "blue",
+    "indigo",
+    "purple",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "teal",
+    "cyan",
+    "gray",
+    "gray-dark",
+    "primary",
+    "secondary",
+    "success",
+    "info",
+    "warning",
+    "danger",
+  ],
 };
 
 export const stateReducer: Reducer<IMainState, MainActions> = (
@@ -31,8 +73,8 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
 
     case GetEntertainmentTypes.GETENTERTAINMENT: {
       return {
-          ...state,
-          entertainment: action.data
+        ...state,
+        entertainmentNews: action.data,
       };
     }
 
@@ -40,19 +82,40 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
       return {
         ...state,
       };
-      }
-          
+    }
+
     case GetTrendingTypes.GETTRENDING: {
       return {
-          ...state,
-          trendingNews: action.data
+        ...state,
+        trendingNews: action.data,
       };
-      }
-          
+    }
+
     case GetTechTypes.GETTECH: {
       return {
-          ...state,
-          techNews: action.data
+        ...state,
+        techNews: action.data,
+      };
+    }
+
+    case GetBusinessTypes.GETBUSINESS: {
+      return {
+        ...state,
+        businessNews: action.data,
+      };
+    }
+
+    case GetSportTypes.GETSPORT: {
+      return {
+        ...state,
+        sportNews: action.data,
+      };
+    }
+
+    case GetHeadlineNewsTypes.GETHEADLINENEWS: {
+      return {
+        ...state,
+        headlineNews: action.data,
       };
     }
 
