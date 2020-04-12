@@ -26,8 +26,22 @@ export enum GetSportTypes {
 export enum GetHeadlineNewsTypes {
   GETHEADLINENEWS= "GETHEADLINENEWS",
 }
+export enum GetHealthTypes {
+  GETHEALTH= "GETHEALTH",
+}
+export enum GetScienceTypes {
+  GETSCIENCE= "GETSCIENCE",
+}
 
 /* interfaces */
+export interface IScienceAction {
+  type:GetHealthTypes.GETHEALTH;
+  data: any;
+}
+export interface IHealthAction {
+  type:GetScienceTypes.GETSCIENCE;
+  data: any;
+}
 export interface IHeadlineNewsAction {
   type:GetHeadlineNewsTypes.GETHEADLINENEWS;
   data: any;
@@ -73,7 +87,9 @@ export type MainActions =
     | ITechAction
     | IBusinessAction
   | ISportAction
-  |IHeadlineNewsAction
+  | IHeadlineNewsAction
+  | IHealthAction
+  |IScienceAction
   | IGetEntertainmentAction;
 
 export interface IMainState {
@@ -84,5 +100,7 @@ export interface IMainState {
   readonly businessNews: any;
   readonly sportNews: any;
   readonly headlineNews: any;
+  readonly healthNews: any;
+  readonly scienceNews: any;
   readonly colors: string[];
 }

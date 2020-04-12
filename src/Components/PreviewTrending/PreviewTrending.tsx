@@ -13,26 +13,7 @@ export interface State {}
 
 class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
   keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
-  colors: string[] = [
-    "blue",
-    "indigo",
-    "purple",
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "teal",
-    "cyan",
-    "white",
-    "gray",
-    "gray-dark",
-    "primary",
-    "secondary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-  ];
+  
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(

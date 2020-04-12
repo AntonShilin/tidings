@@ -1,4 +1,4 @@
-import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu } from "../Types/Types";
+import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes } from "../Types/Types";
 import { Dispatch } from "redux";
 
 export const getData = (url: string) => {
@@ -34,6 +34,25 @@ export const getEntertainment = (url: string) => {
       .then((news) =>
         dispatch({
           type: GetEntertainmentTypes.GETENTERTAINMENT,
+          data: news
+        })
+      );
+  };
+};
+
+export const getScience = (url: string) => {
+  return (dispatch: Dispatch) => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((news) =>
+        dispatch({
+          type: GetScienceTypes.GETSCIENCE,
           data: news
         })
       );
@@ -129,6 +148,25 @@ export const getNews = (url: string) => {
       .then((news) =>
         dispatch({
           type: GetHeadlineNewsTypes.GETHEADLINENEWS,
+          data: news
+        })
+      );
+  };
+};
+
+export const getHealth = (url: string) => {
+  return (dispatch: Dispatch) => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((news) =>
+        dispatch({
+          type: GetHealthTypes.GETHEALTH,
           data: news
         })
       );

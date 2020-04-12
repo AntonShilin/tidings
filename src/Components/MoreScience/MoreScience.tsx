@@ -1,51 +1,50 @@
 import * as React from "react";
-import { getBusiness } from "../../Actions/Actions";
+import { getScience } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
-import "./MoreBusiness.scss";
+import "./MoreScience.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 
-export interface MoreBusinessProps {
-  businessNews: any | null;
-  getBusiness: typeof getBusiness;
+export interface MoreScienceProps {
+  scienceNews: any | null;
+  getScience: typeof getScience;
   colors: string[];
 }
 
 export interface State {}
 
-class MoreBusiness extends React.Component<MoreBusinessProps, State> {
+class MoreScience extends React.Component<MoreScienceProps, State> {
   keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
 
   componentDidMount() {
-    if (this.props.businessNews === null) {
-      this.props.getBusiness(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
+    if (this.props.scienceNews === null) {
+      this.props.getScience(
+        `https://newsapi.org/v2/top-headlines?country=ie&category=science&apiKey=${this.keyAPI}`
       );
     }
   }
   render() {
-    console.log(this.props.businessNews)
-    return this.props.businessNews === null ? (
+    return this.props.scienceNews === null ? (
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 business-news-article">
+        <div className="container mt-5 science-news-article">
           <div className="row">
             <div className="col-lg-8">
               <div className="row">
                 <div className="col">
-                  <div className="latest-business-article">
+                  <div className="latest-science-article">
                     <h3>
-                      <mark>{this.props.businessNews.articles[7].title}</mark>
+                      <mark>{this.props.scienceNews.articles[0].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.businessNews.articles[7].urlToImage}
+                      src={this.props.scienceNews.articles[0].urlToImage}
                       alt=""
                     />
                     <p>
-                      {this.props.businessNews.articles[7].description}
+                      {this.props.scienceNews.articles[0].description}
                       <FiChevronsRight
                         style={{ color: "orange", strokeWidth: 4 }}
                       />
@@ -53,8 +52,8 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                   </div>
                 </div>
               </div>
-              <div className="row business-news-news">
-                {this.props.businessNews.articles.map(
+              <div className="row science-news-news">
+                {this.props.scienceNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 7 ? (
                       <div className="col-6" key={i}>
@@ -100,15 +99,15 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-   businessNews: state.data_news.businessNews,
+    scienceNews: state.data_news.scienceNews,
    colors: state.data_news.colors
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getBusiness: (url: string) => dispatch(getBusiness(url)),
+    getScience: (url: string) => dispatch(getScience(url)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoreBusiness);
+export default connect(mapStateToProps, mapDispatchToProps)(MoreScience);

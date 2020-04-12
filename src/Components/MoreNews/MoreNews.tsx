@@ -9,36 +9,18 @@ import RightSidebar from "../RightSidebar/RightSidebar";
 export interface MoreNewsProps {
     headlineNews: any | null;
   getNews: typeof getNews;
+  colors: string[];
 }
 
 export interface State {}
 
 class MoreNews extends React.Component<MoreNewsProps, State> {
   keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
-  colors: string[] = [
-    "blue",
-    "indigo",
-    "purple",
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "teal",
-    "cyan",
-    "white",
-    "gray",
-    "gray-dark",
-    "primary",
-    "secondary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-  ];
+ 
   componentDidMount() {
     if (this.props.headlineNews === null) {
       this.props.getNews(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.keyAPI}`
       );
     }
   }
@@ -76,7 +58,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                       i > 9 ? (
                         <div className="col-6" key={i}>
                           <h5>
-                            <mark style={{ backgroundColor: this.colors[this.colors.length-i] }}>
+                            <mark style={{ backgroundColor: this.props.colors[this.props.colors.length-i] }}>
                               {article.title}
                             </mark>
                           </h5>
@@ -88,7 +70,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                           <p>
                             {article.description}
                             <FiChevronsRight
-                              style={{ color: this.colors[this.colors.length-i], strokeWidth: 4 }}
+                              style={{ color: this.props.colors[this.props.colors.length-i], strokeWidth: 4 }}
                             />
                           </p>
                         </div>
@@ -110,6 +92,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
 const mapStateToProps = (state: any) => {
   return {
     headlineNews: state.data_news.headlineNews,
+    colors: state.data_news.colors
   };
 };
 

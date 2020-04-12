@@ -10,6 +10,8 @@ import {
   GetBusinessTypes,
   GetSportTypes,
   GetHeadlineNewsTypes,
+  GetHealthTypes,
+  GetScienceTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
@@ -21,6 +23,8 @@ const initialState: IMainState = {
   businessNews: null,
   sportNews: null,
   headlineNews: null,
+  healthNews: null,
+  scienceNews:null,
   colors: [
     "blue",
     "indigo",
@@ -102,6 +106,20 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
       return {
         ...state,
         businessNews: action.data,
+      };
+    }
+      
+    case GetScienceTypes.GETSCIENCE: {
+      return {
+        ...state,
+        scienceNews: action.data,
+      };
+    }
+      
+    case GetHealthTypes.GETHEALTH: {
+      return {
+        ...state,
+        healthNews: action.data,
       };
     }
 

@@ -17,7 +17,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=sports&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.keyAPI}`
       );
     }
   }

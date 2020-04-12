@@ -5,11 +5,8 @@ import { FaCaretSquareRight } from "react-icons/fa";
 import { FiChevronsDown } from "react-icons/fi";
 import HeaderSmallScreen from "../HeaderSmallScreen/HeaderSmallScreen";
 
-export interface Props {}
 
-export interface State {}
-
-class Header extends React.Component<Props, State> {
+class Header extends React.Component<{}, {}> {
   render() {
     return (
       <React.Fragment>
@@ -26,7 +23,7 @@ class Header extends React.Component<Props, State> {
           </div>
           <nav className="row">
             <div className="col">
-              <NavLink to="/news" className="">
+              <NavLink to="/morenews" className="">
                 <p className="text-center">News</p>
               </NavLink>
             </div>
@@ -43,7 +40,7 @@ class Header extends React.Component<Props, State> {
             <div className="col more">
               <div className="row">
                 <div className="col-12">
-                  <a className="">
+                  <NavLink to="#" className="">
                     <p className="text-center">
                       More
                       <span className="">
@@ -56,24 +53,24 @@ class Header extends React.Component<Props, State> {
                         />
                       </span>
                     </p>
-                  </a>
+                  </NavLink>
                 </div>
               </div>
               <div className="row">
                 <div className="col-12">
-                  <a className="">
+                <NavLink to="/moretech" className="">
                     <p className="text-center">Tech</p>
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="col-12">
-                  <a className="">
+                <NavLink to="/morehealth" className="">
                     <p className="text-center">Health</p>
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="col-12">
-                  <a className="">
+                <NavLink to="/morescience" className="">
                     <p className="text-center">Science</p>
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="col-12">
                   <NavLink to="/moresport" className="">
@@ -88,9 +85,9 @@ class Header extends React.Component<Props, State> {
               </div>
             </div>
             <div className="col trending">
-              <a className="">
+              <NavLink to="/moretrending" className="">
                 <p className="text-center">Trending</p>
-              </a>
+              </NavLink>
             </div>
             <div className="col-auto p-0 search">
               <button className="">

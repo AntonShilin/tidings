@@ -24,7 +24,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=sports&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.keyAPI}`
       );
     }
   }
@@ -60,7 +60,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
               <div className="row main-sport-news">
                 {this.props.sportNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 9 ? (
+                    i > 7 ? (
                       <div className="col-6" key={i}>
                         <h5>
                           <mark
