@@ -3,6 +3,7 @@ import { getBusiness } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewBusiness.scss";
+import question from "../Media/img/question.jpg";
 
 export interface PreviewBusinessProps {
   businessNews: any | null;
@@ -27,7 +28,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
     ) : (
       <div className="container">
         <div className="row mt-3 business-header">
-          <div className="col">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <h3>
               <mark>
                 Business
@@ -35,7 +36,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
               </mark>
             </h3>
           </div>
-          <div className="col">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <p className="text-right">
               More business stories
               <FiChevronsRight style={{ color: "#070707", strokeWidth: 4 }} />
@@ -46,7 +47,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
           {this.props.businessNews.articles.map(
             (article: any, i: number, arr: any) =>
               i < 6 ? (
-                <div className="col-4" key={i}>
+                <div className="col-lg-4 col-md-6 col-sm-6" key={i}>
                   <h5>
                     <mark>
                       {article.title}
@@ -57,7 +58,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage}
+                    src={article.urlToImage !==null ?article.urlToImage :question}
                     alt=""
                   />
                 </div>

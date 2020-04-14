@@ -39,10 +39,29 @@
         font-weight: 700;
         background-color: cyan;
         opacity: 0.85;
-      &:hover {
-        opacity: 1;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }
 }
+
+@media screen and (max-width: 766px) {
+  .tech-news-header {
+    div:nth-of-type(2) {
+      p {
+        display: none;
+      }
+    }
+  }
+  .tech-news-article {
+    div {
+      overflow: hidden;
+      margin-bottom: 1rem;
+      h5 {
+        bottom: 0rem;
+      }
+    }
+  }
 }

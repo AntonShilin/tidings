@@ -9,6 +9,7 @@ import PreviewTech from "../PreviewTech/PreviewTech";
 import PreviewBusiness from "../PreviewBusiness/PreviewBusiness";
 import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
+import question from "../Media/img/question.jpg";
 
 export interface TitlePageProps {
   latestNews: any | null;
@@ -40,7 +41,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
       <React.Fragment>
         <div className="container title-page">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest_articles">
@@ -49,7 +50,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.latestNews.articles[0].urlToImage}
+                      src={this.props.latestNews.articles[0].urlToImage !==null ?this.props.latestNews.articles[0].urlToImage :question}
                       alt=""
                     />
                     <p>
@@ -65,7 +66,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                 {this.props.latestNews.articles.map(
                   (article: any, i: number, arr: any) =>
                    (i>0 && i < 11) ? (
-                      <div className="col-6" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark style={{ backgroundColor: this.props.colors[i] }}>
                             {article.title}
@@ -73,7 +74,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={article.urlToImage !==null ?article.urlToImage :question}
                           alt=""
                         />
                         <p>
@@ -87,7 +88,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-lg-4 col-md-4 d-lg-block d-md-block d-none">
               <RightSidebar />
             </div>
           </div>

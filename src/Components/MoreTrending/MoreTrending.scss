@@ -2,13 +2,14 @@ div.header-trending-article {
   margin-top: 2rem !important;
 
   .main-trending-news > div > div {
-    min-height: 15rem;
+    height: 15rem;
     overflow: hidden;
     div:nth-of-type(1) {
       position: relative;
       width: 15rem;
       height: auto;
       padding: 0;
+      cursor: pointer;
       .trending-number {
         position: absolute;
         right: 0rem;
@@ -31,7 +32,8 @@ div.header-trending-article {
       }
     }
     div:nth-of-type(2) {
-      padding: .3rem 0.25rem .3rem 0.5rem ;
+      cursor: pointer;
+      padding: 0rem 0.25rem 0.3rem 0.5rem;
       h5 {
         font-weight: 500;
       }
@@ -41,3 +43,20 @@ div.header-trending-article {
     }
   }
 }
+
+@media screen and (max-width: 568px) {
+  div.main-trending-news >div>div  {
+    height: 8rem !important;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    div:nth-of-type(2) {
+      h5{
+        font-size: 1rem;
+      }
+      p {
+        display: none;
+      }
+    }
+  }
+}
+

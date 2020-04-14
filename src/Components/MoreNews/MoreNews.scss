@@ -51,3 +51,11 @@ div.headline-news-article {
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .headline-news-article {
+    .header-right-sidebar{
+      display: none;
+    }
+  }
+}

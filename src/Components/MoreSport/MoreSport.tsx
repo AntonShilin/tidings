@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
+import question from "../Media/img/question.jpg";
 
 export interface MoreSportProps {
   sportNews: any | null;
@@ -36,20 +37,24 @@ class MoreSport extends React.Component<MoreSportProps, State> {
       <React.Fragment>
         <div className="container mt-5 header-sport-article">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest-sport-article">
                     <h3>
-                      <mark>{this.props.sportNews.articles[9].title}</mark>
+                      <mark>{this.props.sportNews.articles[0].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.sportNews.articles[9].urlToImage}
+                      src={
+                        this.props.sportNews.articles[0].urlToImage !== null
+                          ? this.props.sportNews.articles[0].urlToImage
+                          : question
+                      }
                       alt=""
                     />
                     <p>
-                      {this.props.sportNews.articles[9].description}
+                      {this.props.sportNews.articles[0].description}
                       <FiChevronsRight
                         style={{ color: "orange", strokeWidth: 4 }}
                       />
@@ -61,7 +66,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                 {this.props.sportNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 7 ? (
-                      <div className="col-6" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{
@@ -75,7 +80,11 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={
+                            article.urlToImage !== null
+                              ? article.urlToImage
+                              : question
+                          }
                           alt=""
                         />
                         <p>
@@ -94,7 +103,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4 d-lg-block d-md-none">
+            <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
           </div>
@@ -107,7 +116,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
 const mapStateToProps = (state: any) => {
   return {
     sportNews: state.data_news.sportNews,
-    colors: state.data_news.colors
+    colors: state.data_news.colors,
   };
 };
 

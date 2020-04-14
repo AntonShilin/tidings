@@ -1,54 +1,64 @@
-div.title-page{
-margin-top:2rem;
+div.title-page {
+  margin-top: 2rem;
 
-.latest_articles {
-  cursor: pointer;
-  position: relative;
-  margin: 0 auto;
-  height: auto;
-  width: 100%;
-  h3 {
-    position: absolute;
-    top: -1rem;
-    mark {
-      background-color: orange;
-      color: white;
-      line-height: 2.5rem;
-      opacity: 0.85;
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-  p {
-    font-size: 0.95rem;
-  }
-}
-
-.main-news {
-  div {
+  .latest_articles {
     cursor: pointer;
     position: relative;
     margin: 0 auto;
     height: auto;
     width: 100%;
-    margin-top: 3rem;
-    h5 {
+    h3 {
       position: absolute;
-      top: -3rem;
+      top: -1rem;
       mark {
-        line-height: 1.9rem;
+        background-color: orange;
         color: white;
+        line-height: 2.5rem;
         opacity: 0.85;
         &:hover {
           opacity: 1;
         }
       }
     }
+    p {
+      font-size: 0.95rem;
+    }
   }
-  p {
-    font-size: .95rem;
+
+  .main-news {
+    div {
+      cursor: pointer;
+      position: relative;
+      margin: 0 auto;
+      height: auto;
+      width: 100%;
+      margin-top: 3rem;
+      h5 {
+        position: absolute;
+        top: -3rem;
+        mark {
+          line-height: 1.9rem;
+          color: white;
+          opacity: 0.85;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    p {
+      font-size: 0.95rem;
+    }
   }
 }
 
+@media screen and (max-width: 411px) {
+  div.main-news > div {
+    h5{
+      top: -2rem !important;
+    }
+    p {
+      display: none;
+    }
+  }
 }

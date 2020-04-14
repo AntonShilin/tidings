@@ -1,54 +1,59 @@
 div.business-news-article {
-    margin-top: 2rem !important;
-  
-    .latest-business-article {
+  margin-top: 2rem !important;
+
+  .latest-business-article {
+    cursor: pointer;
+    position: relative;
+    margin: 0 auto;
+    height: auto;
+    width: 100%;
+    h3 {
+      position: absolute;
+      top: -1rem;
+      mark {
+        background-color: orange;
+        color: white;
+        line-height: 2.5rem;
+        opacity: 0.85;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .business-news-news {
+    div {
       cursor: pointer;
       position: relative;
       margin: 0 auto;
       height: auto;
       width: 100%;
-      h3 {
+      margin-top: 3rem;
+      h5 {
         position: absolute;
-        top: -1rem;
+        top: -3rem;
         mark {
-          background-color: orange;
+          line-height: 1.9rem;
           color: white;
-          line-height: 2.5rem;
           opacity: 0.85;
           &:hover {
             opacity: 1;
           }
         }
       }
-      p {
-        font-size: 0.95rem;
-      }
     }
-  
-    .business-news-news {
-      div {
-        cursor: pointer;
-        position: relative;
-        margin: 0 auto;
-        height: auto;
-        width: 100%;
-        margin-top: 3rem;
-        h5 {
-          position: absolute;
-          top: -3rem;
-          mark {
-            line-height: 1.9rem;
-            color: white;
-            opacity: 0.85;
-            &:hover {
-              opacity: 1;
-            }
-          }
-        }
-      }
-      p {
-        font-size: 0.95rem;
-      }
+    p {
+      font-size: 0.95rem;
     }
   }
-  
+}
+
+@media only screen and (max-width: 767px) {
+  .header-right-sidebar {
+    display: none;
+  }
+}

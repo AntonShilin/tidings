@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import "./MoreBusiness.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
+import question from "../Media/img/question.jpg";
 
 export interface MoreBusinessProps {
   businessNews: any | null;
@@ -25,14 +26,13 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
     }
   }
   render() {
-    console.log(this.props.businessNews)
     return this.props.businessNews === null ? (
       <Preloader />
     ) : (
       <React.Fragment>
         <div className="container mt-5 business-news-article">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest-business-article">
@@ -41,7 +41,9 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.businessNews.articles[7].urlToImage}
+                      src={this.props.businessNews.articles[7].urlToImage !== null
+                        ? this.props.businessNews.articles[7].urlToImage
+                        : question}
                       alt=""
                     />
                     <p>
@@ -57,7 +59,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                 {this.props.businessNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 7 ? (
-                      <div className="col-6" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{
@@ -71,7 +73,9 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={ article.urlToImage !== null
+                            ? article.urlToImage
+                            : question}
                           alt=""
                         />
                         <p>
@@ -88,7 +92,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4 d-lg-block d-md-none">
+            <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
           </div>

@@ -52,3 +52,8 @@ div.health-news-article {
     }
   }
   
+  @media only screen and (max-width: 767px) {
+    .header-right-sidebar {
+      display: none;
+    }
+  }

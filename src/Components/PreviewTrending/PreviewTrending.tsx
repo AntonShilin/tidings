@@ -28,7 +28,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
     ) : (
       <div className="container">
         <div className="row mt-3 trending-news-header">
-          <div className="col">
+          <div className="col-lg-6 col-md-7 col-sm-12">
             <h3>
               <mark>
                 What is the trending now
@@ -36,7 +36,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
               </mark>
             </h3>
           </div>
-          <div className="col">
+          <div className="col-lg-6 col-md-5 d-none d-md-block d-lg-block">
             <p className="text-right">
               More trending stories
               <FiChevronsRight style={{ color: "#000", strokeWidth: 4 }} />
@@ -46,10 +46,10 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
         <div className="row trending-news-article">
           {this.props.trendingNews.articles.map(
             (article: any, i: number, arr: any) =>
-              i < 5 ? (
-                <div className="col" key={i}>
+              i < 6 ? (
+                <div className="col-lg-2 col-md-2 col-sm-12" key={i}>
                   <div className="article-number">
-                    <span>{i}</span>
+                    <span>{i+1}</span>
                   </div>
                   <h5>
                     <mark>{article.title}</mark>

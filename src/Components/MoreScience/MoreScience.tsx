@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import "./MoreScience.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
+import question from "../Media/img/question.jpg";
+
 
 export interface MoreScienceProps {
   scienceNews: any | null;
@@ -31,7 +33,7 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
       <React.Fragment>
         <div className="container mt-5 science-news-article">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest-science-article">
@@ -40,7 +42,9 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.scienceNews.articles[0].urlToImage}
+                      src={this.props.scienceNews.articles[0].urlToImage !== null
+                        ? this.props.scienceNews.articles[0].urlToImage
+                        : question}
                       alt=""
                     />
                     <p>
@@ -56,7 +60,7 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
                 {this.props.scienceNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 7 ? (
-                      <div className="col-6" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{
@@ -70,7 +74,9 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={article.urlToImage !== null
+                            ? article.urlToImage
+                            : question}
                           alt=""
                         />
                         <p>
@@ -87,7 +93,7 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4 d-lg-block d-md-none">
+            <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
           </div>

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
+import question from "../Media/img/question.jpg";
 
 export interface MoreTechProps {
   techNews: any | null;
@@ -32,7 +33,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
       <React.Fragment>
         <div className="container mt-5 header-tech-article">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest-tech-article">
@@ -41,7 +42,9 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.techNews.articles[9].urlToImage}
+                      src={this.props.techNews.articles[9].urlToImage !== null
+                        ? this.props.techNews.articles[9].urlToImage
+                        : question}
                       alt=""
                     />
                     <p>
@@ -57,7 +60,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                 {this.props.techNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 9 ? (
-                      <div className="col-6" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{
@@ -71,7 +74,9 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={article.urlToImage !== null
+                            ? article.urlToImage
+                            : question}
                           alt=""
                         />
                         <p>
@@ -90,7 +95,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4 d-lg-block d-md-none">
+            <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
           </div>

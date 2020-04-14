@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import "./MoreHealth.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
+import question from "../Media/img/question.jpg";
 
 export interface MoreHealthProps {
   healthNews: any | null;
@@ -31,16 +32,18 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
       <React.Fragment>
         <div className="container mt-5 health-news-article">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest-health-article">
                     <h3>
-                      <mark>{this.props.healthNews.articles[0].title}</mark>
+                      <mark>{this.props.healthNews.articles[1].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.healthNews.articles[0].urlToImage}
+                      src={this.props.healthNews.articles[1].urlToImage !== null
+                        ? this.props.healthNews.articles[1].urlToImage
+                        : question}
                       alt=""
                     />
                     <p>
@@ -56,7 +59,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                 {this.props.healthNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 1 && i<12 ? (
-                      <div className="col-6" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{
@@ -70,7 +73,9 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={ article.urlToImage !== null
+                            ? article.urlToImage
+                            : question}
                           alt=""
                         />
                         <p>
@@ -87,7 +92,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4 d-lg-block d-md-none">
+            <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
           </div>

@@ -5,6 +5,7 @@ import { getEntertainment } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreEntertainment.scss";
+import question from "../Media/img/question.jpg";
 
 export interface MoreEntertainmentProps {
   entertainmentNews: any | null;
@@ -31,22 +32,24 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
       <React.Fragment>
         <div className="container entertainment-article">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div className="latest-entertainment">
                     <h3>
                       <mark>
-                        {this.props.entertainmentNews.articles[7].title}
+                        {this.props.entertainmentNews.articles[0].title}
                       </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.entertainmentNews.articles[7].urlToImage}
+                      src={this.props.entertainmentNews.articles[0].urlToImage !== null
+                        ? this.props.entertainmentNews.articles[0].urlToImage
+                        : question}
                       alt=""
                     />
                     <p>
-                      {this.props.entertainmentNews.articles[7].description}
+                      {this.props.entertainmentNews.articles[0].description}
                       <FiChevronsRight
                         style={{ color: "orange", strokeWidth: 4 }}
                       />
@@ -57,8 +60,8 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
               <div className="row entertainment-news">
                 {this.props.entertainmentNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 7 ? (
-                      <div className="col-6" key={i}>
+                    i > 9 ? (
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{
@@ -72,7 +75,9 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage}
+                          src={ article.urlToImage !== null
+                            ? article.urlToImage
+                            : question}
                           alt=""
                         />
                         <p>
@@ -91,7 +96,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                 )}
               </div>
             </div>
-            <div className="col-lg-4 d-lg-block d-md-none">
+            <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
           </div>

@@ -3,6 +3,7 @@ import { getSport } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewSport.scss";
+import question from "../Media/img/question.jpg";
 
 export interface PreviewSportProps {
   sportNews: any | null;
@@ -27,7 +28,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
     ) : (
       <div className="container">
         <div className="row mt-3 sport-news-header">
-          <div className="col">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <h3>
               <mark>
                 Sport
@@ -35,7 +36,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
               </mark>
             </h3>
           </div>
-          <div className="col">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <p className="text-right">
               More sport stories
               <FiChevronsRight style={{ color: "#070707", strokeWidth: 4 }} />
@@ -46,7 +47,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
           {this.props.sportNews.articles.map(
             (article: any, i: number, arr: any) =>
               i < 6 ? (
-                <div className="col-4" key={i}>
+                <div className="col-lg-4 col-md-6 col-sm-6" key={i}>
                   <h5>
                     <mark>
                       {article.title}
@@ -57,7 +58,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage}
+                    src={article.urlToImage !==null ?article.urlToImage :question}
                     alt=""
                   />
                 </div>

@@ -36,7 +36,7 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
               <div className="row main-trending-news">
                 {this.props.trendingNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 0 && i<9? (
+                    i > 0 ? (
                       <div className="col-12 mb-2" key={i}>
                         <div className="row">
                           <div className="col-6">
