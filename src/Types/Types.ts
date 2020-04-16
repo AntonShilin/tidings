@@ -32,8 +32,14 @@ export enum GetHealthTypes {
 export enum GetScienceTypes {
   GETSCIENCE= "GETSCIENCE",
 }
+export enum GetShowFullArticleTypes {
+  GETSHOWFULLARTICLE= "GETSHOWFULLARTICLE",
+}
 
 /* interfaces */
+export interface IGetShowFullArticleAction {
+  type:GetShowFullArticleTypes.GETSHOWFULLARTICLE
+}
 export interface IScienceAction {
   type:GetHealthTypes.GETHEALTH;
   data: any;
@@ -89,11 +95,12 @@ export type MainActions =
   | ISportAction
   | IHeadlineNewsAction
   | IHealthAction
-  |IScienceAction
+  | IScienceAction
+  |IGetShowFullArticleAction
   | IGetEntertainmentAction;
 
 export interface IMainState {
-  readonly data: any;
+  readonly titlepageNews: any;
   readonly entertainmentNews: any;
   readonly trendingNews: any;
   readonly techNews: any;

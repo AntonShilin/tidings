@@ -12,11 +12,12 @@ import {
   GetHeadlineNewsTypes,
   GetHealthTypes,
   GetScienceTypes,
+  GetShowFullArticleTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
 const initialState: IMainState = {
-  data: null,
+  titlepageNews: null,
   entertainmentNews: null,
   trendingNews: null,
   techNews: null,
@@ -24,7 +25,7 @@ const initialState: IMainState = {
   sportNews: null,
   headlineNews: null,
   healthNews: null,
-  scienceNews:null,
+  scienceNews: null,
   colors: [
     "blue",
     "indigo",
@@ -69,9 +70,10 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
 ): IMainState => {
   switch (action.type) {
     case GetDataTypes.GETDATA: {
+      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
-        data: action.data,
+        titlepageNews: action.data,
       };
     }
 
@@ -108,14 +110,14 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
         businessNews: action.data,
       };
     }
-      
+
     case GetScienceTypes.GETSCIENCE: {
       return {
         ...state,
         scienceNews: action.data,
       };
     }
-      
+
     case GetHealthTypes.GETHEALTH: {
       return {
         ...state,
@@ -134,6 +136,12 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
       return {
         ...state,
         headlineNews: action.data,
+      };
+    }
+
+    case GetShowFullArticleTypes.GETSHOWFULLARTICLE: {
+      return {
+        ...state,
       };
     }
 

@@ -1,4 +1,4 @@
-import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes } from "../Types/Types";
+import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes } from "../Types/Types";
 import { Dispatch } from "redux";
 
 export const getData = (url: string) => {
@@ -180,9 +180,16 @@ const loading = () => {
 };
 
 export const toggleSmallScreenMenu = (e:React.MouseEvent,elem: HTMLDivElement) => {
-   console.log(elem)
   elem.classList.toggle("show");
   return {
     type: toggleMenu.TOGGLEMENU,
+  };
+}
+
+export const showFullArticleInfo = (id:number,url:any) => {
+  url.history.push(`/${id}`);
+  url.match.params.id = id;
+  return {
+    type: GetShowFullArticleTypes.GETSHOWFULLARTICLE
   };
 }

@@ -18,7 +18,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
-        `https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
       );
     }
   }

@@ -16,7 +16,6 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
 
 
   render() {
-    console.log("ref",this.submenu)
     return (
       <div className="container">
           <nav className="row main-menu-xs-screen">

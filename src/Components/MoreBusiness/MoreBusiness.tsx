@@ -21,7 +21,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
       );
     }
   }
