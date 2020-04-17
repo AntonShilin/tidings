@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getNews } from "../../Actions/Actions";
+import { getNews, showFullArticleInfo } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreNews.scss";
@@ -11,6 +11,8 @@ export interface MoreNewsProps {
   headlineNews: any | null;
   getNews: typeof getNews;
   colors: string[];
+  url: any;
+  showFullArticleInfo: typeof showFullArticleInfo;
 }
 
 export interface State {}
@@ -35,7 +37,15 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div className="latest-headline-article">
+                  <div
+                    className="latest-headline-article"
+                    onClick={() =>
+                      this.props.showFullArticleInfo(
+                        this.props.headlineNews.articles[9].source.id,
+                        this.props.url
+                      )
+                    }
+                  >
                     <h3>
                       <mark>{this.props.headlineNews.articles[9].title}</mark>
                     </h3>
@@ -61,7 +71,16 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                 {this.props.headlineNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 9 ? (
-                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <div
+                        className="col-lg-6 col-md-6 col-sm-12"
+                        key={i}
+                        onClick={() =>
+                          this.props.showFullArticleInfo(
+                            article.source.id,
+                            this.props.url
+                          )
+                        }
+                      >
                         <h5>
                           <mark
                             style={{
@@ -108,16 +127,19 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     headlineNews: state.data_news.headlineNews,
     colors: state.data_news.colors,
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getNews: (url: string) => dispatch(getNews(url)),
+    showFullArticleInfo: (id: number, url: any) =>
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

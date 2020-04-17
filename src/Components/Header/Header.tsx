@@ -13,7 +13,7 @@ class Header extends React.Component<{}, {}> {
         <header className="container d-lg-block d-md-block d-none">
           <div className="row logo">
             <div className="col-lg-6 col-md-6 logo-brand">
-              <NavLink to="/" className="">
+              <NavLink to="/titlenews" className="">
                 Tidings
               </NavLink>
             </div>

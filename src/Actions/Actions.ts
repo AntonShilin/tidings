@@ -187,8 +187,8 @@ export const toggleSmallScreenMenu = (e:React.MouseEvent,elem: HTMLDivElement) =
 }
 
 export const showFullArticleInfo = (id:number,url:any) => {
-  url.history.push(`/${id}`);
-  url.match.params.id = id;
+  url.history.push(`${url.match.url}/${id}`);
+   url.match.params.id = id; 
   return {
     type: GetShowFullArticleTypes.GETSHOWFULLARTICLE
   };

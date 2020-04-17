@@ -1,11 +1,13 @@
 import * as React from "react";
-import { getEntertainment } from "../../Actions/Actions";
+import { getEntertainment, showFullArticleInfo } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import "./RightSidebar.scss";
 
 export interface RightSidebarProps {
   entertainmentNews: any | null;
   getEntertainment: typeof getEntertainment;
+  showFullArticleInfo: typeof showFullArticleInfo;
+  url: any;
 }
 
 export interface State {}
@@ -29,10 +31,11 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
         {this.props.entertainmentNews !== null
           ? this.props.entertainmentNews.articles.map(
               (article: any, i: number | string) => (
-              <div key={i} className="d-flex article_right_sidebar  mb-2">
-                  
-                    <img src={article.urlToImage} className="img-fluid" alt="" />
-                
+                <div
+                  key={i}
+                  className="d-flex article_right_sidebar  mb-2"
+                >
+                  <img src={article.urlToImage} className="img-fluid" alt="" />
                   <div className="">{article.description}</div>
                 </div>
               )
@@ -43,15 +46,18 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     entertainmentNews: state.data_news.entertainmentNews,
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getEntertainment: (url: string) => dispatch(getEntertainment(url)),
+    showFullArticleInfo: (id: number, url: any) =>
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

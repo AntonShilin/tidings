@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getBusiness } from "../../Actions/Actions";
+import { getBusiness, showFullArticleInfo } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreBusiness.scss";
@@ -11,6 +11,8 @@ export interface MoreBusinessProps {
   businessNews: any | null;
   getBusiness: typeof getBusiness;
   colors: string[];
+  showFullArticleInfo: typeof showFullArticleInfo;
+  url: any;
 }
 
 export interface State {}
@@ -35,15 +37,25 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div className="latest-business-article">
+                  <div
+                    className="latest-business-article"
+                    onClick={() =>
+                      this.props.showFullArticleInfo(
+                        this.props.businessNews.articles[7].source.id,
+                        this.props.url
+                      )
+                    }
+                  >
                     <h3>
                       <mark>{this.props.businessNews.articles[7].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.businessNews.articles[7].urlToImage !== null
-                        ? this.props.businessNews.articles[7].urlToImage
-                        : question}
+                      src={
+                        this.props.businessNews.articles[7].urlToImage !== null
+                          ? this.props.businessNews.articles[7].urlToImage
+                          : question
+                      }
                       alt=""
                     />
                     <p>
@@ -59,7 +71,16 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                 {this.props.businessNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 7 ? (
-                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <div
+                        className="col-lg-6 col-md-6 col-sm-12"
+                        key={i}
+                        onClick={() =>
+                          this.props.showFullArticleInfo(
+                            article.source.id,
+                            this.props.url
+                          )
+                        }
+                      >
                         <h5>
                           <mark
                             style={{
@@ -73,16 +94,20 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={ article.urlToImage !== null
-                            ? article.urlToImage
-                            : question}
+                          src={
+                            article.urlToImage !== null
+                              ? article.urlToImage
+                              : question
+                          }
                           alt=""
                         />
                         <p>
                           {article.description}
                           <FiChevronsRight
                             style={{
-                              color: this.props.colors[this.props.colors.length - i],
+                              color: this.props.colors[
+                                this.props.colors.length - i
+                              ],
                               strokeWidth: 4,
                             }}
                           />
@@ -102,16 +127,19 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
-   businessNews: state.data_news.businessNews,
-   colors: state.data_news.colors
+    businessNews: state.data_news.businessNews,
+    colors: state.data_news.colors,
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getBusiness: (url: string) => dispatch(getBusiness(url)),
+    showFullArticleInfo: (id: number, url: any) =>
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

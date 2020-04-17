@@ -20,7 +20,7 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
       <div className="container">
           <nav className="row main-menu-xs-screen">
             <div className="col-4">
-              <NavLink to="/" className="">
+              <NavLink to="/titlenews" className="">
                 <p className="text-center">Tidings</p>
               </NavLink>
             </div>
