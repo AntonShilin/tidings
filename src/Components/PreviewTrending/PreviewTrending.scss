@@ -65,13 +65,14 @@
 }
 
 @media screen and (max-width: 766px) {
+
   .trending-news-article {
     div {
       height: 100%;
       margin-bottom: 3rem;
       .article-number {
-        top: 0 !important;
-        right: 0.9 !important;
+        top: -0.5rem !important;
+        right: 0.5rem !important;
       }
       h5 {
         bottom: -1rem !important;
