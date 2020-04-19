@@ -38,20 +38,25 @@ class MoreTech extends React.Component<MoreTechProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div className="latest-tech-article"    onClick={() =>
+                  <div
+                    className="latest-tech-article"
+                    onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.techNews.articles[7].source.id,
+                        this.props.techNews.articles[9].source.id,
                         this.props.url
                       )
-                    }>
+                    }
+                  >
                     <h3>
                       <mark>{this.props.techNews.articles[9].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.techNews.articles[9].urlToImage !== null
-                        ? this.props.techNews.articles[9].urlToImage
-                        : question}
+                      src={
+                        this.props.techNews.articles[9].urlToImage !== null
+                          ? this.props.techNews.articles[9].urlToImage
+                          : question
+                      }
                       alt=""
                     />
                     <p>
@@ -67,12 +72,16 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                 {this.props.techNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 9 ? (
-                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}    onClick={() =>
-                        this.props.showFullArticleInfo(
-                          article.source.id,
-                          this.props.url
-                        )
-                      }>
+                      <div
+                        className="col-lg-6 col-md-6 col-sm-12"
+                        key={i}
+                        onClick={() =>
+                          this.props.showFullArticleInfo(
+                            article.source.id,
+                            this.props.url
+                          )
+                        }
+                      >
                         <h5>
                           <mark
                             style={{
@@ -86,9 +95,11 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={article.urlToImage !== null
-                            ? article.urlToImage
-                            : question}
+                          src={
+                            article.urlToImage !== null
+                              ? article.urlToImage
+                              : question
+                          }
                           alt=""
                         />
                         <p>
@@ -117,11 +128,11 @@ class MoreTech extends React.Component<MoreTechProps, State> {
   }
 }
 
-const mapStateToProps = (state: any,url:any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
-    url
+    url,
   };
 };
 
@@ -129,7 +140,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getTech: (url: string) => dispatch(getTech(url)),
     showFullArticleInfo: (id: number, url: any) =>
-    dispatch(showFullArticleInfo(id, url))
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

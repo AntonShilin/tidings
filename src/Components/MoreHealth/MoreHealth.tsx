@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getHealth } from "../../Actions/Actions";
+import { getHealth, showFullArticleInfo } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreHealth.scss";
@@ -11,6 +11,8 @@ export interface MoreHealthProps {
   healthNews: any | null;
   getHealth: typeof getHealth;
   colors: string[];
+  showFullArticleInfo: typeof showFullArticleInfo;
+  url: any;
 }
 
 export interface State {}
@@ -35,15 +37,25 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div className="latest-health-article">
+                  <div
+                    className="latest-health-article"
+                    onClick={() =>
+                      this.props.showFullArticleInfo(
+                        this.props.healthNews.articles[1].source.id,
+                        this.props.url
+                      )
+                    }
+                  >
                     <h3>
                       <mark>{this.props.healthNews.articles[1].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
-                      src={this.props.healthNews.articles[1].urlToImage !== null
-                        ? this.props.healthNews.articles[1].urlToImage
-                        : question}
+                      src={
+                        this.props.healthNews.articles[1].urlToImage !== null
+                          ? this.props.healthNews.articles[1].urlToImage
+                          : question
+                      }
                       alt=""
                     />
                     <p>
@@ -58,8 +70,17 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
               <div className="row health-news-news">
                 {this.props.healthNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 1 && i<12 ? (
-                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                    i > 1 && i < 12 ? (
+                      <div
+                        className="col-lg-6 col-md-6 col-sm-12"
+                        key={i}
+                        onClick={() =>
+                          this.props.showFullArticleInfo(
+                            article.source.id,
+                            this.props.url
+                          )
+                        }
+                      >
                         <h5>
                           <mark
                             style={{
@@ -73,16 +94,20 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                         </h5>
                         <img
                           className="img-fluid mb-1"
-                          src={ article.urlToImage !== null
-                            ? article.urlToImage
-                            : question}
+                          src={
+                            article.urlToImage !== null
+                              ? article.urlToImage
+                              : question
+                          }
                           alt=""
                         />
                         <p>
                           {article.description}
                           <FiChevronsRight
                             style={{
-                              color: this.props.colors[this.props.colors.length - i],
+                              color: this.props.colors[
+                                this.props.colors.length - i
+                              ],
                               strokeWidth: 4,
                             }}
                           />
@@ -102,16 +127,19 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     healthNews: state.data_news.healthNews,
-   colors: state.data_news.colors
+    colors: state.data_news.colors,
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getHealth: (url: string) => dispatch(getHealth(url)),
+    showFullArticleInfo: (id: number, url: any) =>
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 
