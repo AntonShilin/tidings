@@ -15,7 +15,8 @@ export interface RightSidebarProps {
 export interface State {}
 
 class RightSidebar extends React.Component<RightSidebarProps, State> {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
+  
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(

@@ -3,19 +3,20 @@ import "./TitleSelectArticle.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import { getData } from "../../../Actions/Actions";
+import { getData, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 
 export interface SelectArticleProps {
   titlepageNews: any;
   getData: typeof getData;
+  goToPublisherPage: typeof goToPublisherPage;
   url: any;
 }
 
 export interface State {}
 
 class TitleSelectArticle extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.titlepageNews === null) {
@@ -34,7 +35,11 @@ class TitleSelectArticle extends React.Component<SelectArticleProps, State> {
     ) : (
       <div className="container">
         <div className="row selected-article">
-          <div className="col-lg-8 col-md-8 col-sm-12">
+          <div className="col-lg-8 col-md-8 col-sm-12"   onClick={() =>
+              this.props.goToPublisherPage(
+                this.props.titlepageNews.articles[id].url
+              )
+            }>
             <h1>{this.props.titlepageNews.articles[id].title}</h1>
             <p>
                 <b>{this.props.titlepageNews.articles[id].author}{" "}</b>
@@ -70,6 +75,7 @@ const mapStateToProps = (state: any,url:any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getData: (url: string) => dispatch(getData(url)),
+    goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };
 

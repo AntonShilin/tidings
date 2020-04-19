@@ -3,13 +3,14 @@ import "./SelectArticleScience.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import { getScience } from "../../../Actions/Actions";
+import { getScience, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage  from "../../Media/img/question.jpg";
+import defaultImage from "../../Media/img/question.jpg";
 
 export interface SelectArticleProps {
   scienceNews: any | null;
   getScience: typeof getScience;
+  goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
 }
@@ -17,7 +18,7 @@ export interface SelectArticleProps {
 export interface State {}
 
 class SelectArticleScience extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.scienceNews === null) {
@@ -35,7 +36,14 @@ class SelectArticleScience extends React.Component<SelectArticleProps, State> {
     ) : (
       <div className="container">
         <div className="row selected-article">
-          <div className="col-lg-8 col-md-8 col-sm-12">
+          <div
+            className="col-lg-8 col-md-8 col-sm-12"
+            onClick={() =>
+              this.props.goToPublisherPage(
+                this.props.scienceNews.articles[id].url
+              )
+            }
+          >
             <h1>{this.props.scienceNews.articles[id].title}</h1>
             <p>
               <b>{this.props.scienceNews.articles[id].author} </b>
@@ -68,17 +76,18 @@ class SelectArticleScience extends React.Component<SelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: any,url:any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     scienceNews: state.data_news.scienceNews,
     colors: state.data_news.colors,
-    url
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getScience: (url: string) => dispatch(getScience(url)),
+    goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };
 

@@ -3,13 +3,14 @@ import "./SelectArticleHealth.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import { getHealth } from "../../../Actions/Actions";
+import { getHealth, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage  from "../../Media/img/question.jpg";
 
 export interface SelectArticleProps {
   healthNews: any | null;
   getHealth: typeof getHealth;
+  goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
 }
@@ -17,7 +18,7 @@ export interface SelectArticleProps {
 export interface State {}
 
 class SelectArticleHealth extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.healthNews === null) {
@@ -35,7 +36,11 @@ class SelectArticleHealth extends React.Component<SelectArticleProps, State> {
     ) : (
       <div className="container">
         <div className="row selected-article">
-          <div className="col-lg-8 col-md-8 col-sm-12">
+          <div className="col-lg-8 col-md-8 col-sm-12"  onClick={() =>
+              this.props.goToPublisherPage(
+                this.props.healthNews.articles[id].url
+              )
+            }>
             <h1>{this.props.healthNews.articles[id].title}</h1>
             <p>
               <b>{this.props.healthNews.articles[id].author} </b>
@@ -79,6 +84,7 @@ const mapStateToProps = (state: any,url:any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getHealth: (url: string) => dispatch(getHealth(url)),
+    goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };
 

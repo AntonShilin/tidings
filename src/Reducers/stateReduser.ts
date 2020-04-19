@@ -14,6 +14,7 @@ import {
   GetScienceTypes,
   GetShowFullArticleTypes,
   GetWindowPositionTypes,
+  GetPublisherPageTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
@@ -160,6 +161,12 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
       
     case GetWindowPositionTypes.GETWINDOWPOSITION: {
+      return {
+        ...state,
+      };
+    }
+      
+    case GetPublisherPageTypes.GETPUBLISHERPAGE: {
       return {
         ...state,
       };

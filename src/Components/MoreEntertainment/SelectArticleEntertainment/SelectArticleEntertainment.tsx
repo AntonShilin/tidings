@@ -3,13 +3,14 @@ import "./SelectArticleEntertainment.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import { getEntertainment } from "../../../Actions/Actions";
+import { getEntertainment, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/question.jpg";
 
 export interface SelectArticleProps {
   entertainmentNews: any | null;
   getEntertainment: typeof getEntertainment;
+  goToPublisherPage: typeof goToPublisherPage;
   url: any;
   colors: string[];
 }
@@ -20,7 +21,7 @@ class SelectArticleEntertainment extends React.Component<
   SelectArticleProps,
   State
 > {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
@@ -38,7 +39,14 @@ class SelectArticleEntertainment extends React.Component<
     ) : (
       <div className="container">
         <div className="row selected-article">
-          <div className="col-lg-8 col-md-8 col-sm-12">
+          <div
+            className="col-lg-8 col-md-8 col-sm-12"
+            onClick={() =>
+              this.props.goToPublisherPage(
+                this.props.entertainmentNews.articles[id].url
+              )
+            }
+          >
             <h1>{this.props.entertainmentNews.articles[id].title}</h1>
             <p>
               <b>{this.props.entertainmentNews.articles[id].author} </b>
@@ -82,6 +90,7 @@ const mapStateToProps = (state: any, url: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getEntertainment: (url: string) => dispatch(getEntertainment(url)),
+    goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };
 

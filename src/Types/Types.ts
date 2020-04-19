@@ -32,6 +32,11 @@ export enum GetHealthTypes {
 export enum GetScienceTypes {
   GETSCIENCE= "GETSCIENCE",
 }
+
+export enum GetPublisherPageTypes {
+  GETPUBLISHERPAGE= "GETPUBLISHERPAGE",
+}
+
 export enum GetWindowPositionTypes {
   GETWINDOWPOSITION= "GETWINDOWPOSITION",
 }
@@ -43,6 +48,10 @@ export enum GetShowFullArticleTypes {
 /* interfaces */
 export interface IGetShowFullArticleAction {
   type:GetShowFullArticleTypes.GETSHOWFULLARTICLE
+}
+
+export interface IPublisherPageAction {
+  type:GetPublisherPageTypes.GETPUBLISHERPAGE
 }
 
 export interface IWindowPositionAction {
@@ -106,7 +115,8 @@ export type MainActions =
   | IHealthAction
   | IScienceAction
   | IGetShowFullArticleAction
-  |IWindowPositionAction
+  | IWindowPositionAction
+  |IPublisherPageAction
   | IGetEntertainmentAction;
 
 export interface IMainState {

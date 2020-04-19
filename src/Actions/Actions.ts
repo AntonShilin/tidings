@@ -1,5 +1,5 @@
-import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes, GetWindowPositionTypes } from "../Types/Types";
-import { Dispatch} from "redux";
+import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes, GetWindowPositionTypes, GetPublisherPageTypes } from "../Types/Types";
+import { Dispatch, AnyAction} from "redux";
 
 export const getData = (url: string) => {
   return (dispatch: Dispatch) => {
@@ -198,5 +198,14 @@ export const fixedSmallScreenMenu = (num:number,elem:HTMLDivElement) => {
   elem.style.zIndex = '5';
   return {
    type: GetWindowPositionTypes.GETWINDOWPOSITION
+  }
+}
+
+export const goToPublisherPage = (adress: string) => {
+  if (window.confirm("Are your sure go to publisher page?")===true) {
+     window.open(adress);
+  }
+  return {
+    type: GetPublisherPageTypes.GETPUBLISHERPAGE
   }
 }

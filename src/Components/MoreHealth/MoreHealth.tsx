@@ -6,6 +6,8 @@ import "./MoreHealth.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import question from "../Media/img/question.jpg";
+import { Dispatch, AnyAction } from "redux";
+import { GetHealthTypes } from "../../Types/Types";
 
 export interface MoreHealthProps {
   healthNews: any | null;
@@ -18,7 +20,7 @@ export interface MoreHealthProps {
 export interface State {}
 
 class MoreHealth extends React.Component<MoreHealthProps, State> {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.healthNews === null) {
@@ -135,7 +137,7 @@ const mapStateToProps = (state: any, url: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch:any) => {
   return {
     getHealth: (url: string) => dispatch(getHealth(url)),
     showFullArticleInfo: (id: number, url: any) =>

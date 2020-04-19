@@ -3,13 +3,16 @@ import "./SelectArticleSport.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import { getSport } from "../../../Actions/Actions";
+import { getSport, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage  from "../../Media/img/question.jpg";
+import defaultImage from "../../Media/img/question.jpg";
+import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
+import PreviewTech from "../../PreviewTech/PreviewTech";
 
 export interface SelectArticleProps {
   sportNews: any | null;
   getSport: typeof getSport;
+  goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
 }
@@ -17,7 +20,7 @@ export interface SelectArticleProps {
 export interface State {}
 
 class SelectArticleSport extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "74498e6f023d4358a296a9351a1ea043";
+  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.sportNews === null) {
@@ -35,7 +38,14 @@ class SelectArticleSport extends React.Component<SelectArticleProps, State> {
     ) : (
       <div className="container">
         <div className="row selected-article">
-          <div className="col-lg-8 col-md-8 col-sm-12">
+          <div
+            className="col-lg-8 col-md-8 col-sm-12"
+            onClick={() =>
+              this.props.goToPublisherPage(
+                this.props.sportNews.articles[id].url
+              )
+            }
+          >
             <h1>{this.props.sportNews.articles[id].title}</h1>
             <p>
               <b>{this.props.sportNews.articles[id].author} </b>
@@ -63,26 +73,27 @@ class SelectArticleSport extends React.Component<SelectArticleProps, State> {
             <RightSidebar />
           </div>
         </div>
+        <PreviewTech />
+        <PreviewBusiness />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: any,url:any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
-   sportNews: state.data_news.sportNews,
+    sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,
-    url
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSport: (url: string) => dispatch(getSport(url)),
+    goToPublisherPage: (adress: string) =>
+      dispatch(goToPublisherPage(adress)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectArticleSport);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectArticleSport);
