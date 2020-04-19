@@ -21,6 +21,7 @@ import SelectArticleEntertainment from "../Components/MoreEntertainment/SelectAr
 import SelectArticleTech from "../Components/MoreTech/SelectArticleTech/SelectArticleTech";
 import SelectArticleHealth from "../Components/MoreHealth/SelectArticleHealth/SelectArticleHealth";
 import SelectArticleScience from "../Components/MoreScience/SelectArticleScience/SelectArticleScience";
+import SelectArticleSport from "../Components/MoreSport/SelectArticleSport/SelectArticleSport";
 
 
 class Routes extends React.Component {
@@ -32,6 +33,7 @@ class Routes extends React.Component {
         <Route exact={true} path="/morenews" component={MoreNews} />
         <Route exact={true} path="/morenews/:id" component={SelectArticleNews} />
         <Route exact={true} path="/moresport" component={MoreSport} />
+        <Route exact={true} path="/moresport/:id" component={SelectArticleSport} />
         <Route exact={true} path="/morebusiness" component={MoreBusiness} />
         <Route exact={true} path="/morebusiness/:id" component={SelectArticleBusiness} />
         <Route exact={true} path="/moreentertainment" component={MoreEntertainment} />

@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./MoreSport.scss";
-import { getSport } from "../../Actions/Actions";
+import { getSport, showFullArticleInfo } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
@@ -11,6 +11,8 @@ export interface MoreSportProps {
   sportNews: any | null;
   getSport: typeof getSport;
   colors: string[];
+  showFullArticleInfo: typeof showFullArticleInfo;
+  url: any;
 }
 
 export interface State {}
@@ -40,7 +42,15 @@ class MoreSport extends React.Component<MoreSportProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div className="latest-sport-article">
+                  <div
+                    className="latest-sport-article"
+                    onClick={() =>
+                      this.props.showFullArticleInfo(
+                        this.props.sportNews.articles[0].source.id,
+                        this.props.url
+                      )
+                    }
+                  >
                     <h3>
                       <mark>{this.props.sportNews.articles[0].title}</mark>
                     </h3>
@@ -66,7 +76,16 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                 {this.props.sportNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 7 ? (
-                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <div
+                        className="col-lg-6 col-md-6 col-sm-12"
+                        key={i}
+                        onClick={() =>
+                          this.props.showFullArticleInfo(
+                            article.source.id,
+                            this.props.url
+                          )
+                        }
+                      >
                         <h5>
                           <mark
                             style={{
@@ -113,16 +132,19 @@ class MoreSport extends React.Component<MoreSportProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,
+    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSport: (url: string) => dispatch(getSport(url)),
+    showFullArticleInfo: (id: number, url: any) =>
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 
