@@ -1,4 +1,4 @@
-import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes } from "../Types/Types";
+import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes, GetWindowPositionTypes } from "../Types/Types";
 import { Dispatch} from "redux";
 
 export const getData = (url: string) => {
@@ -191,4 +191,12 @@ export const showFullArticleInfo = (id: number, url: any) => {
   return {
     type: GetShowFullArticleTypes.GETSHOWFULLARTICLE
   };
+}
+
+export const fixedSmallScreenMenu = (num:number,elem:HTMLDivElement) => {
+  elem.style.transform = 'translateY(' + num+'px)';
+  elem.style.zIndex = '5';
+  return {
+   type: GetWindowPositionTypes.GETWINDOWPOSITION
+  }
 }

@@ -13,6 +13,7 @@ import {
   GetHealthTypes,
   GetScienceTypes,
   GetShowFullArticleTypes,
+  GetWindowPositionTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
@@ -153,6 +154,12 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetShowFullArticleTypes.GETSHOWFULLARTICLE: {
+      return {
+        ...state,
+      };
+    }
+      
+    case GetWindowPositionTypes.GETWINDOWPOSITION: {
       return {
         ...state,
       };
