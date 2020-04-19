@@ -18,6 +18,7 @@ import TitleSelectArticle from "../Components/TitlePage/TitleSelectArticle/Title
 import SelectArticleNews from "../Components/MoreNews/SelectArticleNews/SelectArticleNews";
 import SelectArticleBusiness from "../Components/MoreBusiness/SelectArticleBusiness/SelectArticleBusiness";
 import SelectArticleEntertainment from "../Components/MoreEntertainment/SelectArticleEntertainment/SelectArticleEntertainment";
+import SelectArticleTech from "../Components/MoreTech/SelectArticleTech/SelectArticleTech";
 
 
 export interface Props {}
@@ -39,6 +40,7 @@ class Routes extends React.Component {
         <Route exact={true} path="/moreentertainment/:id" component={SelectArticleEntertainment} />
         <Route exact={true} path="/moretrending" component={MoreTrending} />
         <Route exact={true} path="/moretech" component={MoreTech} />
+        <Route exact={true} path="/moretech/:id" component={SelectArticleTech} />
         <Route exact={true} path="/morehealth" component={MoreHealth} />
         <Route exact={true} path="/morescience" component={MoreScience} />
         <Redirect exact={true} from="/" to="/titlenews" />

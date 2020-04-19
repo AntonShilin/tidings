@@ -54,7 +54,12 @@ div.header-sport-article {
 
 
 @media only screen and (max-width: 767px) {
-  
+  div.header-sport-article .latest-sport-article h3{
+    font-size: 1.25rem;
+    mark{
+      line-height: 1.9rem !important;
+    }
+  }
     .header-right-sidebar{
       display: none;
     }

@@ -53,6 +53,12 @@ div.science-news-article {
   }
   
   @media only screen and (max-width: 767px) {
+    div.science-news-article .latest-science-article h3{
+      font-size: 1.25rem;
+      mark{
+        line-height: 1.9rem !important;
+      }
+    }
     .header-right-sidebar {
       display: none;
     }

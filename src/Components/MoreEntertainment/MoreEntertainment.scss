@@ -53,6 +53,12 @@
 }
 
 @media only screen and (max-width: 767px) {
+  div.entertainment-article .latest-entertainment h3{
+    font-size: 1.25rem;
+    mark{
+      line-height: 1.9rem !important;
+    }
+  }
   .header-right-sidebar {
     display: none;
   }

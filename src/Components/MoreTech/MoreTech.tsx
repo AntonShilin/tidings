@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./MoreTech.scss";
-import { getTech } from "../../Actions/Actions";
+import { getTech, showFullArticleInfo } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
@@ -11,6 +11,8 @@ export interface MoreTechProps {
   techNews: any | null;
   getTech: typeof getTech;
   colors: string[];
+  showFullArticleInfo: typeof showFullArticleInfo;
+  url: any;
 }
 
 export interface State {}
@@ -36,7 +38,12 @@ class MoreTech extends React.Component<MoreTechProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div className="latest-tech-article">
+                  <div className="latest-tech-article"    onClick={() =>
+                      this.props.showFullArticleInfo(
+                        this.props.techNews.articles[7].source.id,
+                        this.props.url
+                      )
+                    }>
                     <h3>
                       <mark>{this.props.techNews.articles[9].title}</mark>
                     </h3>
@@ -60,7 +67,12 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                 {this.props.techNews.articles.map(
                   (article: any, i: number, arr: any) =>
                     i > 9 ? (
-                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}    onClick={() =>
+                        this.props.showFullArticleInfo(
+                          article.source.id,
+                          this.props.url
+                        )
+                      }>
                         <h5>
                           <mark
                             style={{
@@ -105,16 +117,19 @@ class MoreTech extends React.Component<MoreTechProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any,url:any) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
+    url
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getTech: (url: string) => dispatch(getTech(url)),
+    showFullArticleInfo: (id: number, url: any) =>
+    dispatch(showFullArticleInfo(id, url))
   };
 };
 

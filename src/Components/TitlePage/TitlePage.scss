@@ -53,6 +53,12 @@ div.title-page {
 }
 
 @media screen and (max-width: 411px) {
+  div.title-page .latest_articles h3 {
+    font-size: 1.25rem;
+    mark{
+      line-height: 1.9rem !important;
+    }
+  }
   div.main-news > div {
     h5{
       top: -2rem !important;

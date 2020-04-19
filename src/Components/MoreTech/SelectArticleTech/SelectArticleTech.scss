@@ -1,0 +1,49 @@
+.selected-article {
+    margin-top: 2rem;
+    max-height: 50rem;
+    overflow: hidden;
+    div:nth-of-type(1) {
+      h1 {
+        color: #070707;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+      p:nth-of-type(2) {
+        cursor: pointer;
+        color: #070707;
+        &:hover{
+          color: #474646;
+        }
+      }
+    }
+  }
+  
+  .header-right-sidebar{
+    h3{
+      color: #070707;
+      font-size: 2rem;
+      font-weight: 600;
+      background-color: #FFC000;
+      mark{
+        background-color: transparent;
+        box-shadow:none;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 766px) {
+    .selected-article {
+      div:nth-of-type(1) {
+        h1 {
+         text-align: left;
+        }
+      }
+      div:nth-of-type(2) {
+        display: none;
+      }
+    }
+    .header-right-sidebar{
+   display: none;
+    }
+  }
+  

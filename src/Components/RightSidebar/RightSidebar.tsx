@@ -2,6 +2,8 @@ import * as React from "react";
 import { getEntertainment, showFullArticleInfo } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import "./RightSidebar.scss";
+import { Dispatch, AnyAction, Action } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 
 export interface RightSidebarProps {
   entertainmentNews: any | null;
@@ -53,7 +55,7 @@ const mapStateToProps = (state: any, url: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch:any) => {
   return {
     getEntertainment: (url: string) => dispatch(getEntertainment(url)),
     showFullArticleInfo: (id: number, url: any) =>

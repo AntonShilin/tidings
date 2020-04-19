@@ -53,6 +53,12 @@ div.headline-news-article {
 }
 
 @media only screen and (max-width: 767px) {
+  div.headline-news-article .latest-headline-article h3{
+    font-size: 1.25rem;
+    mark{
+      line-height: 1.9rem !important;
+    }
+  }
   .headline-news-article {
     .header-right-sidebar{
       display: none;

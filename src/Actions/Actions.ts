@@ -1,9 +1,8 @@
 import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes } from "../Types/Types";
-import { Dispatch } from "redux";
+import { Dispatch} from "redux";
 
 export const getData = (url: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(loading());
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -21,7 +20,7 @@ export const getData = (url: string) => {
   };
 };
 
-export const getEntertainment = (url: string) => {
+export const getEntertainment = (url: string) => { 
   return (dispatch: Dispatch) => {
     fetch(url)
       .then((response) => {
@@ -186,7 +185,8 @@ export const toggleSmallScreenMenu = (e:React.MouseEvent,elem: HTMLDivElement) =
   };
 }
 
-export const showFullArticleInfo = (id:number,url:any) => {
+export const showFullArticleInfo = (id: number, url: any) => {
+  console.log("Aaa")
   url.history.push(`${url.match.url}/${id}`);
    url.match.params.id = id; 
   return {

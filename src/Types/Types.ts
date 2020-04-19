@@ -36,6 +36,7 @@ export enum GetShowFullArticleTypes {
   GETSHOWFULLARTICLE= "GETSHOWFULLARTICLE",
 }
 
+
 /* interfaces */
 export interface IGetShowFullArticleAction {
   type:GetShowFullArticleTypes.GETSHOWFULLARTICLE

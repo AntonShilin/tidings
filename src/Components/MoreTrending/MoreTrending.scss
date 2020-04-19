@@ -8,7 +8,6 @@ div.header-trending-article {
       position: relative;
       width: 15rem;
       height: auto;
-      padding: 0;
       cursor: pointer;
       .trending-number {
         position: absolute;
@@ -45,13 +44,19 @@ div.header-trending-article {
 }
 
 @media screen and (max-width: 568px) {
+  div.health-news-article .latest-health-article h3{
+    font-size: 1.1rem;
+    mark{
+      line-height: 1.5rem !important;
+    }
+  }
   div.main-trending-news >div>div  {
     height: 8rem !important;
     overflow: hidden;
     margin-bottom: 1rem;
     div:nth-of-type(2) {
       h5{
-        font-size: 1rem;
+        font-size: .9rem;
       }
       p {
         display: none;
