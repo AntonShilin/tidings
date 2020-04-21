@@ -29,6 +29,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
   }
 
   render() {
+    console.log("Tech",this.props.url)
     return this.props.techNews === null ? (
       <Preloader />
     ) : (

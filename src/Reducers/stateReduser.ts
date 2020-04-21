@@ -15,12 +15,15 @@ import {
   GetShowFullArticleTypes,
   GetWindowPositionTypes,
   GetPublisherPageTypes,
+  GetShowSidebarArticleTypes,
+  GetSidebarTypes,
 } from "../Types/Types";
 import { Reducer } from "react";
 
 const initialState: IMainState = {
   titlepageNews: null,
   entertainmentNews: null,
+  sidebarNews: null,
   trendingNews: null,
   techNews: null,
   businessNews: null,
@@ -129,6 +132,14 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
         scienceNews: action.data,
       };
     }
+      
+    case GetSidebarTypes.GETSIDEBAR: {
+      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      return {
+        ...state,
+        sidebarNews: action.data,
+      };
+    }
 
     case GetHealthTypes.GETHEALTH: {
       action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
@@ -167,6 +178,12 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
       
     case GetPublisherPageTypes.GETPUBLISHERPAGE: {
+      return {
+        ...state,
+      };
+    }
+      
+    case GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE: {
       return {
         ...state,
       };

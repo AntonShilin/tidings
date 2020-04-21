@@ -33,6 +33,10 @@ export enum GetScienceTypes {
   GETSCIENCE= "GETSCIENCE",
 }
 
+export enum GetSidebarTypes {
+  GETSIDEBAR= "GETSIDEBAR",
+}
+
 export enum GetPublisherPageTypes {
   GETPUBLISHERPAGE= "GETPUBLISHERPAGE",
 }
@@ -43,9 +47,16 @@ export enum GetWindowPositionTypes {
 export enum GetShowFullArticleTypes {
   GETSHOWFULLARTICLE= "GETSHOWFULLARTICLE",
 }
+export enum GetShowSidebarArticleTypes {
+  GETSHOWSIDEBARARTICLE= "GETSHOWSIDEBARARTICLE",
+}
 
 
 /* interfaces */
+export interface IGetShowSidebarArticleAction {
+  type:GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE
+}
+
 export interface IGetShowFullArticleAction {
   type:GetShowFullArticleTypes.GETSHOWFULLARTICLE
 }
@@ -60,6 +71,10 @@ export interface IWindowPositionAction {
 
 export interface IScienceAction {
   type:GetHealthTypes.GETHEALTH;
+  data: any;
+}
+export interface ISidebarAction {
+  type:GetSidebarTypes.GETSIDEBAR;
   data: any;
 }
 export interface IHealthAction {
@@ -113,15 +128,18 @@ export type MainActions =
   | ISportAction
   | IHeadlineNewsAction
   | IHealthAction
+  |ISidebarAction
   | IScienceAction
   | IGetShowFullArticleAction
   | IWindowPositionAction
-  |IPublisherPageAction
+  | IPublisherPageAction
+  |IGetShowSidebarArticleAction
   | IGetEntertainmentAction;
 
 export interface IMainState {
   readonly titlepageNews: any;
   readonly entertainmentNews: any;
+  readonly sidebarNews: any;
   readonly trendingNews: any;
   readonly techNews: any;
   readonly businessNews: any;

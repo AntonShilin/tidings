@@ -1,14 +1,14 @@
 import * as React from "react";
-import { getEntertainment, showFullArticleInfo } from "../../Actions/Actions";
+import { getSidebarNews, showSidebarArticleInfo } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import "./RightSidebar.scss";
-import { Dispatch, AnyAction, Action } from "redux";
-import { ThunkDispatch } from "redux-thunk";
+import { IAplicationState } from "../../Store/Store";
+import { withRouter } from "react-router";
 
 export interface RightSidebarProps {
-  entertainmentNews: any | null;
-  getEntertainment: typeof getEntertainment;
-  showFullArticleInfo: typeof showFullArticleInfo;
+  sidebarNews: any | null;
+  getSidebarNews: typeof getSidebarNews;
+  showSidebarArticleInfo: typeof showSidebarArticleInfo;
   url: any;
 }
 
@@ -16,10 +16,10 @@ export interface State {}
 
 class RightSidebar extends React.Component<RightSidebarProps, State> {
   keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
-  
+
   componentDidMount() {
-    if (this.props.entertainmentNews === null) {
-      this.props.getEntertainment(
+    if (this.props.sidebarNews === null) {
+      this.props.getSidebarNews(
         `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.keyAPI}`
       );
     }
@@ -27,41 +27,57 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
 
   render() {
     return (
-      <div className="header-right-sidebar">
-        <h3 className="text-start mb-4">
-          <mark>Just in</mark>
-        </h3>
-        {this.props.entertainmentNews !== null
-          ? this.props.entertainmentNews.articles.map(
-              (article: any, i: number | string) => (
-                <div
-                  key={i}
-                  className="d-flex article_right_sidebar  mb-2"
-                >
-                  <img src={article.urlToImage} className="img-fluid" alt="" />
-                  <div className="">{article.description}</div>
-                </div>
+      <div className="container header-right-sidebar">
+        <div className="row">
+          <h3 className="text-start mb-4">
+            <mark>Just in</mark>
+          </h3>
+        </div>
+        <div className="row">
+          {this.props.sidebarNews !== null
+            ? this.props.sidebarNews.articles.map(
+                (article: any, i: number | string) => (
+                  <div
+                    key={i}
+                    className="col-12 d-flex article_right_sidebar  mb-2"
+                    onClick={() =>
+                      this.props.showSidebarArticleInfo(
+                        this.props.sidebarNews.articles[i].source.id,
+                        this.props.url
+                      )
+                    }
+                  >
+                    <img
+                      src={article.urlToImage}
+                      className="img-fluid"
+                      alt=""
+                    />
+                    <div className="">{article.description}</div>
+                  </div>
+                )
               )
-            )
-          : null}
+            : null}
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: IAplicationState, url: any) => {
   return {
-    entertainmentNews: state.data_news.entertainmentNews,
+    sidebarNews: state.data_news.sidebarNews,
     url,
   };
 };
 
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    getEntertainment: (url: string) => dispatch(getEntertainment(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
+    getSidebarNews: (url: string) => dispatch(getSidebarNews(url)),
+    showSidebarArticleInfo: (id: number, url: any) =>
+      dispatch(showSidebarArticleInfo(id, url)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RightSidebar);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(RightSidebar)
+);

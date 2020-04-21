@@ -1,5 +1,6 @@
-import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes, GetWindowPositionTypes, GetPublisherPageTypes } from "../Types/Types";
-import { Dispatch, AnyAction} from "redux";
+import { GetDataTypes, isLoadingTypes, GetEntertainmentTypes, GetTrendingTypes, GetTechTypes, GetBusinessTypes, GetSportTypes, GetHeadlineNewsTypes, toggleMenu, GetHealthTypes, GetScienceTypes, GetShowFullArticleTypes, GetWindowPositionTypes, GetPublisherPageTypes, GetShowSidebarArticleTypes, GetSidebarTypes } from "../Types/Types";
+import { Dispatch} from "redux";
+import { RouteComponentProps } from "react-router-dom";
 
 export const getData = (url: string) => {
   return (dispatch: Dispatch) => {
@@ -172,6 +173,25 @@ export const getHealth = (url: string) => {
   };
 };
 
+export const getSidebarNews = (url: string) => {
+  return (dispatch: Dispatch) => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((news) =>
+        dispatch({
+          type: GetSidebarTypes.GETSIDEBAR,
+          data: news
+        })
+      );
+  };
+};
+
 const loading = () => {
   return {
     type: isLoadingTypes.LOADING,
@@ -208,4 +228,14 @@ export const goToPublisherPage = (adress: string) => {
   return {
     type: GetPublisherPageTypes.GETPUBLISHERPAGE
   }
+}
+
+export const showSidebarArticleInfo = (id: number, url: any) => {
+  console.log(id,url)
+  console.log()
+  url.history.push(`rightsidebar/${id}`);
+  url.match.params.id = id; 
+  return {
+    type: GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE
+  };
 }

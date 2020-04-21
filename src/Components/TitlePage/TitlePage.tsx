@@ -10,13 +10,15 @@ import PreviewBusiness from "../PreviewBusiness/PreviewBusiness";
 import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
 import defaultImage from "../Media/img/question.jpg";
+import { RouteComponentProps } from "react-router-dom";
+import { IAplicationState } from "../../Store/Store";
 
 export interface TitlePageProps {
   titlepageNews: any | null;
   colors: string[];
   getData: typeof getData;
   showFullArticleInfo: typeof showFullArticleInfo;
-  url: any;
+  url: RouteComponentProps;
 }
 
 export interface State {}
@@ -134,7 +136,9 @@ class TitlePage extends React.Component<TitlePageProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+
+
+const mapStateToProps = (state: IAplicationState, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     colors: state.data_news.colors,
@@ -145,7 +149,7 @@ const mapStateToProps = (state: any, url: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getData: (url: string) => dispatch(getData(url)),
-    showFullArticleInfo: (id: number, url: any) =>
+    showFullArticleInfo: (id: number, url: RouteComponentProps) =>
       dispatch(showFullArticleInfo(id, url)),
   };
 };

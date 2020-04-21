@@ -5,6 +5,8 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getData, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
+import { RouteComponentProps } from "react-router-dom";
+import { IAplicationState } from "../../../Store/Store";
 
 export interface SelectArticleProps {
   titlepageNews: any;
@@ -64,7 +66,7 @@ class TitleSelectArticle extends React.Component<SelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: any,url:any) => {
+const mapStateToProps = (state: IAplicationState,url:RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     colors: state.data_news.colors,
