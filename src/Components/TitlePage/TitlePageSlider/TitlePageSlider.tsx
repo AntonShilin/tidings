@@ -9,13 +9,14 @@ import {
 } from "../../../Actions/Actions";
 import Preloader from "../../Preloader/Preloader";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { IImages } from "../../../Types/Types";
 
 export interface TitlePageSliderProps {
   titlepageNews: any | null;
   getData: typeof getData;
   clickToLeftArrow: typeof clickToLeftArrow;
   clickToRightArrow: typeof clickToRightArrow;
-  images: string[];
+  images: IImages[];
   keyApi: string;
 }
 
@@ -45,7 +46,7 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
         <div className="col">
           <div className="slider">
             <button
-              className="arrow-left"
+              className="btn arrow-left"
               onClick={() =>
                 this.props.clickToLeftArrow(
                   this.slider?.current!,
@@ -53,16 +54,10 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
                 )
               }
             >
-              <MdKeyboardArrowLeft
-                style={{
-                  fontSize: "1.5rem",
-                  color: "white",
-                  strokeWidth: "3",
-                }}
-              />
+             <span>&#10094;</span>
             </button>
             <button
-              className="arrow-right"
+              className="btn arrow-right"
               onClick={() =>
                 this.props.clickToRightArrow(
                   this.slider?.current!,
@@ -70,27 +65,23 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
                 )
               }
             >
-              <MdKeyboardArrowRight
-                style={{
-                  fontSize: "1.5rem",
-                  color: "white",
-                  strokeWidth: "3",
-                }}
-              />
+             <span>&#10095;</span>
             </button>
-            <div className="navigation-panel">
-              {this.props.images.map((n: any, i: number) => (
-                <div key={i}>{` `}</div>
-              ))}
-            </div>
             <div className="window-images-slider" ref={this.slider}>
               {this.props.images.map((url: any, i: number) =>
                 i < 2 ? (
                   <div key={i}>
-                    <img src={url} />
+                    <img src={url} alt={`image_${i}`}/>
                   </div>
                 ) : null
               )}
+            </div>
+            <div className="navigation-panel">
+              <p>
+                {this.props.images.map((n: any, i: number) => (
+                  <span key={i}>{` `}</span>
+                ))}
+              </p>
             </div>
           </div>
         </div>

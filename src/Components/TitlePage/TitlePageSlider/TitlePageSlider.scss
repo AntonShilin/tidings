@@ -2,53 +2,68 @@
   width: 100%;
   max-height: 32rem;
   overflow: hidden;
-  button.arrow-left {
+  button.arrow-left.btn {
     position: absolute;
     left: 0.2rem;
     top: 45%;
     z-index: 4;
-    color: red;
     cursor: pointer;
     background-color: lightseagreen;
     border: 0;
-    outline: none;
+    outline: none !important;
     border-radius: 50%;
     width: 2.5rem;
     height: 2.5rem;
+    span{
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
   }
-  button.arrow-right {
+  button.arrow-right.btn {
     cursor: pointer;
     position: absolute;
     right: 0.2rem;
     top: 45%;
     z-index: 4;
     border: 0;
-    outline: none;
+    outline: none !important;
     border-radius: 50%;
     background-color: lightseagreen;
     width: 2.5rem;
     height: 2.5rem;
+    span{
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
   }
   .navigation-panel {
     position: absolute;
     bottom: 1rem;
-    left: 45%;
+    left: 0;
     z-index: 4;
-    div {
-      display: inline-block;
-      background-color: red;
-      margin: 0.2rem;
-      width: 0.5rem;
-      height: 0.5rem;
+    width: 100%;
+    p{
+      text-align: center;
+      span {
+        display: inline-block;
+        background-color: red;
+        margin: 0.2rem;
+        width: 0.5rem;
+        height: 0.5rem;
+      }
     }
   }
   .window-images-slider {
     margin-top: 1rem;
+    display: -webkit-inline-box;
     display: inline-flex;
     max-height: 31rem;
     width: 100%;
     position: relative;
     div:nth-of-type(1) {
+      cursor: pointer;
       height: 30rem;
       width: 100%;
       position: absolute;
@@ -57,13 +72,30 @@
         width: 100%;
         height: auto;
       }
+      p{
+        position: absolute;
+        top: 1rem;
+        mark{
+          background-color: orange;
+          color: white;
+        }
+      }
     }
     div:nth-of-type(2) {
+      cursor: pointer;
       height: 30rem;
       width: 100%;
       img {
         width: 100%;
         height: auto;
+      }
+      p{
+        position: absolute;
+        top: 1rem;
+        mark{
+          background-color: blue;
+          color: white;
+        }
       }
     }
     div:nth-of-type(3) {
@@ -74,6 +106,14 @@
       img {
         width: 100%;
         height: auto;
+      }
+      p{
+        position: absolute;
+        top: 1rem;
+        mark{
+          background-color: green;
+          color: white;
+        }
       }
     }
   }
@@ -93,6 +133,9 @@
     max-height: 16rem;
     .window-images-slider {
       max-height: 16rem;
+      .navigation-panel {
+        bottom: 0rem;
+      }
     }
   }
 }
@@ -101,8 +144,13 @@
   .slider {
     max-height: 13rem;
     .navigation-panel {
-      left: 40%;
-      bottom: 0.5rem;
+      bottom: -1.5rem;
+      p{
+        span {
+          width: 0.3rem;
+          height: 0.3rem;
+        }
+      }
     }
     .window-images-slider {
       max-height: 13rem;

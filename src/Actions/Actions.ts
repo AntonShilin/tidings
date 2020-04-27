@@ -279,7 +279,12 @@ export const clickToLeftArrow = (elem: any, allImages: any) => {
 /* create new img[0]  */
   const div0: HTMLDivElement = document.createElement("div");
   const img0: HTMLImageElement = document.createElement("img");
-  img0.setAttribute("src", allImages[1]);
+  const p0: HTMLDivElement = document.createElement("p");
+  const mark0: HTMLElement = document.createElement("mark");
+  p0.append(mark0);
+  mark0.innerText = allImages[1].title;
+  div0.append(p0);
+  img0.setAttribute("src", allImages[1].urlToImage);
   div0.append(img0);
   elem.prepend(div0);
   console.log(currentArray);
@@ -289,7 +294,12 @@ export const clickToLeftArrow = (elem: any, allImages: any) => {
   /* create new img[1]  */
   const div1: HTMLDivElement = document.createElement("div");
   const img1: HTMLImageElement = document.createElement("img");
-  img1.setAttribute("src", allImages[0]);
+  const p1: HTMLDivElement = document.createElement("p");
+  const mark1: HTMLElement = document.createElement("mark");
+  p1.append(mark1);
+  mark1.innerText = allImages[0].title;
+  div0.append(p1);
+  img1.setAttribute("src", allImages[0].urlToImage);
   div1.append(img1);
   elem.prepend(div1);
   console.log(currentArray);
@@ -319,7 +329,12 @@ export const clickToRightArrow = (elem: any, allImages: any) => {
 /* create new img[0] */
 const div: HTMLDivElement = document.createElement("div");
   const img: HTMLImageElement = document.createElement("img");
-  img.setAttribute("src", allImages[0]);
+  const p: HTMLDivElement = document.createElement("p");
+  const mark: HTMLElement = document.createElement("mark");
+  p.append(mark);
+  mark.innerText = allImages[0].title;
+  div.append(p);
+  img.setAttribute("src", allImages[0].urlToImage);
   div.append(img);
   elem.prepend(div);
   /* -------------- */

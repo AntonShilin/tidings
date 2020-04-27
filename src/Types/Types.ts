@@ -1,5 +1,5 @@
 export enum toggleMenu {
-TOGGLEMENU = "TOGGLEMENU",
+  TOGGLEMENU = "TOGGLEMENU",
 }
 export enum GetDataTypes {
   GETDATA = "GETDATA",
@@ -18,37 +18,37 @@ export enum GetTechTypes {
   GETTECH = "GETTECH",
 }
 export enum GetBusinessTypes {
-  GETBUSINESS= "GETBUSINESS",
+  GETBUSINESS = "GETBUSINESS",
 }
 export enum GetSportTypes {
-  GETSPORT= "GETSPORT",
+  GETSPORT = "GETSPORT",
 }
 export enum GetHeadlineNewsTypes {
-  GETHEADLINENEWS= "GETHEADLINENEWS",
+  GETHEADLINENEWS = "GETHEADLINENEWS",
 }
 export enum GetHealthTypes {
-  GETHEALTH= "GETHEALTH",
+  GETHEALTH = "GETHEALTH",
 }
 export enum GetScienceTypes {
-  GETSCIENCE= "GETSCIENCE",
+  GETSCIENCE = "GETSCIENCE",
 }
 
 export enum GetSidebarTypes {
-  GETSIDEBAR= "GETSIDEBAR",
+  GETSIDEBAR = "GETSIDEBAR",
 }
 
 export enum GetPublisherPageTypes {
-  GETPUBLISHERPAGE= "GETPUBLISHERPAGE",
+  GETPUBLISHERPAGE = "GETPUBLISHERPAGE",
 }
 
 export enum GetWindowPositionTypes {
-  GETWINDOWPOSITION= "GETWINDOWPOSITION",
+  GETWINDOWPOSITION = "GETWINDOWPOSITION",
 }
 export enum GetShowFullArticleTypes {
-  GETSHOWFULLARTICLE= "GETSHOWFULLARTICLE",
+  GETSHOWFULLARTICLE = "GETSHOWFULLARTICLE",
 }
 export enum GetShowSidebarArticleTypes {
-  GETSHOWSIDEBARARTICLE= "GETSHOWSIDEBARARTICLE",
+  GETSHOWSIDEBARARTICLE = "GETSHOWSIDEBARARTICLE",
 }
 
 export enum ArrowLeftTypes {
@@ -58,9 +58,6 @@ export enum ArrowLeftTypes {
 export enum ArrowRightTypes {
   ARROWRIGHT = "ARROWRIGHT",
 }
-
-
-
 
 /* interfaces */
 
@@ -74,37 +71,36 @@ export interface IArrowRightAction {
   newArr: any;
 }
 
-
 export interface IGetShowSidebarArticleAction {
-  type:GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE
+  type: GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE;
 }
 
 export interface IGetShowFullArticleAction {
-  type:GetShowFullArticleTypes.GETSHOWFULLARTICLE
+  type: GetShowFullArticleTypes.GETSHOWFULLARTICLE;
 }
 
 export interface IPublisherPageAction {
-  type:GetPublisherPageTypes.GETPUBLISHERPAGE
+  type: GetPublisherPageTypes.GETPUBLISHERPAGE;
 }
 
 export interface IWindowPositionAction {
-  type: GetWindowPositionTypes.GETWINDOWPOSITION
+  type: GetWindowPositionTypes.GETWINDOWPOSITION;
 }
 
 export interface IScienceAction {
-  type:GetHealthTypes.GETHEALTH;
+  type: GetHealthTypes.GETHEALTH;
   data: any;
 }
 export interface ISidebarAction {
-  type:GetSidebarTypes.GETSIDEBAR;
+  type: GetSidebarTypes.GETSIDEBAR;
   data: any;
 }
 export interface IHealthAction {
-  type:GetScienceTypes.GETSCIENCE;
+  type: GetScienceTypes.GETSCIENCE;
   data: any;
 }
 export interface IHeadlineNewsAction {
-  type:GetHeadlineNewsTypes.GETHEADLINENEWS;
+  type: GetHeadlineNewsTypes.GETHEADLINENEWS;
   data: any;
 }
 export interface ISportAction {
@@ -141,23 +137,23 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
-  |IToggleMenuAction
+  | IToggleMenuAction
   | IGetDataAction
   | ILoadingAction
   | ITrendingAction
-    | ITechAction
-    | IBusinessAction
+  | ITechAction
+  | IBusinessAction
   | ISportAction
   | IHeadlineNewsAction
   | IHealthAction
-  |ISidebarAction
+  | ISidebarAction
   | IScienceAction
   | IGetShowFullArticleAction
   | IWindowPositionAction
   | IPublisherPageAction
   | IArrowLeftAction
-  |IArrowRightAction
-  |IGetShowSidebarArticleAction
+  | IArrowRightAction
+  | IGetShowSidebarArticleAction
   | IGetEntertainmentAction;
 
 export interface IMainState {
@@ -172,7 +168,11 @@ export interface IMainState {
   readonly healthNews: any;
   readonly scienceNews: any;
   readonly colors: string[];
-  readonly images: string[];
+  readonly images: IImages[];
   readonly keyApi: string;
+}
 
+export interface IImages {
+  urlToImage: string;
+  title: string;
 }
