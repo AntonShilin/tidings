@@ -51,8 +51,30 @@ export enum GetShowSidebarArticleTypes {
   GETSHOWSIDEBARARTICLE= "GETSHOWSIDEBARARTICLE",
 }
 
+export enum ArrowLeftTypes {
+  ARROWLEFT = "ARROWLEFT",
+}
+
+export enum ArrowRightTypes {
+  ARROWRIGHT = "ARROWRIGHT",
+}
+
+
+
 
 /* interfaces */
+
+export interface IArrowLeftAction {
+  type: ArrowLeftTypes.ARROWLEFT;
+  newArr: any;
+}
+
+export interface IArrowRightAction {
+  type: ArrowRightTypes.ARROWRIGHT;
+  newArr: any;
+}
+
+
 export interface IGetShowSidebarArticleAction {
   type:GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE
 }
@@ -133,6 +155,8 @@ export type MainActions =
   | IGetShowFullArticleAction
   | IWindowPositionAction
   | IPublisherPageAction
+  | IArrowLeftAction
+  |IArrowRightAction
   |IGetShowSidebarArticleAction
   | IGetEntertainmentAction;
 
@@ -148,4 +172,7 @@ export interface IMainState {
   readonly healthNews: any;
   readonly scienceNews: any;
   readonly colors: string[];
+  readonly images: string[];
+  readonly keyApi: string;
+
 }

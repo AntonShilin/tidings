@@ -13,17 +13,17 @@ export interface SelectArticleProps {
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class SelectArticleScience extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.scienceNews === null) {
       this.props.getScience(
-        `https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -80,6 +80,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     scienceNews: state.data_news.scienceNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

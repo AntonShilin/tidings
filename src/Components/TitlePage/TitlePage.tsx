@@ -9,9 +9,10 @@ import PreviewTech from "../PreviewTech/PreviewTech";
 import PreviewBusiness from "../PreviewBusiness/PreviewBusiness";
 import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
-import defaultImage from "../Media/img/question.jpg";
+import defaultImage from "../Media/img/news.jpg";
 import { RouteComponentProps } from "react-router-dom";
 import { IAplicationState } from "../../Store/Store";
+import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
 
 export interface TitlePageProps {
   titlepageNews: any | null;
@@ -19,12 +20,12 @@ export interface TitlePageProps {
   getData: typeof getData;
   showFullArticleInfo: typeof showFullArticleInfo;
   url: RouteComponentProps;
+  keyApi: string;
 }
 
 export interface State {}
 
 class TitlePage extends React.Component<TitlePageProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   constructor(props: TitlePageProps) {
     super(props);
@@ -33,7 +34,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
       this.props.getData(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -43,8 +44,9 @@ class TitlePage extends React.Component<TitlePageProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container title-page">
-          <div className="row">
+          <div className="container title-page">
+         <TitlePageSlider/> 
+          <div className="row mt-5">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
@@ -141,6 +143,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
 const mapStateToProps = (state: IAplicationState, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
+    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };

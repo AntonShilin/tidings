@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
-import question from "../Media/img/question.jpg";
+import tech from "../Media/img/tech.jpg";
 
 export interface MoreTechProps {
   techNews: any | null;
@@ -13,17 +13,17 @@ export interface MoreTechProps {
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreTech extends React.Component<MoreTechProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -56,7 +56,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                       src={
                         this.props.techNews.articles[9].urlToImage !== null
                           ? this.props.techNews.articles[9].urlToImage
-                          : question
+                          : tech
                       }
                       alt=""
                     />
@@ -99,7 +99,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : tech
                           }
                           alt=""
                         />
@@ -133,6 +133,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

@@ -4,23 +4,24 @@ import { connect } from "react-redux";
 import "./RightSidebar.scss";
 import { IAplicationState } from "../../Store/Store";
 import { withRouter } from "react-router";
+import defaultImage from "../Media/img/articles.jpg";
 
 export interface RightSidebarProps {
   sidebarNews: any | null;
   getSidebarNews: typeof getSidebarNews;
   showSidebarArticleInfo: typeof showSidebarArticleInfo;
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class RightSidebar extends React.Component<RightSidebarProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.sidebarNews === null) {
       this.props.getSidebarNews(
-        `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -48,7 +49,9 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
                     }
                   >
                     <img
-                      src={article.urlToImage}
+                      src={this.props.sidebarNews.articles[i].urlToImage !== null
+                        ? this.props.sidebarNews.articles[i].urlToImage
+                        : defaultImage}
                       className="img-fluid"
                       alt=""
                     />
@@ -66,6 +69,7 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
 const mapStateToProps = (state: IAplicationState, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

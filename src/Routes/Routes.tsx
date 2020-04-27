@@ -20,6 +20,7 @@ import SelectArticleScience from "../Components/MoreScience/SelectArticleScience
 import SelectArticleSport from "../Components/MoreSport/SelectArticleSport/SelectArticleSport";
 import RightSidebar from "../Components/RightSidebar/RightSidebar";
 import SelectArticleSidebar from "../Components/RightSidebar/SelectArticleSidebar/SelectArticleSidebar";
+import TitlePageSlider from "../Components/TitlePage/TitlePageSlider/TitlePageSlider";
 
 class Routes extends React.Component {
   render() {

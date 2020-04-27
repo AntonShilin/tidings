@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./MoreBusiness.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
-import question from "../Media/img/question.jpg";
+import business from "../Media/img/business.jpg";
 
 export interface MoreBusinessProps {
   businessNews: any | null;
@@ -13,17 +13,17 @@ export interface MoreBusinessProps {
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreBusiness extends React.Component<MoreBusinessProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
-        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -54,7 +54,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                       src={
                         this.props.businessNews.articles[7].urlToImage !== null
                           ? this.props.businessNews.articles[7].urlToImage
-                          : question
+                          : business
                       }
                       alt=""
                     />
@@ -97,7 +97,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : business
                           }
                           alt=""
                         />
@@ -131,6 +131,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     businessNews: state.data_news.businessNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

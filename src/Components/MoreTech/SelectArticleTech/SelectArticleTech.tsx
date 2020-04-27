@@ -5,7 +5,7 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getTech, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage from "../../Media/img/question.jpg";
+import defaultImage from "../../Media/img/tech.jpg";
 
 export interface SelectArticleProps {
   techNews: any | null;
@@ -13,17 +13,17 @@ export interface SelectArticleProps {
   getTech: typeof getTech;
   colors: string[];
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class SelectArticleTech extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -80,6 +80,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

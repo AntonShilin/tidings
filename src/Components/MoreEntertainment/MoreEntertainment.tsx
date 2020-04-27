@@ -5,7 +5,7 @@ import { getEntertainment, showFullArticleInfo } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreEntertainment.scss";
-import question from "../Media/img/question.jpg";
+import entertainment from "../Media/img/entertainment.jpg";
 
 export interface MoreEntertainmentProps {
   entertainmentNews: any | null;
@@ -13,17 +13,16 @@ export interface MoreEntertainmentProps {
   showFullArticleInfo: typeof showFullArticleInfo;
   colors: string[];
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
-
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -57,7 +56,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                         this.props.entertainmentNews.articles[0].urlToImage !==
                         null
                           ? this.props.entertainmentNews.articles[0].urlToImage
-                          : question
+                          : entertainment
                       }
                       alt=""
                     />
@@ -100,7 +99,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : entertainment
                           }
                           alt=""
                         />
@@ -133,6 +132,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
 const mapStateToProps = (state: any, url: any) => {
   return {
     entertainmentNews: state.data_news.entertainmentNews,
+    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };
@@ -142,7 +142,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getEntertainment: (url: string) => dispatch(getEntertainment(url)),
     showFullArticleInfo: (id: number, url: any) =>
-    dispatch(showFullArticleInfo(id, url)),
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

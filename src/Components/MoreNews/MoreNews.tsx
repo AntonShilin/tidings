@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./MoreNews.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
-import question from "../Media/img/question.jpg";
+import news from "../Media/img/news.jpg";
 
 export interface MoreNewsProps {
   headlineNews: any | null;
@@ -13,17 +13,17 @@ export interface MoreNewsProps {
   colors: string[];
   url: any;
   showFullArticleInfo: typeof showFullArticleInfo;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreNews extends React.Component<MoreNewsProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.headlineNews === null) {
       this.props.getNews(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -54,7 +54,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                       src={
                         this.props.headlineNews.articles[9].urlToImage !== null
                           ? this.props.headlineNews.articles[9].urlToImage
-                          : question
+                          : news
                       }
                       alt=""
                     />
@@ -97,7 +97,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : news
                           }
                           alt=""
                         />
@@ -130,6 +130,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
 const mapStateToProps = (state: any, url: any) => {
   return {
     headlineNews: state.data_news.headlineNews,
+    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };

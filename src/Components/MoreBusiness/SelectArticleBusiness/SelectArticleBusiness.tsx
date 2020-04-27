@@ -5,7 +5,7 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getBusiness, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage from "../../Media/img/question.jpg";
+import defaultImage from "../../Media/img/business.jpg";
 
 export interface SelectArticleProps {
   businessNews: any | null;
@@ -13,17 +13,17 @@ export interface SelectArticleProps {
   goToPublisherPage: typeof goToPublisherPage;
   url: any;
   colors: string[];
+  keyApi: string;
 }
 
 export interface State {}
 
 class SelectArticleBusiness extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
-        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -80,6 +80,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     businessNews: state.data_news.businessNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

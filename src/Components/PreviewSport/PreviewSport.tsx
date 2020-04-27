@@ -3,22 +3,22 @@ import { getSport } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewSport.scss";
-import question from "../Media/img/question.jpg";
+import sport from "../Media/img/sport.jpg";
 
 export interface PreviewSportProps {
   sportNews: any | null;
   getSport: typeof getSport;
+  keyApi: string;
 }
 
 export interface State {}
 
 class PreviewSport extends React.Component<PreviewSportProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
   
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -58,7 +58,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage !==null ?article.urlToImage :question}
+                    src={article.urlToImage !==null ?article.urlToImage :sport}
                     alt=""
                   />
                 </div>
@@ -72,7 +72,8 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    sportNews: state.data_news.sportNews
+    sportNews: state.data_news.sportNews,
+    keyApi: state.data_news.keyApi
   };
 };
 

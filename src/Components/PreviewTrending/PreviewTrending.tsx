@@ -3,21 +3,23 @@ import { connect } from "react-redux";
 import { getTrending } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import "./PreviewTrending.scss";
+import defaultImage from "../Media/img/trends.jpg"
+
 
 export interface PreviewTrendingProps {
   trendingNews: any | null;
   getTrending: typeof getTrending;
+  keyApi: string;
 }
 
 export interface State {}
 
 class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
   
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(
-        `https://newsapi.org/v2/everything?q=apple&from=2020-04-08&to=2020-04-08&sortBy=popularity&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/everything?q=apple&from=2020-04-08&to=2020-04-08&sortBy=popularity&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -56,7 +58,9 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage}
+                    src={article.urlToImage !== null
+                      ? article.urlToImage
+                      : defaultImage}
                     alt=""
                   />
                 </div>
@@ -71,6 +75,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
 const mapStateToProps = (state: any) => {
   return {
     trendingNews: state.data_news.trendingNews,
+    keyApi: state.data_news.keyApi
   };
 };
 

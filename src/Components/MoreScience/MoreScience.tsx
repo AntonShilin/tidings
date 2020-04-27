@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./MoreScience.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
-import question from "../Media/img/question.jpg";
+import science from "../Media/img/science.jpg";
 
 export interface MoreScienceProps {
   scienceNews: any | null;
@@ -13,17 +13,17 @@ export interface MoreScienceProps {
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreScience extends React.Component<MoreScienceProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.scienceNews === null) {
       this.props.getScience(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=science&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=science&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -54,7 +54,7 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
                       src={
                         this.props.scienceNews.articles[0].urlToImage !== null
                           ? this.props.scienceNews.articles[0].urlToImage
-                          : question
+                          : science
                       }
                       alt=""
                     />
@@ -96,7 +96,7 @@ class MoreScience extends React.Component<MoreScienceProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : science
                           }
                           alt=""
                         />
@@ -130,6 +130,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     scienceNews: state.data_news.scienceNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

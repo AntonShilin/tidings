@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./MoreHealth.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
-import question from "../Media/img/question.jpg";
+import health from "../Media/img/health.jpg";
 import { Dispatch, AnyAction } from "redux";
 import { GetHealthTypes } from "../../Types/Types";
 
@@ -15,17 +15,17 @@ export interface MoreHealthProps {
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreHealth extends React.Component<MoreHealthProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.healthNews === null) {
       this.props.getHealth(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=health&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=health&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -56,7 +56,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                       src={
                         this.props.healthNews.articles[1].urlToImage !== null
                           ? this.props.healthNews.articles[1].urlToImage
-                          : question
+                          : health
                       }
                       alt=""
                     />
@@ -99,7 +99,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : health
                           }
                           alt=""
                         />
@@ -132,6 +132,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
 const mapStateToProps = (state: any, url: any) => {
   return {
     healthNews: state.data_news.healthNews,
+    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };

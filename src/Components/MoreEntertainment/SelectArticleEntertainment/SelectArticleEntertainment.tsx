@@ -5,7 +5,7 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getEntertainment, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage from "../../Media/img/question.jpg";
+import defaultImage from "../../Media/img/entertainment.jpg";
 
 export interface SelectArticleProps {
   entertainmentNews: any | null;
@@ -13,6 +13,7 @@ export interface SelectArticleProps {
   goToPublisherPage: typeof goToPublisherPage;
   url: any;
   colors: string[];
+  keyApi: string;
 }
 
 export interface State {}
@@ -21,12 +22,10 @@ class SelectArticleEntertainment extends React.Component<
   SelectArticleProps,
   State
 > {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
-
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(
-        `http://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -83,6 +82,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     entertainmentNews: state.data_news.entertainmentNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

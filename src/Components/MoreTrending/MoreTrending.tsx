@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
+import trends from "../Media/img/trends.jpg";
 
 export interface MoreTrendingProps {
   trendingNews: any | null;
   getTrending: typeof getTrending;
   colors: string[];
+  keyApi: string;
 }
 
 export interface State {}
@@ -20,7 +22,7 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(
-        `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -45,7 +47,7 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
                             </div>
                             <img
                               className="img-fluid"
-                              src={article.urlToImage}
+                              src={article.urlToImage !== null ? article.urlToImage : trends }
                               alt=""
                             />
                           </div>
@@ -81,6 +83,7 @@ const mapStateToProps = (state: any) => {
   return {
     trendingNews: state.data_news.trendingNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi
   };
 };
 

@@ -3,22 +3,22 @@ import { getTech } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewTech.scss";
-import question from "../Media/img/question.jpg";
+import defaultImage from "../Media/img/tech.jpg"
 
 export interface PreviewTechProps {
   techNews: any | null;
   getTech: typeof getTech;
+  keyApi: string;
 }
 
 export interface State {}
 
 class PreviewTech extends React.Component<PreviewTechProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -58,7 +58,7 @@ class PreviewTech extends React.Component<PreviewTechProps, State> {
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage !==null ?article.urlToImage :question}
+                    src={article.urlToImage !==null ?article.urlToImage :defaultImage}
                     alt=""
                   />
                 </div>
@@ -72,7 +72,8 @@ class PreviewTech extends React.Component<PreviewTechProps, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    techNews: state.data_news.techNews
+    techNews: state.data_news.techNews,
+    keyApi: state.data_news.keyApi
   };
 };
 

@@ -5,7 +5,7 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getHealth, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage  from "../../Media/img/question.jpg";
+import defaultImage  from "../../Media/img/health.jpg";
 
 export interface SelectArticleProps {
   healthNews: any | null;

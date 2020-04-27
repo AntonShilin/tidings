@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
-import question from "../Media/img/question.jpg";
+import sport from "../Media/img/sport.jpg";
 
 export interface MoreSportProps {
   sportNews: any | null;
@@ -13,12 +13,12 @@ export interface MoreSportProps {
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class MoreSport extends React.Component<MoreSportProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   constructor(props: MoreSportProps) {
     super(props);
@@ -27,7 +27,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -59,7 +59,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                       src={
                         this.props.sportNews.articles[0].urlToImage !== null
                           ? this.props.sportNews.articles[0].urlToImage
-                          : question
+                          : sport
                       }
                       alt=""
                     />
@@ -102,7 +102,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                           src={
                             article.urlToImage !== null
                               ? article.urlToImage
-                              : question
+                              : sport
                           }
                           alt=""
                         />
@@ -136,6 +136,7 @@ const mapStateToProps = (state: any, url: any) => {
   return {
     sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url,
   };
 };

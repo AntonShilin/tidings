@@ -1,0 +1,111 @@
+.slider {
+  width: 100%;
+  max-height: 32rem;
+  overflow: hidden;
+  button.arrow-left {
+    position: absolute;
+    left: 0.2rem;
+    top: 45%;
+    z-index: 4;
+    color: red;
+    cursor: pointer;
+    background-color: lightseagreen;
+    border: 0;
+    outline: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  button.arrow-right {
+    cursor: pointer;
+    position: absolute;
+    right: 0.2rem;
+    top: 45%;
+    z-index: 4;
+    border: 0;
+    outline: none;
+    border-radius: 50%;
+    background-color: lightseagreen;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .navigation-panel {
+    position: absolute;
+    bottom: 1rem;
+    left: 45%;
+    z-index: 4;
+    div {
+      display: inline-block;
+      background-color: red;
+      margin: 0.2rem;
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+  .window-images-slider {
+    margin-top: 1rem;
+    display: inline-flex;
+    max-height: 31rem;
+    width: 100%;
+    position: relative;
+    div:nth-of-type(1) {
+      height: 30rem;
+      width: 100%;
+      position: absolute;
+      left: -100%;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    div:nth-of-type(2) {
+      height: 30rem;
+      width: 100%;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    div:nth-of-type(3) {
+      height: 30rem;
+      width: 100%;
+      position: absolute;
+      right: -100%;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .slider {
+    max-height: 22rem;
+    .window-images-slider {
+      max-height: 22rem;
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .slider {
+    max-height: 16rem;
+    .window-images-slider {
+      max-height: 16rem;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .slider {
+    max-height: 13rem;
+    .navigation-panel {
+      left: 40%;
+      bottom: 0.5rem;
+    }
+    .window-images-slider {
+      max-height: 13rem;
+    }
+  }
+}

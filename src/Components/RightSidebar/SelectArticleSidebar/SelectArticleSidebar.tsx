@@ -7,7 +7,7 @@ import {
   goToPublisherPage,
   getSidebarNews,
 } from "../../../Actions/Actions";
-import defaultImage from "../../Media/img/question.jpg";
+import defaultImage from "../../Media/img/articles.jpg";
 
 export interface SelectArticleProps {
     sidebarNews: any | null;
@@ -15,17 +15,17 @@ export interface SelectArticleProps {
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
 
 class SelectArticleSidebar extends React.Component<SelectArticleProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.sidebarNews === null) {
       this.props.getSidebarNews(
-        `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.keyAPI}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -71,7 +71,7 @@ class SelectArticleSidebar extends React.Component<SelectArticleProps, State> {
             </p>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-12">
-           >>>>>>>>>>>>>>>>>
+           
           </div>
         </div>
       </div>
@@ -82,6 +82,7 @@ class SelectArticleSidebar extends React.Component<SelectArticleProps, State> {
 const mapStateToProps = (state: any, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
+    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };
