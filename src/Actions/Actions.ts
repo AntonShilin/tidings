@@ -268,13 +268,8 @@ export const clickToLeftArrow = (elem: any, allImages: any) => {
   currentArray[1].remove();
 
   /* delete [0] elem and add into end of array */
-  console.log("Old array", allImages);
   const removeElemOfArray1: string[] = allImages.splice(0,1);
-  console.log("Cute elem", removeElemOfArray1);
   allImages.push(removeElemOfArray1[0]);
-  console.log("Новый массив ", allImages);
-
-/* ------------------- */
 
 /* create new img[0]  */
   const div0: HTMLDivElement = document.createElement("div");
@@ -287,9 +282,6 @@ export const clickToLeftArrow = (elem: any, allImages: any) => {
   img0.setAttribute("src", allImages[1].urlToImage);
   div0.append(img0);
   elem.prepend(div0);
-  console.log(currentArray);
-/* -------------- */
-  
 
   /* create new img[1]  */
   const div1: HTMLDivElement = document.createElement("div");
@@ -302,8 +294,6 @@ export const clickToLeftArrow = (elem: any, allImages: any) => {
   img1.setAttribute("src", allImages[0].urlToImage);
   div1.append(img1);
   elem.prepend(div1);
-  console.log(currentArray);
-/* -------------- */
 
   return {
     type: ArrowLeftTypes.ARROWLEFT,
@@ -319,12 +309,8 @@ export const clickToRightArrow = (elem: any, allImages: any) => {
   const currentArray = Array.prototype.slice.call(elem.children, 0); 
 
   /*  delete last element and add into beginning of array  */
-  console.log("Old array", allImages);
   const removeElemOfArray: string[] = allImages.pop();
-  console.log("Cute elem", removeElemOfArray);
   allImages.unshift(removeElemOfArray);
-  console.log("Новый массив ", allImages);
-  /* ------------------- */
 
 /* create new img[0] */
 const div: HTMLDivElement = document.createElement("div");
@@ -337,7 +323,6 @@ const div: HTMLDivElement = document.createElement("div");
   img.setAttribute("src", allImages[0].urlToImage);
   div.append(img);
   elem.prepend(div);
-  /* -------------- */
 
   // delete img[1]
   const timer = setTimeout(() => {

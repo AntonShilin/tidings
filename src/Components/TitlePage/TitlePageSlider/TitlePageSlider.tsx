@@ -39,7 +39,7 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
   }
 
   render() {
-    return this.props.images === null ? (
+    return this.props.titlepageNews === null ? (
       <Preloader />
     ) : (
       <div className="row ">
@@ -71,7 +71,7 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
               {this.props.images.map((url: any, i: number) =>
                 i < 2 ? (
                   <div key={i}>
-                    <img src={url} alt={`image_${i}`}/>
+                    <img src={url.urlToImage} alt={`image_${i}`}/>
                   </div>
                 ) : null
               )}
