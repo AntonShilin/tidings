@@ -6,9 +6,11 @@ import {
   getData,
   clickToLeftArrow,
   clickToRightArrow,
+  showFullArticleInfo,
 } from "../../../Actions/Actions";
 import Preloader from "../../Preloader/Preloader";
 import { IImages } from "../../../Types/Types";
+import {  withRouter } from "react-router-dom";
 
 export interface TitlePageSliderProps {
   titlepageNews: any | null;
@@ -17,6 +19,7 @@ export interface TitlePageSliderProps {
   clickToRightArrow: typeof clickToRightArrow;
   images: IImages[];
   keyApi: string;
+  url: any;
 }
 
 export interface State {}
@@ -53,7 +56,7 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
                 )
               }
             >
-             <span>&#10094;</span>
+              <span>&#10094;</span>
             </button>
             <button
               className="btn arrow-right"
@@ -64,13 +67,16 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
                 )
               }
             >
-             <span>&#10095;</span>
+              <span>&#10095;</span>
             </button>
             <div className="window-images-slider" ref={this.slider}>
               {this.props.images.map((url: any, i: number) =>
                 i < 2 ? (
                   <div key={i}>
-                    <img src={url.urlToImage} alt={`image_${i}`}/>
+                    <img
+                      src={url.urlToImage}
+                      alt={`image_${i}`}
+                    />
                   </div>
                 ) : null
               )}
@@ -89,11 +95,12 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
   }
 }
 
-const mapStateToProps = (state: IAplicationState) => {
+const mapStateToProps = (state: IAplicationState, url: any) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,
     images: state.data_news.images,
+    url,
   };
 };
 
@@ -107,4 +114,6 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TitlePageSlider);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(TitlePageSlider)
+);
