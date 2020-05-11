@@ -8,7 +8,6 @@ import {
   clickToRightArrow,
 } from "../../../Actions/Actions";
 import Preloader from "../../Preloader/Preloader";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { IImages } from "../../../Types/Types";
 
 export interface TitlePageSliderProps {

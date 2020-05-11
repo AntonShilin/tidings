@@ -22,7 +22,7 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(
-        `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=${this.props.keyApi}`
       );
     }
   }

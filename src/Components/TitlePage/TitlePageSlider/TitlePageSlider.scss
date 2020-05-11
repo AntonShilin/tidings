@@ -74,7 +74,9 @@
       }
       p{
         position: absolute;
-        top: 1rem;
+        top: -0.3rem;
+        font-size: 1.5rem;
+        opacity: .7;
         mark{
           background-color: orange;
           color: white;
@@ -91,10 +93,15 @@
       }
       p{
         position: absolute;
-        top: 1rem;
+        top: -0.3rem;
+        font-size: 1.5rem;
+        opacity: .7;
+        &:hover{
+          opacity: 1;
+        }
         mark{
-          background-color: blue;
           color: white;
+          background-color: blue;
         }
       }
     }
@@ -140,9 +147,21 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 360px) {
   .slider {
     max-height: 13rem;
+    .window-images-slider {
+      max-height: 13rem;
+      div:nth-of-type(2) {
+        cursor: pointer;
+        height: 30rem;
+        width: 100%;
+        p{
+          top: -0.3rem;
+          font-size: 1.25rem !important;
+        }
+      }
+    }
     .navigation-panel {
       bottom: -1.5rem;
       p{
@@ -152,8 +171,6 @@
         }
       }
     }
-    .window-images-slider {
-      max-height: 13rem;
-    }
+  
   }
 }

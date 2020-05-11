@@ -33,21 +33,7 @@ const initialState: IMainState = {
   headlineNews: null,
   healthNews: null,
   scienceNews: null,
-  images: [{
-      urlToImage:
-        "https://www.djaxtech.com/blog/wp-content/uploads/2018/07/ad-tech-world.jpg",
-      'title': "news"
-    },
-    {
-      urlToImage:
-        "https://previews.123rf.com/images/zerbor/zerbor1503/zerbor150300073/37603790-a-newspaper-with-the-headline-travel-news.jpg",
-      title: "news"
-    },
-    {
-      urlToImage:
-        "https://media4.s-nbcnews.com/i/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.png",
-      'title': "news"
-    }
+  images: [
   ],
   keyApi: "20f3c47ba88f40959e5c50ebf472a722",
   colors: [

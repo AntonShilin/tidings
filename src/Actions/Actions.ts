@@ -290,7 +290,7 @@ export const clickToLeftArrow = (elem: any, allImages: any) => {
   const mark1: HTMLElement = document.createElement("mark");
   p1.append(mark1);
   mark1.innerText = allImages[0].title;
-  div0.append(p1);
+  div1.append(p1);
   img1.setAttribute("src", allImages[0].urlToImage);
   div1.append(img1);
   elem.prepend(div1);

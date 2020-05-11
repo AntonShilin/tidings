@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { getTrending } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import "./PreviewTrending.scss";
-import defaultImage from "../Media/img/trends.jpg"
-
+import defaultImage from "../Media/img/trends.jpg";
 
 export interface PreviewTrendingProps {
   trendingNews: any | null;
@@ -15,19 +14,16 @@ export interface PreviewTrendingProps {
 export interface State {}
 
 class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
-  
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(
-        `https://newsapi.org/v2/everything?q=apple&from=2020-04-08&to=2020-04-08&sortBy=popularity&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=${this.props.keyApi}`
       );
     }
   }
 
   render() {
-    return this.props.trendingNews === null ? (
-     null
-    ) : (
+    return this.props.trendingNews === null ? null : (
       <div className="container">
         <div className="row mt-3 trending-news-header">
           <div className="col-lg-6 col-md-7 col-sm-12">
@@ -51,16 +47,18 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
               i < 6 ? (
                 <div className="col-lg-2 col-md-2 col-sm-12" key={i}>
                   <div className="article-number">
-                    <span>{i+1}</span>
+                    <span>{i + 1}</span>
                   </div>
                   <h5>
                     <mark>{article.title}</mark>
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage !== null
-                      ? article.urlToImage
-                      : defaultImage}
+                    src={
+                      article.urlToImage !== null
+                        ? article.urlToImage
+                        : defaultImage
+                    }
                     alt=""
                   />
                 </div>
@@ -75,7 +73,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
 const mapStateToProps = (state: any) => {
   return {
     trendingNews: state.data_news.trendingNews,
-    keyApi: state.data_news.keyApi
+    keyApi: state.data_news.keyApi,
   };
 };
 
