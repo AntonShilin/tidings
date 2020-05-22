@@ -25,7 +25,7 @@ class SelectArticleSport extends React.Component<SelectArticleProps, State> {
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
-        `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${this.props.keyApi}`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${this.props.keyApi}`
       );
     }
   }

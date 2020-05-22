@@ -22,7 +22,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(
-        `https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
       );
     }
   }

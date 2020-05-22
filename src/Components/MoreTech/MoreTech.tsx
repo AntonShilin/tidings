@@ -23,13 +23,12 @@ class MoreTech extends React.Component<MoreTechProps, State> {
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }
 
   render() {
-    console.log("Tech",this.props.url)
     return this.props.techNews === null ? (
       <Preloader />
     ) : (

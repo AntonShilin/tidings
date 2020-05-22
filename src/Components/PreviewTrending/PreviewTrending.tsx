@@ -17,7 +17,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(
-        `https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=${this.props.keyApi}`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=${this.props.keyApi}`
       );
     }
   }

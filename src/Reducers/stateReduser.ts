@@ -35,7 +35,7 @@ const initialState: IMainState = {
   scienceNews: null,
   images: [
   ],
-  keyApi: "20f3c47ba88f40959e5c50ebf472a722",
+  keyApi: "3e174a1555d74566bf991d0c5a205679",
   colors: [
     "blue",
     "indigo",

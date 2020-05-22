@@ -13,6 +13,7 @@ export interface SelectArticleProps {
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
+  keyApi: string;
 }
 
 export interface State {}
@@ -23,7 +24,7 @@ class SelectArticleHealth extends React.Component<SelectArticleProps, State> {
   componentDidMount() {
     if (this.props.healthNews === null) {
       this.props.getHealth(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.keyAPI}`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }
@@ -77,6 +78,7 @@ const mapStateToProps = (state: any,url:any) => {
   return {
     healthNews: state.data_news.healthNews,
     colors: state.data_news.colors,
+    keyApi: state.data_news.keyApi,
     url
   };
 };

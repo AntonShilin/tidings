@@ -14,4 +14,4 @@ const rootReducer = combineReducers({
 
 
 export const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
-store.subscribe(() => console.log("Store subscribe", store.getState()));
+// store.subscribe(() => console.log("Store subscribe", store.getState()));

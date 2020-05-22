@@ -23,7 +23,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
   componentDidMount() {
     if (this.props.headlineNews === null) {
       this.props.getNews(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
       );
     }
   }
