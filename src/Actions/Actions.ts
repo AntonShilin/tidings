@@ -11,7 +11,6 @@ import {
   GetHealthTypes,
   GetScienceTypes,
   GetShowFullArticleTypes,
-  GetWindowPositionTypes,
   GetPublisherPageTypes,
   GetShowSidebarArticleTypes,
   GetSidebarTypes,
@@ -267,13 +266,6 @@ export const showFullArticleInfo = (id: number, url: any) => {
   };
 };
 
-export const fixedSmallScreenMenu = (num: number, elem: HTMLDivElement) => {
-  elem.style.transform = "translateY(" + num + "px)";
-  elem.style.zIndex = "5";
-  return {
-    type: GetWindowPositionTypes.GETWINDOWPOSITION,
-  };
-};
 
 export const goToPublisherPage = (adress: string) => {
   if (window.confirm("Are your sure go to publisher page?") === true) {

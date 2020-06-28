@@ -10,7 +10,7 @@ class Header extends React.Component<{}, {}> {
   render() {
     return (
       <React.Fragment>
-        <header className="container d-lg-block d-md-block d-none">
+        <header className="container-xl d-lg-block d-md-block d-none">
           <div className="row logo">
             <div className="col-lg-6 col-md-6 logo-brand">
               <NavLink to="/titlenews" className="">

@@ -26,7 +26,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
     return this.props.businessNews === null ? (
       null
     ) : (
-      <div className="container">
+      <div className="container-xl">
         <div className="row mt-3 business-header">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <h3>

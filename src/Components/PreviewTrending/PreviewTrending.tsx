@@ -24,7 +24,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
 
   render() {
     return this.props.trendingNews === null ? null : (
-      <div className="container">
+      <div className="container-xl">
         <div className="row mt-3 trending-news-header">
           <div className="col-lg-6 col-md-7 col-sm-12">
             <h3>

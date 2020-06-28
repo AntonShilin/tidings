@@ -11,8 +11,8 @@ import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
 import defaultImage from "../Media/img/news.jpg";
 import { RouteComponentProps } from "react-router-dom";
-import { IAplicationState } from "../../Store/Store";
 import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
+import { RootState } from "../../Store/Store";
 
 export interface TitlePageProps {
   titlepageNews: any | null;
@@ -26,7 +26,6 @@ export interface TitlePageProps {
 export interface State {}
 
 class TitlePage extends React.Component<TitlePageProps, State> {
-
   constructor(props: TitlePageProps) {
     super(props);
   }
@@ -44,10 +43,10 @@ class TitlePage extends React.Component<TitlePageProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-          <div className="container title-page">
-         <TitlePageSlider/> 
+        <div className="container-xl title-page">
+          <TitlePageSlider />
           <div className="row mt-5">
-            <div className="col-lg-8 col-md-8 col-sm-12">
+            <div className="col-lg-9 col-md-9 col-sm-12">
               <div className="row">
                 <div className="col">
                   <div
@@ -69,7 +68,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                           ? this.props.titlepageNews.articles[0].urlToImage
                           : defaultImage
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.titlepageNews.articles[0].description}
@@ -82,49 +81,46 @@ class TitlePage extends React.Component<TitlePageProps, State> {
               </div>
               <div className="row main-news">
                 {this.props.titlepageNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                    i > 0 && i < 11 ? (
-                      <div
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
+                  (article: any, i: number, arr: any) => (
+                    <div
+                      onClick={() =>
+                        this.props.showFullArticleInfo(
+                          article.source.id,
+                          this.props.url
+                        )
+                      }
+                      className="col-lg-6 col-md-6 col-sm-12"
+                      key={i}
+                    >
+                      <h5>
+                        <mark style={{ backgroundColor: this.props.colors[i] }}>
+                          {article.title}
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : defaultImage
                         }
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                      >
-                        <h5>
-                          <mark
-                            style={{ backgroundColor: this.props.colors[i] }}
-                          >
-                            {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : defaultImage
-                          }
-                          alt=""
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[i],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[i],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
-                    ) : null
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 d-lg-block d-md-block d-none">
+            <div className="col-lg-3 col-md-3 d-lg-block d-md-block d-none right-sidebar">
               <RightSidebar />
             </div>
           </div>
@@ -138,9 +134,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
   }
 }
 
-
-
-const mapStateToProps = (state: IAplicationState, url: RouteComponentProps) => {
+const mapStateToProps = (state: any, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,

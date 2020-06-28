@@ -41,12 +41,11 @@ export enum GetPublisherPageTypes {
   GETPUBLISHERPAGE = "GETPUBLISHERPAGE",
 }
 
-export enum GetWindowPositionTypes {
-  GETWINDOWPOSITION = "GETWINDOWPOSITION",
-}
+
 export enum GetShowFullArticleTypes {
   GETSHOWFULLARTICLE = "GETSHOWFULLARTICLE",
 }
+
 export enum GetShowSidebarArticleTypes {
   GETSHOWSIDEBARARTICLE = "GETSHOWSIDEBARARTICLE",
 }
@@ -83,41 +82,38 @@ export interface IPublisherPageAction {
   type: GetPublisherPageTypes.GETPUBLISHERPAGE;
 }
 
-export interface IWindowPositionAction {
-  type: GetWindowPositionTypes.GETWINDOWPOSITION;
-}
 
 export interface IScienceAction {
   type: GetHealthTypes.GETHEALTH;
-  data: any;
+  data: IData | null;
 }
 export interface ISidebarAction {
   type: GetSidebarTypes.GETSIDEBAR;
-  data: any;
+  data: IData | null;
 }
 export interface IHealthAction {
   type: GetScienceTypes.GETSCIENCE;
-  data: any;
+  data: IData | null;
 }
 export interface IHeadlineNewsAction {
   type: GetHeadlineNewsTypes.GETHEADLINENEWS;
-  data: any;
+  data: IData | null;
 }
 export interface ISportAction {
   type: GetSportTypes.GETSPORT;
-  data: any;
+  data: IData | null;
 }
 export interface IBusinessAction {
   type: GetBusinessTypes.GETBUSINESS;
-  data: any;
+  data: IData | null;
 }
 export interface ITechAction {
   type: GetTechTypes.GETTECH;
-  data: any;
+  data: IData | null;
 }
 export interface ITrendingAction {
   type: GetTrendingTypes.GETTRENDING;
-  data: any;
+  data: IData | null;
 }
 export interface ILoadingAction {
   type: isLoadingTypes.LOADING;
@@ -128,12 +124,12 @@ export interface IToggleMenuAction {
 
 export interface IGetDataAction {
   type: GetDataTypes.GETDATA;
-  data: any;
+  data: IData | null;
 }
 
 export interface IGetEntertainmentAction {
   type: GetEntertainmentTypes.GETENTERTAINMENT;
-  data: any;
+  data: IData | null;
 }
 
 export type MainActions =
@@ -149,7 +145,6 @@ export type MainActions =
   | ISidebarAction
   | IScienceAction
   | IGetShowFullArticleAction
-  | IWindowPositionAction
   | IPublisherPageAction
   | IArrowLeftAction
   | IArrowRightAction
@@ -157,22 +152,44 @@ export type MainActions =
   | IGetEntertainmentAction;
 
 export interface IMainState {
-  readonly titlepageNews: any;
-  readonly entertainmentNews: any;
-  readonly sidebarNews: any;
-  readonly trendingNews: any;
-  readonly techNews: any;
-  readonly businessNews: any;
-  readonly sportNews: any;
-  readonly headlineNews: any;
-  readonly healthNews: any;
-  readonly scienceNews: any;
-  readonly colors: string[];
-  readonly images: IImages[];
-  readonly keyApi: string;
+ titlepageNews: IData | null;
+ entertainmentNews: IData | null;
+ sidebarNews: IData | null;
+ trendingNews: IData | null;
+ techNews: IData | null;
+ businessNews: IData | null;
+ sportNews: IData | null;
+ headlineNews: IData | null;
+ healthNews: IData | null;
+ scienceNews: IData | null;
+ colors: string[];
+  images: IImages[] | [{}];
+ keyApi: string;
 }
 
 export interface IImages {
   urlToImage: string;
   title: string;
+}
+
+export interface IData {
+  articles: IDataDescription[];
+  status: string;
+  totalResults: number;
+}
+
+interface IDataDescription {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: ISource;
+  title: string;
+  url: string;
+  urlToImage: string;
+}
+
+interface ISource {
+  id: number;
+  name: string;
 }

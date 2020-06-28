@@ -2,7 +2,6 @@ import * as React from "react";
 import { getSidebarNews, showSidebarArticleInfo } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import "./RightSidebar.scss";
-import { IAplicationState } from "../../Store/Store";
 import { withRouter } from "react-router";
 import defaultImage from "../Media/img/articles.jpg";
 
@@ -40,22 +39,23 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
                 (article: any, i: number | string) => (
                   <div
                     key={i}
-                    className="col-12 d-flex article_right_sidebar  mb-2"
+                    className="col-12 article_right_sidebar  mb-2"
                     onClick={() =>
                       this.props.showSidebarArticleInfo(
                         this.props.sidebarNews.articles[i].source.id,
                         this.props.url
                       )
                     }
-                  >
+                >
+                   <p className="">
                     <img
                       src={this.props.sidebarNews.articles[i].urlToImage !== null
                         ? this.props.sidebarNews.articles[i].urlToImage
                         : defaultImage}
                       className="img-fluid"
-                      alt=""
+                      alt="img"
                     />
-                    <div className="">{article.description}</div>
+                   {article.description}</p>
                   </div>
                 )
               )
@@ -66,7 +66,7 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
   }
 }
 
-const mapStateToProps = (state: IAplicationState, url: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
     keyApi: state.data_news.keyApi,

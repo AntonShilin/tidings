@@ -26,7 +26,7 @@ class PreviewTech extends React.Component<PreviewTechProps, State> {
     return this.props.techNews === null ? (
      null
     ) : (
-      <div className="container">
+      <div className="container-xl">
         <div className="row mt-3 tech-news-header">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <h3>

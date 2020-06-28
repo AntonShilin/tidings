@@ -13,7 +13,6 @@ import {
   GetHealthTypes,
   GetScienceTypes,
   GetShowFullArticleTypes,
-  GetWindowPositionTypes,
   GetPublisherPageTypes,
   GetShowSidebarArticleTypes,
   GetSidebarTypes,
@@ -84,13 +83,15 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
   action
 ): IMainState => {
   switch (action.type) {
+    
     case GetDataTypes.GETDATA: {
-      action.data.articles.map((elem: any, i: number) => {
+      action.data!.articles.map((elem: any, i: number) => {
         elem.source.id = i;
         if (elem.urlToImage !== null) {
           state.images.push({urlToImage: elem.urlToImage,title:elem.title });
         }
       });
+      
       return {
         ...state,
         titlepageNews: action.data,
@@ -99,7 +100,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetEntertainmentTypes.GETENTERTAINMENT: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         entertainmentNews: action.data,
@@ -113,7 +114,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetTrendingTypes.GETTRENDING: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         trendingNews: action.data,
@@ -121,7 +122,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetTechTypes.GETTECH: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         techNews: action.data,
@@ -129,7 +130,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetBusinessTypes.GETBUSINESS: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         businessNews: action.data,
@@ -137,7 +138,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetScienceTypes.GETSCIENCE: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         scienceNews: action.data,
@@ -145,7 +146,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetSidebarTypes.GETSIDEBAR: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         sidebarNews: action.data,
@@ -153,7 +154,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetHealthTypes.GETHEALTH: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         healthNews: action.data,
@@ -161,7 +162,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetSportTypes.GETSPORT: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         sportNews: action.data,
@@ -169,7 +170,7 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetHeadlineNewsTypes.GETHEADLINENEWS: {
-      action.data.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
       return {
         ...state,
         headlineNews: action.data,
@@ -182,11 +183,6 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
       };
     }
 
-    case GetWindowPositionTypes.GETWINDOWPOSITION: {
-      return {
-        ...state,
-      };
-    }
 
     case GetPublisherPageTypes.GETPUBLISHERPAGE: {
       return {

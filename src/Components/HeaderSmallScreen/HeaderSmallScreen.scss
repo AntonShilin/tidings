@@ -1,6 +1,8 @@
 /* xs screen menu */
-.container {
-  position: relative;
+div.main-menu-xs-screen-bg {
+  position: sticky;
+  top: 0rem;
+  z-index: 5;
   nav.main-menu-xs-screen {
     border-bottom: 0.125rem solid white;
     div {
@@ -71,5 +73,3 @@
     display: none !important;
   }
 }
-
-

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./TitlePageSlider.scss";
-import { IAplicationState } from "../../../Store/Store";
 import {
   getData,
   clickToLeftArrow,
@@ -95,7 +94,7 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
   }
 }
 
-const mapStateToProps = (state: IAplicationState, url: any) => {
+const mapStateToProps = (state: any, url: any) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,

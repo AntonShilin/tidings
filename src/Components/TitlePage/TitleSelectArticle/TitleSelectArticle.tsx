@@ -6,11 +6,12 @@ import { FiChevronsRight } from "react-icons/fi";
 import { getData, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import { RouteComponentProps } from "react-router-dom";
-import { IAplicationState } from "../../../Store/Store";
 import defaultImage from "../../Media/img/news.jpg";
+import { RootState } from "../../../Store/Store";
+import { IData } from "../../../Types/Types";
 
-export interface SelectArticleProps {
-  titlepageNews: any;
+export interface ISelectArticleProps {
+  titlepageNews: IData;
   getData: typeof getData;
   goToPublisherPage: typeof goToPublisherPage;
   url: any;
@@ -19,7 +20,8 @@ export interface SelectArticleProps {
 
 export interface State {}
 
-class TitleSelectArticle extends React.Component<SelectArticleProps, State> {
+class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
+
   componentDidMount() {
     if (this.props.titlepageNews === null) {
       this.props.getData(
@@ -76,7 +78,9 @@ class TitleSelectArticle extends React.Component<SelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: IAplicationState, url: RouteComponentProps) => {
+
+
+const mapStateToProps = (state: any, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,

@@ -5,12 +5,10 @@ import "./HeaderSmallScreen.scss";
 import { connect } from "react-redux";
 import {
   toggleSmallScreenMenu,
-  fixedSmallScreenMenu,
 } from "../../Actions/Actions";
 
 export interface HeaderSmScreenProps {
   toggleSmallScreenMenu: typeof toggleSmallScreenMenu;
-  fixedSmallScreenMenu: typeof fixedSmallScreenMenu;
 }
 
 export interface State {}
@@ -19,17 +17,11 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
   private submenu = React.createRef<HTMLDivElement>();
   private fixedMenu = React.createRef<HTMLDivElement>();
 
-  componentDidMount() {
-    window.addEventListener('scroll', ()=>{
-      this.props.fixedSmallScreenMenu(window.scrollY,this.fixedMenu.current!)
-    })
-    
-  }
 
   render() {
     return (
       <div
-        className="container"
+        className="container-xl main-menu-xs-screen-bg"
         ref={this.fixedMenu}
       >
         <nav className="row main-menu-xs-screen">
@@ -108,8 +100,6 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleSmallScreenMenu: (e: React.MouseEvent, elem: HTMLDivElement) =>
       dispatch(toggleSmallScreenMenu(e, elem)),
-    fixedSmallScreenMenu: (num:number, elem: HTMLDivElement) =>
-      dispatch(fixedSmallScreenMenu(num,elem)),
   };
 };
 

@@ -1,14 +1,14 @@
 import * as React from "react";
 import "./Footer.scss";
 
-export interface FooterProps {}
+export interface Props {}
 
 export interface State {}
 
-class Footer extends React.Component<FooterProps, State> {
+class Footer extends React.Component<Props, State> {
   render() {
     return (
-      <footer className="container mt-5">
+      <footer className="container-xl mt-5">
         <div className="row">
           <div className="col-12">
             <p>© 2020 Newspapers</p>
