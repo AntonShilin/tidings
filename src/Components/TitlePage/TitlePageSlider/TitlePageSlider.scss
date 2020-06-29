@@ -14,7 +14,7 @@
     border-radius: 50%;
     width: 2.5rem;
     height: 2.5rem;
-    span{
+    span {
       color: white;
       font-size: 1.2rem;
       font-weight: 700;
@@ -32,7 +32,7 @@
     background-color: lightseagreen;
     width: 2.5rem;
     height: 2.5rem;
-    span{
+    span {
       color: white;
       font-size: 1.2rem;
       font-weight: 700;
@@ -44,7 +44,7 @@
     left: 0;
     z-index: 4;
     width: 100%;
-    p{
+    p {
       text-align: center;
       span {
         display: inline-block;
@@ -57,70 +57,24 @@
   }
   .window-images-slider {
     margin-top: 1rem;
-    display: -webkit-inline-box;
-    display: inline-flex;
     max-height: 31rem;
     width: 100%;
     position: relative;
-    div:nth-of-type(1) {
-      cursor: pointer;
-      height: 30rem;
+    cursor: pointer;
+    height: 30rem;
+    img {
       width: 100%;
-      position: absolute;
-      left: -100%;
-      img {
-        width: 100%;
-        height: auto;
-      }
-      p{
-        position: absolute;
-        top: -0.3rem;
-        font-size: 1rem;
-        opacity: .7;
-        mark{
-          background-color: orange;
-          color: white;
-        }
-      }
+      height: auto;
     }
-    div:nth-of-type(2) {
-      cursor: pointer;
-      height: 30rem;
-      width: 100%;
-      img {
-        width: 100%;
-        height: auto;
-      }
-      p{
-        position: absolute;
-        top: -0.3rem;
-        font-size: 2.5rem;
-        opacity: .7;
-        &:hover{
-          opacity: 1;
-        }
-        mark{
-          color: white;
-          background-color: #fc1049;
-        }
-      }
-    }
-    div:nth-of-type(3) {
-      height: 30rem;
-      width: 100%;
+    h1 {
       position: absolute;
-      right: -100%;
-      img {
-        width: 100%;
-        height: auto;
-      }
-      p{
-        position: absolute;
-        top: 1rem;
-        mark{
-          background-color: green;
-          color: white;
-        }
+      top: -1rem;
+      font-size: 3rem;
+      opacity: 0.7;
+      mark {
+        background-color: rgb(255, 0, 98);
+        color: white;
+        line-height: 4rem;
       }
     }
   }
@@ -132,10 +86,18 @@
     .window-images-slider {
       max-height: 22rem;
       div:nth-of-type(2) {
-        p{
+        p {
           top: -0.3rem;
           font-size: 2rem !important;
         }
+      }
+    }
+  }
+  .window-images-slider {
+    h1 {
+      font-size: 2.5rem !important;
+      mark {
+        line-height: 4rem !important;
       }
     }
   }
@@ -151,19 +113,36 @@
       }
     }
   }
+  .window-images-slider {
+    h1 {
+      font-size: 2rem !important;
+      mark {
+        line-height: 3rem !important;
+      }
+    }
+  }
 }
+
+
 @media screen and (max-width: 414px) {
   .slider {
     .window-images-slider {
       max-height: 13rem;
       div:nth-of-type(2) {
-        p{
+        p {
           top: -0.3rem;
           font-size: 1.7rem !important;
         }
       }
     }
-  
+  }
+  .window-images-slider {
+    h1 {
+      font-size: 1.5rem !important;
+      mark {
+        line-height: 2.5rem !important;
+      }
+    }
   }
 }
 
@@ -173,7 +152,7 @@
     .window-images-slider {
       max-height: 13rem;
       div:nth-of-type(2) {
-        p{
+        p {
           top: -0.3rem;
           font-size: 1.3rem !important;
         }
@@ -181,13 +160,20 @@
     }
     .navigation-panel {
       bottom: -1.5rem;
-      p{
+      p {
         span {
           width: 0.3rem;
           height: 0.3rem;
         }
       }
     }
-  
+  }
+  .window-images-slider {
+    h1 {
+      font-size: 1.4rem !important;
+      mark {
+        line-height: 2.1rem !important;
+      }
+    }
   }
 }

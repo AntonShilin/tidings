@@ -8,29 +8,24 @@ import {
   showFullArticleInfo,
 } from "../../../Actions/Actions";
 import Preloader from "../../Preloader/Preloader";
-import { IImages } from "../../../Types/Types";
-import {  withRouter } from "react-router-dom";
+import { IData, IDataDescription } from "../../../Types/Types";
+import { withRouter } from "react-router-dom";
+import { RootState } from "../../../Store/Store";
 
-export interface TitlePageSliderProps {
-  titlepageNews: any | null;
+export interface ITitlePageSliderProps {
+  titlepageNews: IData | null;
   getData: typeof getData;
   clickToLeftArrow: typeof clickToLeftArrow;
   clickToRightArrow: typeof clickToRightArrow;
-  images: IImages[];
+  showFullArticleInfo: typeof showFullArticleInfo;
+  currentId: number;
   keyApi: string;
   url: any;
 }
 
 export interface State {}
 
-class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
-  slider: React.RefObject<HTMLDivElement> | undefined;
-
-  constructor(props: TitlePageSliderProps) {
-    super(props);
-    this.slider = React.createRef();
-  }
-
+class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
       this.props.getData(
@@ -40,6 +35,7 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
   }
 
   render() {
+    const { currentId } = this.props;
     return this.props.titlepageNews === null ? (
       <Preloader />
     ) : (
@@ -50,8 +46,8 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
               className="btn arrow-left"
               onClick={() =>
                 this.props.clickToLeftArrow(
-                  this.slider?.current!,
-                  this.props.images
+                  currentId,
+                  this.props.titlepageNews!.articles.length - 1
                 )
               }
             >
@@ -61,30 +57,35 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
               className="btn arrow-right"
               onClick={() =>
                 this.props.clickToRightArrow(
-                  this.slider?.current!,
-                  this.props.images
+                  currentId,
+                  this.props.titlepageNews!.articles.length - 1
                 )
               }
             >
               <span>&#10095;</span>
             </button>
-            <div className="window-images-slider" ref={this.slider}>
-              {this.props.images.map((url: any, i: number) =>
-                i < 2 ? (
-                  <div key={i}>
-                    <img
-                      src={url.urlToImage}
-                      alt={`image_${i}`}
-                    />
-                  </div>
-                ) : null
-              )}
+            <div className="window-images-slider">
+              <img
+                src={this.props.titlepageNews.articles[currentId].urlToImage}
+                alt="img"
+              />
+              <h1
+                onClick={() =>
+                  this.props.showFullArticleInfo(currentId, this.props.url)
+                }
+              >
+                <mark>
+                  {this.props.titlepageNews.articles[currentId].title}
+                </mark>
+              </h1>
             </div>
             <div className="navigation-panel">
               <p>
-                {this.props.images.map((n: any, i: number) => (
-                  <span key={i}>{` `}</span>
-                ))}
+                {this.props.titlepageNews!.articles.map(
+                  (n: IDataDescription, i: number) => (
+                    <span key={i}>{` `}</span>
+                  )
+                )}
               </p>
             </div>
           </div>
@@ -94,11 +95,11 @@ class TitlePageSlider extends React.Component<TitlePageSliderProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,
-    images: state.data_news.images,
+    currentId: state.data_news.currentId,
     url,
   };
 };
@@ -106,10 +107,12 @@ const mapStateToProps = (state: any, url: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getData: (url: string) => dispatch(getData(url)),
-    clickToLeftArrow: (elem: any, arr: any) =>
-      dispatch(clickToLeftArrow(elem, arr)),
-    clickToRightArrow: (elem: any, arr: any) =>
-      dispatch(clickToRightArrow(elem, arr)),
+    clickToLeftArrow: (currentId: number, length: number) =>
+      dispatch(clickToLeftArrow(currentId, length)),
+    clickToRightArrow: (currentId: number, length: number) =>
+      dispatch(clickToRightArrow(currentId, length)),
+    showFullArticleInfo: (id: number, url: any) =>
+      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

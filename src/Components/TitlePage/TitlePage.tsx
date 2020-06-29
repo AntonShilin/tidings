@@ -13,9 +13,10 @@ import defaultImage from "../Media/img/news.jpg";
 import { RouteComponentProps } from "react-router-dom";
 import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
 import { RootState } from "../../Store/Store";
+import { IData } from "../../Types/Types";
 
-export interface TitlePageProps {
-  titlepageNews: any | null;
+export interface ITitlePageProps {
+  titlepageNews: IData | null;
   colors: string[];
   getData: typeof getData;
   showFullArticleInfo: typeof showFullArticleInfo;
@@ -25,8 +26,8 @@ export interface TitlePageProps {
 
 export interface State {}
 
-class TitlePage extends React.Component<TitlePageProps, State> {
-  constructor(props: TitlePageProps) {
+class TitlePage extends React.Component<ITitlePageProps, State> {
+  constructor(props: ITitlePageProps) {
     super(props);
   }
 
@@ -53,7 +54,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
                     className="latest_articles"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.titlepageNews.articles[0].source.id,
+                        this.props.titlepageNews!.articles[0].source.id,
                         this.props.url
                       )
                     }
@@ -134,7 +135,7 @@ class TitlePage extends React.Component<TitlePageProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: RouteComponentProps) => {
+const mapStateToProps = (state: RootState, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,
@@ -146,7 +147,7 @@ const mapStateToProps = (state: any, url: RouteComponentProps) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getData: (url: string) => dispatch(getData(url)),
-    showFullArticleInfo: (id: number, url: RouteComponentProps) =>
+    showFullArticleInfo: (id: number, url: any) =>
       dispatch(showFullArticleInfo(id, url)),
   };
 };

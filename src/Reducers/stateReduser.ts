@@ -18,8 +18,8 @@ import {
   GetSidebarTypes,
   ArrowLeftTypes,
   ArrowRightTypes,
+  IDataDescription,
 } from "../Types/Types";
-import { Reducer } from "react";
 
 const initialState: IMainState = {
   titlepageNews: null,
@@ -32,9 +32,8 @@ const initialState: IMainState = {
   headlineNews: null,
   healthNews: null,
   scienceNews: null,
-  images: [
-  ],
-  keyApi: "3e174a1555d74566bf991d0c5a205679",
+  currentId: 0,
+  keyApi: "20f3c47ba88f40959e5c50ebf472a722",
   colors: [
     "blue",
     "indigo",
@@ -78,29 +77,26 @@ const initialState: IMainState = {
   ],
 };
 
-export const stateReducer: Reducer<IMainState, MainActions> = (
-  state = initialState,
-  action
+export const stateReducer = (
+  state: IMainState = initialState,
+  action: MainActions
 ): IMainState => {
   switch (action.type) {
-    
     case GetDataTypes.GETDATA: {
-      action.data!.articles.map((elem: any, i: number) => {
-        elem.source.id = i;
-        if (elem.urlToImage !== null) {
-          state.images.push({urlToImage: elem.urlToImage,title:elem.title });
-        }
-      });
-      
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
+
       return {
         ...state,
         titlepageNews: action.data,
-        images: state.images,
       };
     }
 
     case GetEntertainmentTypes.GETENTERTAINMENT: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         entertainmentNews: action.data,
@@ -114,7 +110,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetTrendingTypes.GETTRENDING: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         trendingNews: action.data,
@@ -122,7 +120,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetTechTypes.GETTECH: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         techNews: action.data,
@@ -130,7 +130,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetBusinessTypes.GETBUSINESS: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         businessNews: action.data,
@@ -138,7 +140,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetScienceTypes.GETSCIENCE: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         scienceNews: action.data,
@@ -146,7 +150,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetSidebarTypes.GETSIDEBAR: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         sidebarNews: action.data,
@@ -154,7 +160,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetHealthTypes.GETHEALTH: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         healthNews: action.data,
@@ -170,7 +178,9 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case GetHeadlineNewsTypes.GETHEADLINENEWS: {
-      action.data!.articles.map((elem: any, i: number) => (elem.source.id = i));
+      action.data!.articles.map(
+        (elem: IDataDescription, i: number) => (elem.source.id = i)
+      );
       return {
         ...state,
         headlineNews: action.data,
@@ -182,7 +192,6 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
         ...state,
       };
     }
-
 
     case GetPublisherPageTypes.GETPUBLISHERPAGE: {
       return {
@@ -197,16 +206,30 @@ export const stateReducer: Reducer<IMainState, MainActions> = (
     }
 
     case ArrowLeftTypes.ARROWLEFT: {
+      let num:number = action.nextId;
+      if (num <= 0) {
+        num = state.titlepageNews!.articles.length-1;
+      } else {
+        --num;
+      }
+
       return {
         ...state,
-        images: action.newArr,
+        currentId: num,
       };
     }
 
     case ArrowRightTypes.ARROWRIGHT: {
+      let num:number =  action.nextId;
+      if (num >= state.titlepageNews!.articles.length-1) {
+        num = 0;
+      } else {
+        ++num;
+      }
+
       return {
         ...state,
-        images: action.newArr,
+        currentId:num,
       };
     }
 

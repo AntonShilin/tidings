@@ -44,8 +44,8 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
         <div className="row trending-news-article">
           {this.props.trendingNews.articles.map(
             (article: any, i: number, arr: any) =>
-              i < 6 ? (
-                <div className="col-lg-2 col-md-2 col-sm-12" key={i}>
+              i < 4 ? (
+                <div className="col-lg-3 col-md-6 col-sm-12" key={i}>
                   <div className="article-number">
                     <span>{i + 1}</span>
                   </div>

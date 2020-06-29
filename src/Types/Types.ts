@@ -62,12 +62,12 @@ export enum ArrowRightTypes {
 
 export interface IArrowLeftAction {
   type: ArrowLeftTypes.ARROWLEFT;
-  newArr: any;
+  nextId: any;
 }
 
 export interface IArrowRightAction {
   type: ArrowRightTypes.ARROWRIGHT;
-  newArr: any;
+  nextId: any;
 }
 
 export interface IGetShowSidebarArticleAction {
@@ -163,14 +163,11 @@ export interface IMainState {
  healthNews: IData | null;
  scienceNews: IData | null;
  colors: string[];
-  images: IImages[] | [{}];
+ currentId: number;
  keyApi: string;
 }
 
-export interface IImages {
-  urlToImage: string;
-  title: string;
-}
+
 
 export interface IData {
   articles: IDataDescription[];
@@ -178,7 +175,7 @@ export interface IData {
   totalResults: number;
 }
 
-interface IDataDescription {
+export interface IDataDescription {
   author: string;
   content: string;
   description: string;
@@ -189,7 +186,7 @@ interface IDataDescription {
   urlToImage: string;
 }
 
-interface ISource {
+export interface ISource {
   id: number;
   name: string;
 }

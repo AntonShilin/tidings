@@ -50,20 +50,25 @@ div.title-page {
       font-size: 0.95rem;
     }
   }
-  .right-sidebar{
+  .right-sidebar {
     max-height: 245rem;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 1px;
+    }
+    scrollbar-width: 1px;
   }
 }
 
 @media screen and (max-width: 411px) {
   div.title-page .latest_articles h3 {
     font-size: 1.25rem;
-    mark{
+    mark {
       line-height: 1.9rem !important;
     }
   }
   div.main-news > div {
-    h5{
+    h5 {
       top: -2rem !important;
     }
     p {

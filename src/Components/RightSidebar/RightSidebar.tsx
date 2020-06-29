@@ -47,7 +47,7 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
                       )
                     }
                 >
-                   <p className="">
+                   <p>
                     <img
                       src={this.props.sidebarNews.articles[i].urlToImage !== null
                         ? this.props.sidebarNews.articles[i].urlToImage
