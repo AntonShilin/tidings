@@ -4,16 +4,18 @@ import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewTech.scss";
 import defaultImage from "../Media/img/tech.jpg"
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface PreviewTechProps {
-  techNews: any | null;
+export interface IPreviewTechProps {
+  techNews: IData | null;
   getTech: typeof getTech;
   keyApi: string;
 }
 
 export interface State {}
 
-class PreviewTech extends React.Component<PreviewTechProps, State> {
+class PreviewTech extends React.Component<IPreviewTechProps, State> {
 
   componentDidMount() {
     if (this.props.techNews === null) {
@@ -70,7 +72,7 @@ class PreviewTech extends React.Component<PreviewTechProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     techNews: state.data_news.techNews,
     keyApi: state.data_news.keyApi

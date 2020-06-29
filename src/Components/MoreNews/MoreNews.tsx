@@ -6,9 +6,11 @@ import "./MoreNews.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import news from "../Media/img/news.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface MoreNewsProps {
-  headlineNews: any | null;
+export interface IMoreNewsProps {
+  headlineNews: IData | null;
   getNews: typeof getNews;
   colors: string[];
   url: any;
@@ -18,7 +20,7 @@ export interface MoreNewsProps {
 
 export interface State {}
 
-class MoreNews extends React.Component<MoreNewsProps, State> {
+class MoreNews extends React.Component<IMoreNewsProps, State> {
 
   componentDidMount() {
     if (this.props.headlineNews === null) {
@@ -32,7 +34,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 headline-news-article">
+        <div className="container-xl mt-5 headline-news-article">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
@@ -41,7 +43,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                     className="latest-headline-article"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.headlineNews.articles[9].source.id,
+                        this.props.headlineNews!.articles[9].source.id,
                         this.props.url
                       )
                     }
@@ -56,7 +58,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                           ? this.props.headlineNews.articles[9].urlToImage
                           : news
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.headlineNews.articles[9].description}
@@ -70,7 +72,6 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
               <div className="row headline-news-news">
                 {this.props.headlineNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 9 ? (
                       <div
                         className="col-lg-6 col-md-6 col-sm-12"
                         key={i}
@@ -99,7 +100,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                               ? article.urlToImage
                               : news
                           }
-                          alt=""
+                          alt="img"
                         />
                         <p>
                           {article.description}
@@ -113,7 +114,6 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
                           />
                         </p>
                       </div>
-                    ) : null
                 )}
               </div>
             </div>
@@ -127,7 +127,7 @@ class MoreNews extends React.Component<MoreNewsProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     headlineNews: state.data_news.headlineNews,
     keyApi: state.data_news.keyApi,

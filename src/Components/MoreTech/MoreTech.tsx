@@ -6,9 +6,11 @@ import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
 import tech from "../Media/img/tech.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface MoreTechProps {
-  techNews: any | null;
+export interface IMoreTechProps {
+  techNews: IData | null;
   getTech: typeof getTech;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
@@ -18,8 +20,7 @@ export interface MoreTechProps {
 
 export interface State {}
 
-class MoreTech extends React.Component<MoreTechProps, State> {
-
+class MoreTech extends React.Component<IMoreTechProps, State> {
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
@@ -33,7 +34,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 header-tech-article">
+        <div className="container-xl mt-5 header-tech-article">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
@@ -42,7 +43,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                     className="latest-tech-article"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.techNews.articles[9].source.id,
+                        this.props.techNews!.articles[9].source.id,
                         this.props.url
                       )
                     }
@@ -57,7 +58,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
                           ? this.props.techNews.articles[9].urlToImage
                           : tech
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.techNews.articles[9].description}
@@ -70,51 +71,50 @@ class MoreTech extends React.Component<MoreTechProps, State> {
               </div>
               <div className="row main-tech-news">
                 {this.props.techNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                    i > 9 ? (
-                      <div
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
+                  (article: any, i: number, arr: any) => (
+                    <div
+                      className="col-lg-6 col-md-6 col-sm-12"
+                      key={i}
+                      onClick={() =>
+                        this.props.showFullArticleInfo(
+                          article.source.id,
+                          this.props.url
+                        )
+                      }
+                    >
+                      <h5>
+                        <mark
+                          style={{
+                            backgroundColor: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                          }}
+                        >
+                          {article.title}
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : tech
                         }
-                      >
-                        <h5>
-                          <mark
-                            style={{
-                              backgroundColor: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                            }}
-                          >
-                            {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : tech
-                          }
-                          alt=""
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
-                    ) : null
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -128,7 +128,7 @@ class MoreTech extends React.Component<MoreTechProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,

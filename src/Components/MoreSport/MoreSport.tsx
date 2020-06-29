@@ -6,9 +6,11 @@ import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
 import sport from "../Media/img/sport.jpg";
+import { RootState } from "../../Store/Store";
+import { IData } from "../../Types/Types";
 
-export interface MoreSportProps {
-  sportNews: any | null;
+export interface IMoreSportProps {
+  sportNews: IData | null;
   getSport: typeof getSport;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
@@ -18,12 +20,7 @@ export interface MoreSportProps {
 
 export interface State {}
 
-class MoreSport extends React.Component<MoreSportProps, State> {
-
-  constructor(props: MoreSportProps) {
-    super(props);
-  }
-
+class MoreSport extends React.Component<IMoreSportProps, State> {
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
@@ -37,7 +34,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 header-sport-article">
+        <div className="container-xl mt-5 header-sport-article">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
@@ -46,7 +43,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                     className="latest-sport-article"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.sportNews.articles[0].source.id,
+                        this.props.sportNews!.articles[0].source.id,
                         this.props.url
                       )
                     }
@@ -61,7 +58,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
                           ? this.props.sportNews.articles[0].urlToImage
                           : sport
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.sportNews.articles[0].description}
@@ -74,51 +71,50 @@ class MoreSport extends React.Component<MoreSportProps, State> {
               </div>
               <div className="row main-sport-news">
                 {this.props.sportNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                    i > 7 ? (
-                      <div
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
+                  (article: any, i: number, arr: any) => (
+                    <div
+                      className="col-lg-6 col-md-6 col-sm-12"
+                      key={i}
+                      onClick={() =>
+                        this.props.showFullArticleInfo(
+                          article.source.id,
+                          this.props.url
+                        )
+                      }
+                    >
+                      <h5>
+                        <mark
+                          style={{
+                            backgroundColor: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                          }}
+                        >
+                          {article.title}
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : sport
                         }
-                      >
-                        <h5>
-                          <mark
-                            style={{
-                              backgroundColor: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                            }}
-                          >
-                            {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : sport
-                          }
-                          alt=""
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
-                    ) : null
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -132,7 +128,7 @@ class MoreSport extends React.Component<MoreSportProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,

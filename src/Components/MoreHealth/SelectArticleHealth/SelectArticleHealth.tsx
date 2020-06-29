@@ -5,10 +5,13 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getHealth, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import defaultImage  from "../../Media/img/health.jpg";
+import defaultImage from "../../Media/img/health.jpg";
+import { IData } from "../../../Types/Types";
+import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
+import { RootState } from "../../../Store/Store";
 
-export interface SelectArticleProps {
-  healthNews: any | null;
+export interface ISelectArticleProps {
+  healthNews: IData | null;
   getHealth: typeof getHealth;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
@@ -18,7 +21,7 @@ export interface SelectArticleProps {
 
 export interface State {}
 
-class SelectArticleHealth extends React.Component<SelectArticleProps, State> {
+class SelectArticleHealth extends React.Component<ISelectArticleProps, State> {
   keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
@@ -35,51 +38,57 @@ class SelectArticleHealth extends React.Component<SelectArticleProps, State> {
     return this.props.healthNews === null ? (
       <Preloader />
     ) : (
-      <div className="container">
-        <div className="row selected-article">
-          <div className="col-lg-8 col-md-8 col-sm-12"  onClick={() =>
-              this.props.goToPublisherPage(
-                this.props.healthNews.articles[id].url
-              )
-            }>
-            <h1>{this.props.healthNews.articles[id].title}</h1>
-            <p>
-              <b>{this.props.healthNews.articles[id].author} </b>
-              <small>
-                {this.props.healthNews.articles[id].publishedAt.match(
-                  /\d+\-\d+\d+\-\d+/g
-                )}
-              </small>
-            </p>
-            <img
-              src={
-                this.props.healthNews.articles[id].urlToImage !== null
-                  ? this.props.healthNews.articles[id].urlToImage
-                  : defaultImage
+      <React.Fragment>
+        <div className="container-xl">
+          <div className="row selected-article">
+            <div
+              className="col-lg-8 col-md-8 col-sm-12"
+              onClick={() =>
+                this.props.goToPublisherPage(
+                  this.props.healthNews!.articles[id].url
+                )
               }
-              alt="img_1"
-              className="img-fluid"
-            />
-            <p>
-              {this.props.healthNews.articles[id].content}
-              <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
-            </p>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12">
-            <RightSidebar />
+            >
+              <h1>{this.props.healthNews.articles[id].title}</h1>
+              <p>
+                <b>{this.props.healthNews.articles[id].author} </b>
+                <small>
+                  {this.props.healthNews.articles[id].publishedAt.match(
+                    /\d+\-\d+\d+\-\d+/g
+                  )}
+                </small>
+              </p>
+              <img
+                src={
+                  this.props.healthNews.articles[id].urlToImage !== null
+                    ? this.props.healthNews.articles[id].urlToImage
+                    : defaultImage
+                }
+                alt="img_1"
+                className="img-fluid"
+              />
+              <p>
+                {this.props.healthNews.articles[id].content}
+                <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+              </p>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12">
+              <RightSidebar />
+            </div>
           </div>
         </div>
-      </div>
+        <PreviewBusiness />
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state: any,url:any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     healthNews: state.data_news.healthNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url
+    url,
   };
 };
 

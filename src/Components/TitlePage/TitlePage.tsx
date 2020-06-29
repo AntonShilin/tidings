@@ -13,7 +13,7 @@ import defaultImage from "../Media/img/news.jpg";
 import { RouteComponentProps } from "react-router-dom";
 import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
 import { RootState } from "../../Store/Store";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
 
 export interface ITitlePageProps {
   titlepageNews: IData | null;
@@ -54,25 +54,25 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                     className="latest_articles"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.titlepageNews!.articles[0].source.id,
+                        this.props.titlepageNews!.articles[7].source.id,
                         this.props.url
                       )
                     }
                   >
                     <h3>
-                      <mark>{this.props.titlepageNews.articles[0].title}</mark>
+                      <mark>{this.props.titlepageNews.articles[7].title}</mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
                       src={
-                        this.props.titlepageNews.articles[0].urlToImage !== null
-                          ? this.props.titlepageNews.articles[0].urlToImage
+                        this.props.titlepageNews.articles[7].urlToImage !== null
+                          ? this.props.titlepageNews.articles[7].urlToImage
                           : defaultImage
                       }
                       alt="img"
                     />
                     <p>
-                      {this.props.titlepageNews.articles[0].description}
+                      {this.props.titlepageNews.articles[7].description}
                       <FiChevronsRight
                         style={{ color: "orange", strokeWidth: 4 }}
                       />
@@ -82,7 +82,7 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
               </div>
               <div className="row main-news">
                 {this.props.titlepageNews.articles.map(
-                  (article: any, i: number, arr: any) => (
+                  (article: IDataDescription, i: number) => (
                     <div
                       onClick={() =>
                         this.props.showFullArticleInfo(

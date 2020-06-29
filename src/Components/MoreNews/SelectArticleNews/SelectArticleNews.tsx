@@ -5,9 +5,11 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getNews, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
+import { IData } from "../../../Types/Types";
+import { RootState } from "../../../Store/Store";
 
-export interface SelectArticleProps {
-  headlineNews: any | null;
+export interface ISelectArticleProps {
+  headlineNews: IData | null;
   getNews: typeof getNews;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
@@ -17,7 +19,7 @@ export interface SelectArticleProps {
 
 export interface State {}
 
-class SelectArticleNews extends React.Component<SelectArticleProps, State> {
+class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
 
   componentDidMount() {
     if (this.props.headlineNews === null) {
@@ -33,13 +35,13 @@ class SelectArticleNews extends React.Component<SelectArticleProps, State> {
     return this.props.headlineNews === null ? (
       <Preloader />
     ) : (
-      <div className="container">
+      <div className="container-xl">
         <div className="row selected-article">
           <div
             className="col-lg-8 col-md-8 col-sm-12"
             onClick={() =>
               this.props.goToPublisherPage(
-                this.props.headlineNews.articles[id].url
+                this.props.headlineNews!.articles[id].url
               )
             }
           >
@@ -71,7 +73,7 @@ class SelectArticleNews extends React.Component<SelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     headlineNews: state.data_news.headlineNews,
     keyApi: state.data_news.keyApi,

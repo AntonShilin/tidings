@@ -4,16 +4,18 @@ import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewSport.scss";
 import sport from "../Media/img/sport.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface PreviewSportProps {
-  sportNews: any | null;
+export interface IPreviewSportProps {
+  sportNews: IData | null;
   getSport: typeof getSport;
   keyApi: string;
 }
 
 export interface State {}
 
-class PreviewSport extends React.Component<PreviewSportProps, State> {
+class PreviewSport extends React.Component<IPreviewSportProps, State> {
   
   componentDidMount() {
     if (this.props.sportNews === null) {
@@ -70,7 +72,7 @@ class PreviewSport extends React.Component<PreviewSportProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     sportNews: state.data_news.sportNews,
     keyApi: state.data_news.keyApi

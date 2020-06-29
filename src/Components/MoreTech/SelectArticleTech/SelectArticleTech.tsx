@@ -6,9 +6,12 @@ import { FiChevronsRight } from "react-icons/fi";
 import { getTech, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/tech.jpg";
+import { IData } from "../../../Types/Types";
+import { RootState } from "../../../Store/Store";
+import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
 
-export interface SelectArticleProps {
-  techNews: any | null;
+export interface ISelectArticleProps {
+  techNews: IData | null;
   goToPublisherPage: typeof goToPublisherPage;
   getTech: typeof getTech;
   colors: string[];
@@ -18,8 +21,7 @@ export interface SelectArticleProps {
 
 export interface State {}
 
-class SelectArticleTech extends React.Component<SelectArticleProps, State> {
-
+class SelectArticleTech extends React.Component<ISelectArticleProps, State> {
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
@@ -34,49 +36,52 @@ class SelectArticleTech extends React.Component<SelectArticleProps, State> {
     return this.props.techNews === null ? (
       <Preloader />
     ) : (
-      <div className="container">
-        <div className="row selected-article">
-          <div
-            className="col-lg-8 col-md-8 col-sm-12"
-            onClick={() =>
-              this.props.goToPublisherPage(
-                this.props.techNews.articles[id].url
-              )
-            }
-          >
-            <h1>{this.props.techNews.articles[id].title}</h1>
-            <p>
-              <b>{this.props.techNews.articles[id].author} </b>
-              <small>
-                {this.props.techNews.articles[id].publishedAt.match(
-                  /\d+\-\d+\d+\-\d+/g
-                )}
-              </small>
-            </p>
-            <img
-              src={
-                this.props.techNews.articles[id].urlToImage !== null
-                  ? this.props.techNews.articles[id].urlToImage
-                  : defaultImage
+      <React.Fragment>
+        <div className="container-xl">
+          <div className="row selected-article">
+            <div
+              className="col-lg-8 col-md-8 col-sm-12"
+              onClick={() =>
+                this.props.goToPublisherPage(
+                  this.props.techNews!.articles[id].url
+                )
               }
-              alt="img_1"
-              className="img-fluid"
-            />
-            <p>
-              {this.props.techNews.articles[id].content}
-              <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
-            </p>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12">
-            <RightSidebar />
+            >
+              <h1>{this.props.techNews.articles[id].title}</h1>
+              <p>
+                <b>{this.props.techNews.articles[id].author} </b>
+                <small>
+                  {this.props.techNews.articles[id].publishedAt.match(
+                    /\d+\-\d+\d+\-\d+/g
+                  )}
+                </small>
+              </p>
+              <img
+                src={
+                  this.props.techNews.articles[id].urlToImage !== null
+                    ? this.props.techNews.articles[id].urlToImage
+                    : defaultImage
+                }
+                alt="img_1"
+                className="img-fluid"
+              />
+              <p>
+                {this.props.techNews.articles[id].content}
+                <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+              </p>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12">
+              <RightSidebar />
+            </div>
           </div>
         </div>
-      </div>
+        <PreviewBusiness />
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
@@ -88,8 +93,7 @@ const mapStateToProps = (state: any, url: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getTech: (url: string) => dispatch(getTech(url)),
-    goToPublisherPage: (adress: string) =>
-    dispatch(goToPublisherPage(adress))
+    goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };
 

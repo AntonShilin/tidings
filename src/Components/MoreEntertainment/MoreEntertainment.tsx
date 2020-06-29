@@ -6,9 +6,11 @@ import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreEntertainment.scss";
 import entertainment from "../Media/img/entertainment.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface MoreEntertainmentProps {
-  entertainmentNews: any | null;
+export interface IMoreEntertainmentProps {
+  entertainmentNews: IData | null;
   getEntertainment: typeof getEntertainment;
   showFullArticleInfo: typeof showFullArticleInfo;
   colors: string[];
@@ -18,7 +20,7 @@ export interface MoreEntertainmentProps {
 
 export interface State {}
 
-class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
+class MoreEntertainment extends React.Component<IMoreEntertainmentProps, State> {
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(
@@ -31,7 +33,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container entertainment-article">
+        <div className="container-xl entertainment-article">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
@@ -40,7 +42,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                     className="latest-entertainment"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.entertainmentNews.articles[0].source.id,
+                        this.props.entertainmentNews!.articles[0].source.id,
                         this.props.url
                       )
                     }
@@ -58,7 +60,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                           ? this.props.entertainmentNews.articles[0].urlToImage
                           : entertainment
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.entertainmentNews.articles[0].description}
@@ -72,7 +74,6 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
               <div className="row entertainment-news">
                 {this.props.entertainmentNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 9 ? (
                       <div
                         className="col-lg-6 col-md-6 col-sm-12"
                         key={i}
@@ -101,7 +102,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                               ? article.urlToImage
                               : entertainment
                           }
-                          alt=""
+                          alt="img"
                         />
                         <p>
                           {article.description}
@@ -115,7 +116,6 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
                           />
                         </p>
                       </div>
-                    ) : null
                 )}
               </div>
             </div>
@@ -129,7 +129,7 @@ class MoreEntertainment extends React.Component<MoreEntertainmentProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     entertainmentNews: state.data_news.entertainmentNews,
     keyApi: state.data_news.keyApi,

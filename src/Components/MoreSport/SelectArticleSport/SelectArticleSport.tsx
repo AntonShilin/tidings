@@ -6,11 +6,12 @@ import { FiChevronsRight } from "react-icons/fi";
 import { getSport, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/question.jpg";
-import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
 import PreviewTech from "../../PreviewTech/PreviewTech";
+import { IData } from "../../../Types/Types";
+import { RootState } from "../../../Store/Store";
 
-export interface SelectArticleProps {
-  sportNews: any | null;
+export interface ISelectArticleProps {
+  sportNews: IData | null;
   getSport: typeof getSport;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
@@ -20,7 +21,7 @@ export interface SelectArticleProps {
 
 export interface State {}
 
-class SelectArticleSport extends React.Component<SelectArticleProps, State> {
+class SelectArticleSport extends React.Component<ISelectArticleProps, State> {
 
   componentDidMount() {
     if (this.props.sportNews === null) {
@@ -36,13 +37,13 @@ class SelectArticleSport extends React.Component<SelectArticleProps, State> {
     return this.props.sportNews === null ? (
       <Preloader />
     ) : (
-      <div className="container">
+      <div className="container-xl">
         <div className="row selected-article">
           <div
             className="col-lg-8 col-md-8 col-sm-12"
             onClick={() =>
               this.props.goToPublisherPage(
-                this.props.sportNews.articles[id].url
+                this.props.sportNews!.articles[id].url
               )
             }
           >
@@ -74,13 +75,12 @@ class SelectArticleSport extends React.Component<SelectArticleProps, State> {
           </div>
         </div>
         <PreviewTech />
-        <PreviewBusiness />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,

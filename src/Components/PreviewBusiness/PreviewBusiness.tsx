@@ -4,16 +4,18 @@ import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./PreviewBusiness.scss";
 import business from "../Media/img/business.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface PreviewBusinessProps {
-  businessNews: any | null;
+export interface IPreviewBusinessProps {
+  businessNews: IData | null;
   getBusiness: typeof getBusiness;
   keyApi: string;
 }
 
 export interface State {}
 
-class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
+class PreviewBusiness extends React.Component<IPreviewBusinessProps, State> {
 
   componentDidMount() {
     if (this.props.businessNews === null) {
@@ -70,7 +72,7 @@ class PreviewBusiness extends React.Component<PreviewBusinessProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     businessNews: state.data_news.businessNews,
     keyApi: state.data_news.keyApi

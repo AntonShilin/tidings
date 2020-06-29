@@ -269,8 +269,6 @@ export const showFullArticleInfo = (
   id: number,
   url: any
 ): IGetShowFullArticleAction => {
-  console.log(id,url)
-  console.log("yes")
   url.history.push(`${url.match.url}/${id}`);
   url.match.params.id = id;
   return {

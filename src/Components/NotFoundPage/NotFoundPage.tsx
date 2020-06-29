@@ -8,7 +8,7 @@ export interface State {}
 class NotFoundPage extends React.Component<Props, State> {
   render() {
     return (
-      <div className="container">
+      <div className="container-xl">
         <div className="row not-found-page">
           <div className="col align-self-center">
             <h1 className="text-center">

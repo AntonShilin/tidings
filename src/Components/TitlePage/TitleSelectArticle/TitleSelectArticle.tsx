@@ -11,7 +11,7 @@ import { RootState } from "../../../Store/Store";
 import { IData } from "../../../Types/Types";
 
 export interface ISelectArticleProps {
-  titlepageNews: IData;
+  titlepageNews: IData|null;
   getData: typeof getData;
   goToPublisherPage: typeof goToPublisherPage;
   url: any;
@@ -36,13 +36,13 @@ class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
     return this.props.titlepageNews === null ? (
       <Preloader />
     ) : (
-      <div className="container">
+      <div className="container-xl">
         <div className="row selected-article">
           <div
             className="col-lg-8 col-md-8 col-sm-12"
             onClick={() =>
               this.props.goToPublisherPage(
-                this.props.titlepageNews.articles[id].url
+                this.props.titlepageNews!.articles[id].url
               )
             }
           >
@@ -80,7 +80,7 @@ class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
 
 
 
-const mapStateToProps = (state: any, url: RouteComponentProps) => {
+const mapStateToProps = (state: RootState, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,

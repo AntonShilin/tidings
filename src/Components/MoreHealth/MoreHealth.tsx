@@ -6,11 +6,12 @@ import "./MoreHealth.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import health from "../Media/img/health.jpg";
-import { Dispatch, AnyAction } from "redux";
-import { GetHealthTypes } from "../../Types/Types";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface MoreHealthProps {
-  healthNews: any | null;
+
+export interface IMoreHealthProps {
+  healthNews: IData | null;
   getHealth: typeof getHealth;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
@@ -20,7 +21,7 @@ export interface MoreHealthProps {
 
 export interface State {}
 
-class MoreHealth extends React.Component<MoreHealthProps, State> {
+class MoreHealth extends React.Component<IMoreHealthProps, State> {
 
   componentDidMount() {
     if (this.props.healthNews === null) {
@@ -34,7 +35,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 health-news-article">
+        <div className="container-xl mt-5 health-news-article">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
@@ -43,7 +44,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                     className="latest-health-article"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.healthNews.articles[1].source.id,
+                        this.props.healthNews!.articles[1].source.id,
                         this.props.url
                       )
                     }
@@ -58,7 +59,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                           ? this.props.healthNews.articles[1].urlToImage
                           : health
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.healthNews.articles[0].description}
@@ -72,7 +73,6 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
               <div className="row health-news-news">
                 {this.props.healthNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 1 && i < 12 ? (
                       <div
                         className="col-lg-6 col-md-6 col-sm-12"
                         key={i}
@@ -101,7 +101,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                               ? article.urlToImage
                               : health
                           }
-                          alt=""
+                          alt="img"
                         />
                         <p>
                           {article.description}
@@ -115,7 +115,6 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
                           />
                         </p>
                       </div>
-                    ) : null
                 )}
               </div>
             </div>
@@ -129,7 +128,7 @@ class MoreHealth extends React.Component<MoreHealthProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     healthNews: state.data_news.healthNews,
     keyApi: state.data_news.keyApi,

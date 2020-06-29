@@ -4,16 +4,18 @@ import { getTrending } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import "./PreviewTrending.scss";
 import defaultImage from "../Media/img/trends.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface PreviewTrendingProps {
-  trendingNews: any | null;
+export interface IPreviewTrendingProps {
+  trendingNews: IData | null;
   getTrending: typeof getTrending;
   keyApi: string;
 }
 
 export interface State {}
 
-class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
+class PreviewTrending extends React.Component<IPreviewTrendingProps, State> {
   componentDidMount() {
     if (this.props.trendingNews === null) {
       this.props.getTrending(
@@ -70,7 +72,7 @@ class PreviewTrending extends React.Component<PreviewTrendingProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     trendingNews: state.data_news.trendingNews,
     keyApi: state.data_news.keyApi,

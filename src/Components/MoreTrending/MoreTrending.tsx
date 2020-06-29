@@ -6,9 +6,11 @@ import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
 import trends from "../Media/img/trends.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface MoreTrendingProps {
-  trendingNews: any | null;
+export interface IMoreTrendingProps {
+  trendingNews: IData | null;
   getTrending: typeof getTrending;
   colors: string[];
   keyApi: string;
@@ -16,7 +18,7 @@ export interface MoreTrendingProps {
 
 export interface State {}
 
-class MoreTrending extends React.Component<MoreTrendingProps, State> {
+class MoreTrending extends React.Component<IMoreTrendingProps, State> {
   keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
@@ -32,13 +34,12 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 header-trending-article">
+        <div className="container-xl mt-5 header-trending-article">
           <div className="row">
             <div className="col-lg-8">
               <div className="row main-trending-news">
                 {this.props.trendingNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 0 ? (
                       <div className="col-12 mb-2" key={i}>
                         <div className="row">
                           <div className="col-6">
@@ -65,7 +66,6 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
                           </div>
                         </div>
                       </div>
-                    ) : null
                 )}
               </div>
             </div>
@@ -79,7 +79,7 @@ class MoreTrending extends React.Component<MoreTrendingProps, State> {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     trendingNews: state.data_news.trendingNews,
     colors: state.data_news.colors,

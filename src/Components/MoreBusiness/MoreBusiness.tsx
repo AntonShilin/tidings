@@ -6,9 +6,10 @@ import "./MoreBusiness.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import business from "../Media/img/business.jpg";
+import { IData } from "../../Types/Types";
 
-export interface MoreBusinessProps {
-  businessNews: any | null;
+export interface IMoreBusinessProps {
+  businessNews: IData | null;
   getBusiness: typeof getBusiness;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
@@ -18,7 +19,7 @@ export interface MoreBusinessProps {
 
 export interface State {}
 
-class MoreBusiness extends React.Component<MoreBusinessProps, State> {
+class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
 
   componentDidMount() {
     if (this.props.businessNews === null) {
@@ -32,7 +33,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
       <Preloader />
     ) : (
       <React.Fragment>
-        <div className="container mt-5 business-news-article">
+        <div className="container-xl mt-5 business-news-article">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
@@ -41,7 +42,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                     className="latest-business-article"
                     onClick={() =>
                       this.props.showFullArticleInfo(
-                        this.props.businessNews.articles[7].source.id,
+                        this.props.businessNews!.articles[7].source.id,
                         this.props.url
                       )
                     }
@@ -56,7 +57,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                           ? this.props.businessNews.articles[7].urlToImage
                           : business
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.businessNews.articles[7].description}
@@ -70,7 +71,6 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
               <div className="row business-news-news">
                 {this.props.businessNews.articles.map(
                   (article: any, i: number, arr: any) =>
-                    i > 7 ? (
                       <div
                         className="col-lg-6 col-md-6 col-sm-12"
                         key={i}
@@ -99,7 +99,7 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                               ? article.urlToImage
                               : business
                           }
-                          alt=""
+                          alt="img"
                         />
                         <p>
                           {article.description}
@@ -113,7 +113,6 @@ class MoreBusiness extends React.Component<MoreBusinessProps, State> {
                           />
                         </p>
                       </div>
-                    ) : null
                 )}
               </div>
             </div>

@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import "./RightSidebar.scss";
 import { withRouter } from "react-router";
 import defaultImage from "../Media/img/articles.jpg";
+import { IData } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
 
-export interface RightSidebarProps {
-  sidebarNews: any | null;
+export interface IRightSidebarProps {
+  sidebarNews: IData | null;
   getSidebarNews: typeof getSidebarNews;
   showSidebarArticleInfo: typeof showSidebarArticleInfo;
   url: any;
@@ -15,7 +17,7 @@ export interface RightSidebarProps {
 
 export interface State {}
 
-class RightSidebar extends React.Component<RightSidebarProps, State> {
+class RightSidebar extends React.Component<IRightSidebarProps, State> {
 
   componentDidMount() {
     if (this.props.sidebarNews === null) {
@@ -27,7 +29,7 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
 
   render() {
     return (
-      <div className="container header-right-sidebar">
+      <div className="container-xl header-right-sidebar">
         <div className="row">
           <h3 className="text-start mb-4">
             <mark>Just in</mark>
@@ -36,21 +38,21 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
         <div className="row">
           {this.props.sidebarNews !== null
             ? this.props.sidebarNews.articles.map(
-                (article: any, i: number | string) => (
+                (article: any, i: number) => (
                   <div
                     key={i}
                     className="col-12 article_right_sidebar  mb-2"
                     onClick={() =>
                       this.props.showSidebarArticleInfo(
-                        this.props.sidebarNews.articles[i].source.id,
+                        this.props.sidebarNews!.articles[i].source.id,
                         this.props.url
                       )
                     }
                 >
                    <p>
                     <img
-                      src={this.props.sidebarNews.articles[i].urlToImage !== null
-                        ? this.props.sidebarNews.articles[i].urlToImage
+                      src={this.props.sidebarNews!.articles[i].urlToImage !== null
+                        ? this.props.sidebarNews!.articles[i].urlToImage
                         : defaultImage}
                       className="img-fluid"
                       alt="img"
@@ -66,7 +68,7 @@ class RightSidebar extends React.Component<RightSidebarProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
     keyApi: state.data_news.keyApi,

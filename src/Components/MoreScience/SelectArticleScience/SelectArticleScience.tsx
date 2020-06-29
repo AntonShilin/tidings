@@ -6,9 +6,12 @@ import { FiChevronsRight } from "react-icons/fi";
 import { getScience, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/question.jpg";
+import { IData } from "../../../Types/Types";
+import PreviewSport from "../../PreviewSport/PreviewSport";
+import { RootState } from "../../../Store/Store";
 
 export interface SelectArticleProps {
-  scienceNews: any | null;
+  scienceNews: IData | null;
   getScience: typeof getScience;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
@@ -34,13 +37,14 @@ class SelectArticleScience extends React.Component<SelectArticleProps, State> {
     return this.props.scienceNews === null ? (
       <Preloader />
     ) : (
-      <div className="container">
+      <React.Fragment>
+      <div className="container-xl">
         <div className="row selected-article">
           <div
             className="col-lg-8 col-md-8 col-sm-12"
             onClick={() =>
               this.props.goToPublisherPage(
-                this.props.scienceNews.articles[id].url
+                this.props.scienceNews!.articles[id].url
               )
             }
           >
@@ -71,12 +75,14 @@ class SelectArticleScience extends React.Component<SelectArticleProps, State> {
             <RightSidebar />
           </div>
         </div>
-      </div>
+        </div>
+        <PreviewSport />
+     </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState, url: any) => {
   return {
     scienceNews: state.data_news.scienceNews,
     colors: state.data_news.colors,
