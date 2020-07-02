@@ -83,7 +83,10 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
               <p>
                 {this.props.titlepageNews!.articles.map(
                   (n: IDataDescription, i: number) => (
-                    <span key={i}>{` `}</span>
+                    <span
+                      key={i}
+                      className={currentId === i ? `currentImg`:undefined}
+                    >{currentId === i }</span>
                   )
                 )}
               </p>
