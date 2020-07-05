@@ -21,6 +21,7 @@ import SelectArticleSport from "../Components/MoreSport/SelectArticleSport/Selec
 import RightSidebar from "../Components/RightSidebar/RightSidebar";
 import SelectArticleSidebar from "../Components/RightSidebar/SelectArticleSidebar/SelectArticleSidebar";
 import TitlePageSlider from "../Components/TitlePage/TitlePageSlider/TitlePageSlider";
+import RadioPage from "../Components/RadioPage/RadioPage";
 
 class Routes extends React.Component {
   render() {
@@ -124,6 +125,11 @@ class Routes extends React.Component {
           exact={true}
           path="/rightsidebar/:id"
           component={SelectArticleSidebar}
+        />
+        <Route
+          exact={true}
+          path="/radio"
+          component={RadioPage}
         />
         <Redirect exact={true} from="/" to="/titlenews" />
         <Route exact={true} path="/404" component={NotFoundPage} />

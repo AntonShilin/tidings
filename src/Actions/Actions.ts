@@ -23,6 +23,8 @@ import {
   IGetShowSidebarArticleAction,
   IArrowLeftAction,
   IArrowRightAction,
+  GetRaioNewsTypes,
+  toggleRadioPlayTypes,
 } from "../Types/Types";
 import { Dispatch } from "redux";
 import { RouteComponentProps } from "react-router-dom";
@@ -311,3 +313,37 @@ export const clickToRightArrow = (currentId:number,length: number): IArrowRightA
     nextId: currentId,
   };
 };
+
+/*  get radio news*/
+export const getRadioNews = () => {
+  return (dispatch: Dispatch) => {
+    fetch("https://coderadio-admin.freecodecamp.org/api/live/nowplaying/coderadio", {
+      "method": "GET",
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("HTTP error, status = " + response.status);
+      }
+    })
+      .then((news) =>
+        dispatch({
+          type: GetRaioNewsTypes.GETRADIONEWS,
+          data: news,
+        })
+      )
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+};
+
+/* toggle radio play or pause */
+export const toggleRadioPlay = (elem: any) => {
+
+    
+  return {
+    type: toggleRadioPlayTypes.TOGGLERADIOPLAY,
+  }
+} 

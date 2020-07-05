@@ -1,4 +1,3 @@
-import {} from "module";
 import {
   IMainState,
   MainActions,

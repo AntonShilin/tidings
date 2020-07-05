@@ -58,7 +58,23 @@ export enum ArrowRightTypes {
   ARROWRIGHT = "ARROWRIGHT",
 }
 
+export enum GetRaioNewsTypes {
+  GETRADIONEWS = "GETRADIONEWS",
+}
+
+export enum toggleRadioPlayTypes {
+  TOGGLERADIOPLAY = "TOGGLERADIOPLAY",
+}
+
 /* interfaces */
+export interface ItoggleRadioPlayAction {
+  type: toggleRadioPlayTypes.TOGGLERADIOPLAY
+}
+
+export interface IGetRaioNewsAction {
+  type: GetRaioNewsTypes.GETRADIONEWS;
+  data: any;
+}
 
 export interface IArrowLeftAction {
   type: ArrowLeftTypes.ARROWLEFT;
@@ -133,6 +149,8 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
+  |ItoggleRadioPlayAction
+  |IGetRaioNewsAction
   | IToggleMenuAction
   | IGetDataAction
   | ILoadingAction
@@ -164,7 +182,7 @@ export interface IMainState {
  scienceNews: IData | null;
  colors: string[];
  currentId: number;
- keyApi: string;
+  keyApi: string;
 }
 
 

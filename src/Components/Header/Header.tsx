@@ -5,7 +5,6 @@ import { FaCaretSquareRight } from "react-icons/fa";
 import { FiChevronsDown } from "react-icons/fi";
 import HeaderSmallScreen from "../HeaderSmallScreen/HeaderSmallScreen";
 
-
 class Header extends React.Component<{}, {}> {
   render() {
     return (
@@ -58,17 +57,17 @@ class Header extends React.Component<{}, {}> {
               </div>
               <div className="row">
                 <div className="col-12">
-                <NavLink to="/moretech" className="">
+                  <NavLink to="/moretech" className="">
                     <p className="text-center">Tech</p>
                   </NavLink>
                 </div>
                 <div className="col-12">
-                <NavLink to="/morehealth" className="">
+                  <NavLink to="/morehealth" className="">
                     <p className="text-center">Health</p>
                   </NavLink>
                 </div>
                 <div className="col-12">
-                <NavLink to="/morescience" className="">
+                  <NavLink to="/morescience" className="">
                     <p className="text-center">Science</p>
                   </NavLink>
                 </div>
@@ -90,11 +89,13 @@ class Header extends React.Component<{}, {}> {
               </NavLink>
             </div>
             <div className="col-auto p-0 search">
-              <button className="">
-                <FaCaretSquareRight
-                  style={{ fontSize: "1.5rem", color: "#007bff" }}
-                />
-              </button>
+              <NavLink to="/radio" className="">
+                <p
+                  className="text-center"
+                >
+                  fm
+                </p>
+              </NavLink>
             </div>
           </nav>
         </header>
