@@ -62,13 +62,31 @@ export enum GetRaioNewsTypes {
   GETRADIONEWS = "GETRADIONEWS",
 }
 
-export enum toggleRadioPlayTypes {
-  TOGGLERADIOPLAY = "TOGGLERADIOPLAY",
+export enum RadioPlayTypes {
+  RADIOPLAY = "RADIOPLAY",
 }
 
+export enum RadioPauseTypes {
+  RADIOPAUSE = "RADIOPAUSE",
+}
+
+
+
+
+
+
 /* interfaces */
-export interface ItoggleRadioPlayAction {
-  type: toggleRadioPlayTypes.TOGGLERADIOPLAY
+
+export interface IRadioPauseAction {
+  type: RadioPauseTypes.RADIOPAUSE;
+  value: boolean;
+}
+
+
+export interface IRadioPlayAction {
+  type: RadioPlayTypes.RADIOPLAY;
+  value: boolean;
+  timeGoOn: any;
 }
 
 export interface IGetRaioNewsAction {
@@ -149,7 +167,8 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
-  |ItoggleRadioPlayAction
+  |IRadioPauseAction
+  |IRadioPlayAction
   |IGetRaioNewsAction
   | IToggleMenuAction
   | IGetDataAction

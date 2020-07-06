@@ -24,7 +24,8 @@ import {
   IArrowLeftAction,
   IArrowRightAction,
   GetRaioNewsTypes,
-  toggleRadioPlayTypes,
+  RadioPlayTypes,
+  RadioPauseTypes,
 } from "../Types/Types";
 import { Dispatch } from "redux";
 import { RouteComponentProps } from "react-router-dom";
@@ -339,11 +340,22 @@ export const getRadioNews = () => {
   };
 };
 
-/* toggle radio play or pause */
-export const toggleRadioPlay = (elem: any) => {
-
-    
+/* on play radio */
+export const playRadioOn = (e: any) => {
+  e.play();
   return {
-    type: toggleRadioPlayTypes.TOGGLERADIOPLAY,
+    type: RadioPlayTypes.RADIOPLAY,
+    value: false
   }
 } 
+
+
+/* pause in play radio */
+export const playRadioPause = (e: any) => {
+  e.pause();
+  return {
+    type: RadioPauseTypes.RADIOPAUSE,
+    value: true
+  }
+} 
+

@@ -93,7 +93,7 @@ class Header extends React.Component<{}, {}> {
                 <p
                   className="text-center"
                 >
-                  fm
+                 <b>fm</b><b>100.0</b>
                 </p>
               </NavLink>
             </div>

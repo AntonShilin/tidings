@@ -36,8 +36,8 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
             </NavLink>
           </div>
           <div className="col-3">
-            <NavLink to="/moresport" className="">
-              <p className="text-center">Sports</p>
+            <NavLink to="/radio" className="">
+              <p className="text-center"><b>fm</b><b>100.0</b></p>
             </NavLink>
           </div>
           <div
@@ -88,6 +88,11 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
           <div className="col-12 text-center">
             <NavLink to="/moretrending" className="">
               <p className="text-center">Trending</p>
+            </NavLink>
+          </div>
+          <div className="col-12 text-center">
+            <NavLink to="/moresport" className="">
+              <p className="text-center">Sport</p>
             </NavLink>
           </div>
         </nav>

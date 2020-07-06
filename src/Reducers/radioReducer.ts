@@ -1,17 +1,20 @@
 import {
   MainActions,
   GetRaioNewsTypes,
-  toggleRadioPlayTypes,
+  RadioPlayTypes,
+  RadioPauseTypes,
 } from "../Types/Types";
 
 interface IRadioState {
   radioData: any | null;
   isRadioPause: boolean;
+  currentTime: number;
 }
 
 const initialState: IRadioState = {
   radioData: null,
   isRadioPause: true,
+  currentTime: 0,
 };
 
 export const radioReducer = (
@@ -26,10 +29,18 @@ export const radioReducer = (
       };
     }
 
-    case toggleRadioPlayTypes.TOGGLERADIOPLAY: {
+    case RadioPlayTypes.RADIOPLAY: {
       return {
-          ...state,
-          isRadioPause: !state.isRadioPause
+        ...state,
+          isRadioPause: action.value,
+        currentTime: action.timeGoOn
+      };
+    }
+
+    case RadioPauseTypes.RADIOPAUSE: {
+      return {
+        ...state,
+        isRadioPause: action.value,
       };
     }
 
