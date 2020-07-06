@@ -1,10 +1,9 @@
 .radio_widjet_bg {
-  background: lightblue;
+  background: #2c343d;
   min-height: 70vh;
   margin: 2rem 0rem 2rem 0rem;
   .album_img {
-    position: relative;
-    background-color: lightgrey;
+    // background: #2c343d;
     border: 1px solid lightgrey;
     flex-grow: 10;
     img {
@@ -12,91 +11,44 @@
       height: auto;
     }
     .album_decription {
+      background-image: linear-gradient(to top, lightblue, transparent);
       width: 100%;
-      position: absolute;
-      bottom: 1rem;
-      left: 0rem;
-      z-index: 2;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-around;
+      padding: 0.5rem;
       div:nth-of-type(1) {
-        flex-grow: 5;
-        p:nth-of-type(1) {
-          text-align: center;
-          text-transform: lowercase;
-          mark {
-            color: white;
-            background-color: #ff0044;
-          }
-        }
-        p:nth-of-type(2) {
-          mark {
-            background-color: #ff0044;
-            color: white;
-          }
+        p {
           font-weight: 600;
-          text-align: center;
+          span {
+            text-transform: uppercase;
+            color: white;
+            font-weight: 500;
+            padding-left: 0.5rem;
+            padding-right: 1rem;
+          }
         }
       }
       div:nth-of-type(2) {
-        flex-grow: 5;
-        p:nth-of-type(1) {
-          text-transform: lowercase;
-          mark {
-            color: white;
-            background-color: #ff0044;
-          }
-          text-align: center;
-        }
-        p:nth-of-type(2) {
-          text-align: center;
+        p {
           font-weight: 600;
-          mark {
+          span {
+            padding-left: 0.5rem;
+            padding-right: 1rem;
+            text-transform: uppercase;
+            font-weight: 500;
             color: white;
-            background-color: #ff0044;
           }
         }
       }
     }
   }
   .radio_widjet_controls {
-    width: 100%;
-    height: 4rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    padding: 0.5rem 0rem 0.5rem 0rem;
     div:nth-of-type(1) {
-      background-color: lightgrey;
-      border: 1px solid white;
-      flex-grow: 8;
-      padding: 0.3rem;
-      div.duration {
-        margin-top: 1.3rem;
-        padding: 0;
-        height: 0.7rem;
-        border: 1px solid red;
-        background-color: white;
-        div.duration_bar {
-          height: 0.6rem;
-          background-color: blue;
-          border: 0;
-        }
-      }
-    }
-    div:nth-of-type(2) {
-      background-color: lightgrey;
-      border: 1px solid white;
-      position: relative;
-      width: 15%;
+      width: 2rem;
+      margin: 0 auto;
       cursor: pointer;
-      flex-grow: 2;
       svg {
-        position: absolute;
-        top: 10%;
-        left: 10%;
+        font-size: 1.9rem;
+        fill: white;
       }
     }
   }

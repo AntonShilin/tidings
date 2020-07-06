@@ -7,6 +7,8 @@ import {
   playRadioOn,
   playRadioPause,
 } from "../../Actions/Actions";
+import { FaPlay, FaPause, FaVolumeUp, FaVolumeDown } from "react-icons/fa";
+import Preloader from "../Preloader/Preloader";
 
 export interface IRadioPageProps {
   getRadioNews: typeof getRadioNews;
@@ -35,114 +37,82 @@ class RadioPage extends React.Component<IRadioPageProps, State> {
   render() {
     const { isRadioPause, radioData, currentTime } = this.props;
     return (
-      <div className="container-xl">
-        <div className="row">
-          <div className="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-12">
-            <div className="radio_widjet_bg">
-              <div className="album_img">
-                <img
-                  src={
-                    radioData !== null
-                      ? radioData.now_playing.song.art
-                      : undefined
-                  }
-                  alt="img"
-                />
-                <div className="album_decription">
-                  <div>
-                    <p>
-                      <mark>Album: </mark>
-                    </p>
-                    <p>
-                      <mark>
-                        {radioData !== null
-                          ? radioData.now_playing.song.album
-                          : "unknown"}
-                      </mark>
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      <mark>Now playing:</mark>
-                    </p>
-                    <p>
-                      <mark>
-                        {radioData !== null
-                          ? radioData.now_playing.song.artist
-                          : "unknown"}
-                      </mark>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="radio_widjet_controls">
-                <div>
-                  {/* <div className="duration">
-                    <div
-                      className="duration_bar"
-                      style={{
-                        width: `${currentTime}%`,
-                      }}
+      <>
+        {radioData === null ? (
+          <Preloader />
+        ) : (
+          <div className="container-xl">
+            <div className="row">
+              <div className="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-12">
+                <div className="radio_widjet_bg">
+                  <div className="album_img">
+                    <img
+                      src={
+                        radioData !== null
+                          ? radioData.now_playing.song.art
+                          : undefined
+                      }
+                      alt="img"
                     />
-                  </div> */}
-                </div>
-                <div>
-                  {isRadioPause ? (
-                    <svg
-                      onClick={(e) =>
-                        this.props.playRadioOn(this.radiovidjet.current!)
-                      }
-                      height="50"
-                      width="50"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <polygon
-                        points="0,0 0,50 50,25"
-                        style={{ fill: "#1a9dde" }}
+                    <div className="album_decription">
+                      <div>
+                        <p>
+                          <span>Album:</span>
+                          {radioData !== null
+                            ? radioData.now_playing.song.album
+                            : "unknown"}
+                        </p>
+                      </div>
+                      <div>
+                        <p>
+                          <span>Now playing:</span>
+                          {radioData !== null ? (
+                            <>
+                              {radioData.now_playing.song.title}
+                              <b> by </b>
+                              {radioData.now_playing.song.artist}
+                            </>
+                          ) : (
+                            "unknown"
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="radio_widjet_controls">
+                    <div className="">
+                      {isRadioPause ? (
+                        <FaPlay
+                          className="play_btn"
+                          onClick={(e) =>
+                            this.props.playRadioOn(this.radiovidjet.current!)
+                          }
+                        />
+                      ) : (
+                        <FaPause
+                          className="pause_btn"
+                          onClick={(e) =>
+                            this.props.playRadioPause(this.radiovidjet.current!)
+                          }
+                        />
+                      )}
+                    </div>
+                  </div>
+                  {radioData !== null && (
+                    <audio ref={this.radiovidjet}>
+                      <source
+                        src={radioData.station.listen_url}
+                        type="audio/mpeg"
                       />
-                      Sorry, your browser does not support inline SVG.
-                    </svg>
-                  ) : (
-                    <svg
-                      onClick={(e) =>
-                        this.props.playRadioPause(this.radiovidjet.current!)
-                      }
-                      width="50"
-                      height="50"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        width="20"
-                        height="50"
-                        style={{ fill: "orange" }}
-                      />
-                      <rect
-                        x="30"
-                        y="0"
-                        width="20"
-                        height="50"
-                        style={{ fill: "orange" }}
-                      />
-                      Sorry, your browser does not support inline SVG.
-                    </svg>
+                      Your browser does not support the audio element.
+                    </audio>
                   )}
                 </div>
               </div>
-              {radioData !== null && (
-                <audio ref={this.radiovidjet}>
-                  <source
-                    src={radioData.station.listen_url}
-                    type="audio/mpeg"
-                  />
-                  Your browser does not support the audio element.
-                </audio>
-              )}
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </>
     );
   }
 }

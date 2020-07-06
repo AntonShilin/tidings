@@ -37,7 +37,7 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
           </div>
           <div className="col-3">
             <NavLink to="/radio" className="">
-              <p className="text-center"><b>fm</b><b>100.0</b></p>
+              <p className="text-center"><b>fm</b><b>100</b></p>
             </NavLink>
           </div>
           <div
