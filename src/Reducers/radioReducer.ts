@@ -3,18 +3,20 @@ import {
   GetRaioNewsTypes,
   RadioPlayTypes,
   RadioPauseTypes,
+  RadioMuteTypes,
+  RadioMuteOffTypes,
 } from "../Types/Types";
 
 interface IRadioState {
   radioData: any | null;
   isRadioPause: boolean;
-  currentTime: number;
+  isRadioMute: boolean;
 }
 
 const initialState: IRadioState = {
   radioData: null,
   isRadioPause: true,
-  currentTime: 0,
+  isRadioMute: false,
 };
 
 export const radioReducer = (
@@ -32,8 +34,7 @@ export const radioReducer = (
     case RadioPlayTypes.RADIOPLAY: {
       return {
         ...state,
-          isRadioPause: action.value,
-        currentTime: action.timeGoOn
+        isRadioPause: action.value,
       };
     }
 
@@ -41,6 +42,20 @@ export const radioReducer = (
       return {
         ...state,
         isRadioPause: action.value,
+      };
+    }
+
+    case RadioMuteTypes.RADIOMUTE: {
+      return {
+        ...state,
+        isRadioMute: action.value,
+      };
+    }
+      
+    case RadioMuteOffTypes.RADIOMUTEOFF: {
+      return {
+        ...state,
+        isRadioMute: action.value,
       };
     }
 

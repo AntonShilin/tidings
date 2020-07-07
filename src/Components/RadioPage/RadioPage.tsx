@@ -6,17 +6,28 @@ import {
   getRadioNews,
   playRadioOn,
   playRadioPause,
+  setRadioMuteOn,
+  setRadioMuteOff,
 } from "../../Actions/Actions";
-import { FaPlay, FaPause, FaVolumeUp, FaVolumeDown } from "react-icons/fa";
+import {
+  FaPlay,
+  FaPause,
+  FaVolumeUp,
+  FaVolumeDown,
+  FaVolumeMute,
+} from "react-icons/fa";
+import { MdVolumeOff } from "react-icons/md";
 import Preloader from "../Preloader/Preloader";
 
 export interface IRadioPageProps {
   getRadioNews: typeof getRadioNews;
   playRadioOn: typeof playRadioOn;
   playRadioPause: typeof playRadioPause;
+  setRadioMuteOn: typeof setRadioMuteOn;
+  setRadioMuteOff: typeof setRadioMuteOff;
   radioData: any | null;
   isRadioPause: boolean;
-  currentTime: number;
+  isRadioMute: boolean;
 }
 
 export interface State {}
@@ -35,7 +46,7 @@ class RadioPage extends React.Component<IRadioPageProps, State> {
   }
 
   render() {
-    const { isRadioPause, radioData, currentTime } = this.props;
+    const { isRadioPause, radioData, isRadioMute } = this.props;
     return (
       <>
         {radioData === null ? (
@@ -50,36 +61,31 @@ class RadioPage extends React.Component<IRadioPageProps, State> {
                       src={
                         radioData !== null
                           ? radioData.now_playing.song.art
-                          : undefined
+                          : "#"
                       }
                       alt="img"
                     />
-                    <div className="album_decription">
-                      <div>
-                        <p>
-                          <span>Album:</span>
-                          {radioData !== null
-                            ? radioData.now_playing.song.album
-                            : "unknown"}
-                        </p>
-                      </div>
-                      <div>
-                        <p>
-                          <span>Now playing:</span>
-                          {radioData !== null ? (
-                            <>
-                              {radioData.now_playing.song.title}
-                              <b> by </b>
-                              {radioData.now_playing.song.artist}
-                            </>
-                          ) : (
-                            "unknown"
-                          )}
-                        </p>
-                      </div>
-                    </div>
                   </div>
+                
                   <div className="radio_widjet_controls">
+                    <div>
+                      {!isRadioMute ? (
+                        <FaVolumeMute
+                          onClick={(e) =>
+                            this.props.setRadioMuteOn(this.radiovidjet.current!)
+                          }
+                        />
+                      ) : (
+                        <MdVolumeOff
+                          className={isRadioMute ? `activeMute` : undefined}
+                          onClick={(e) =>
+                            this.props.setRadioMuteOff(
+                              this.radiovidjet.current!
+                            )
+                          }
+                        />
+                      )}
+                    </div>
                     <div className="">
                       {isRadioPause ? (
                         <FaPlay
@@ -96,6 +102,30 @@ class RadioPage extends React.Component<IRadioPageProps, State> {
                           }
                         />
                       )}
+                    </div>
+                    </div>
+                    <div className="album_decription">
+                    <div>
+                      <p>
+                        <span>Album:</span>
+                        {radioData !== null
+                          ? radioData.now_playing.song.album
+                          : "unknown"}
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span>Now playing:</span>
+                        {radioData !== null ? (
+                          <>
+                            {radioData.now_playing.song.title}
+                            <b> by </b>
+                            {radioData.now_playing.song.artist}
+                          </>
+                        ) : (
+                          "unknown"
+                        )}
+                      </p>
                     </div>
                   </div>
                   {radioData !== null && (
@@ -121,7 +151,7 @@ const mapStateToProps = (state: RootState) => {
   return {
     radioData: state.radio_vidjet.radioData,
     isRadioPause: state.radio_vidjet.isRadioPause,
-    currentTime: state.radio_vidjet.currentTime,
+    isRadioMute: state.radio_vidjet.isRadioMute,
   };
 };
 
@@ -130,6 +160,8 @@ const mapDispatchToProps = (dispatch: any) => {
     getRadioNews: () => dispatch(getRadioNews()),
     playRadioOn: (elem: any) => dispatch(playRadioOn(elem)),
     playRadioPause: (elem: any) => dispatch(playRadioPause(elem)),
+    setRadioMuteOn: (elem: any) => dispatch(setRadioMuteOn(elem)),
+    setRadioMuteOff: (elem: any) => dispatch(setRadioMuteOff(elem)),
   };
 };
 

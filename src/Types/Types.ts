@@ -70,12 +70,27 @@ export enum RadioPauseTypes {
   RADIOPAUSE = "RADIOPAUSE",
 }
 
+export enum RadioMuteTypes {
+  RADIOMUTE = "RADIOMUTE",
+}
 
-
+export enum RadioMuteOffTypes {
+  RADIOMUTEOFF = "RADIOMUTEOFF",
+}
 
 
 
 /* interfaces */
+export interface IRadioMuteOffAction {
+  type: RadioMuteOffTypes.RADIOMUTEOFF;
+  value: boolean;
+}
+
+
+export interface IRadioMuteAction {
+  type: RadioMuteTypes.RADIOMUTE
+  value: boolean;
+}
 
 export interface IRadioPauseAction {
   type: RadioPauseTypes.RADIOPAUSE;
@@ -167,6 +182,8 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
+  |IRadioMuteOffAction
+  |IRadioMuteAction
   |IRadioPauseAction
   |IRadioPlayAction
   |IGetRaioNewsAction

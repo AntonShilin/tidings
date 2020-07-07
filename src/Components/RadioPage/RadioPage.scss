@@ -3,50 +3,72 @@
   min-height: 70vh;
   margin: 2rem 0rem 2rem 0rem;
   .album_img {
-    // background: #2c343d;
     border: 1px solid lightgrey;
     flex-grow: 10;
     img {
       width: 100%;
       height: auto;
     }
-    .album_decription {
-      background-image: linear-gradient(to top, lightblue, transparent);
-      width: 100%;
-      padding: 0.5rem;
-      div:nth-of-type(1) {
-        p {
-          font-weight: 600;
-          span {
-            text-transform: uppercase;
-            color: white;
-            font-weight: 500;
-            padding-left: 0.5rem;
-            padding-right: 1rem;
-          }
+  }
+  .album_decription {
+    background-image: linear-gradient(to top, lightblue, transparent);
+    width: 100%;
+    padding: 0.5rem;
+    div:nth-of-type(1) {
+      p {
+        font-weight: 600;
+        span {
+          text-transform: uppercase;
+          color: white;
+          font-weight: 500;
+          padding-left: 0.5rem;
+          padding-right: 1rem;
         }
       }
-      div:nth-of-type(2) {
-        p {
-          font-weight: 600;
-          span {
-            padding-left: 0.5rem;
-            padding-right: 1rem;
-            text-transform: uppercase;
-            font-weight: 500;
-            color: white;
-          }
+    }
+    div:nth-of-type(2) {
+      p {
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        span {
+          padding-left: 0.5rem;
+          padding-right: 1rem;
+          text-transform: uppercase;
+          font-weight: 500;
+          color: white;
         }
       }
     }
   }
   .radio_widjet_controls {
     padding: 0.5rem 0rem 0.5rem 0rem;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+   
     div:nth-of-type(1) {
+      flex-grow: 5;
       width: 2rem;
-      margin: 0 auto;
       cursor: pointer;
       svg {
+        display: block;
+        margin: 0 auto;
+        font-size: 2.3rem;
+        fill: white;    
+      }
+      .activeMute{
+        fill: red !important;  
+      }
+    }
+    div:nth-of-type(2) {
+      flex-grow: 5;
+      width: 2rem;
+      cursor: pointer;
+      svg {
+        display: block;
+        margin: 0 auto;
         font-size: 1.9rem;
         fill: white;
       }

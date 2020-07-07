@@ -26,6 +26,8 @@ import {
   GetRaioNewsTypes,
   RadioPlayTypes,
   RadioPauseTypes,
+  RadioMuteTypes,
+  RadioMuteOffTypes,
 } from "../Types/Types";
 import { Dispatch } from "redux";
 import { RouteComponentProps } from "react-router-dom";
@@ -359,3 +361,22 @@ export const playRadioPause = (e: any) => {
   }
 } 
 
+
+/* mute on  radio play*/
+export const setRadioMuteOn = (e: any) => {
+  e.volume =0;
+  return {
+    type: RadioMuteTypes.RADIOMUTE,
+    value: true
+  }
+} 
+
+
+/* mute off  radio play*/
+export const setRadioMuteOff = (e: any) => {
+  e.volume =1;
+  return {
+    type: RadioMuteOffTypes.RADIOMUTEOFF,
+    value: false
+  }
+} 
