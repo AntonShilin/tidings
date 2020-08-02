@@ -66,8 +66,12 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
             </button>
             <div className="window-images-slider">
               <img
-                src={this.props.titlepageNews.articles[currentId].urlToImage}
-                alt="img"
+                src={
+                  this.props.titlepageNews.articles[currentId].urlToImage !==null
+                    ? this.props.titlepageNews.articles[currentId].urlToImage
+                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/BBC_World_News_red.svg/107px-BBC_World_News_red.svg.png"
+                }
+                alt="news"
               />
               <h1
                 onClick={() =>
@@ -85,8 +89,10 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
                   (n: IDataDescription, i: number) => (
                     <span
                       key={i}
-                      className={currentId === i ? `currentImg`:undefined}
-                    >{currentId === i }</span>
+                      className={currentId === i ? `currentImg` : undefined}
+                    >
+                      {currentId === i}
+                    </span>
                   )
                 )}
               </p>

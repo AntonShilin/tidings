@@ -1,0 +1,13 @@
+.album_decription {
+  background-color: #006697;
+  padding: 0.2rem  0.5rem 0.2rem .5rem ;
+  p {
+    color: white;
+    margin: 0;
+    text-transform: lowercase;
+    span {
+      margin-right: 1rem;
+      text-transform: capitalize !important;
+    }
+  }
+}

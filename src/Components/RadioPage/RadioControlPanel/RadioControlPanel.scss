@@ -1,0 +1,79 @@
+div {
+  .radio_control_panel {
+    background-color: #006697;
+    border-top: 2px solid white;
+    padding: 1rem 0rem 1rem 0rem;
+    div:nth-of-type(1) {
+      svg {
+        margin: 0 auto;
+        display: block;
+        color: white;
+        font-size: 1.7rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    div:nth-of-type(2) {
+      div.row {
+        div:nth-of-type(1) {
+          position: relative;
+          svg {
+            display: block;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+          }
+          span {
+            display: none;
+          }
+          .activeMute {
+            display: block;
+            top: 0.2rem;
+            left: 3rem;
+            position: absolute;
+            color: white;
+            font-weight: 700;
+            transform: rotate(45deg);
+          }
+        }
+        div:nth-of-type(2) {
+          padding-top: 0.5rem;
+          div.radio_control_panel_volume {
+            height: 1rem;
+            width: 100%;
+            position: relative;
+            transform: rotate(180deg);
+            div {
+              background-color: white;
+              display: inline-block;
+              height: 1rem;
+              cursor: pointer;
+              width: 0.5rem;
+              top: 0;
+              position: absolute;
+            }
+            .volume_up {
+              height: 1.5rem;
+            }
+            div:nth-of-type(1) {
+              right: 0rem;
+            }
+            div:nth-of-type(2) {
+              right: 0.6rem;
+            }
+            div:nth-of-type(3) {
+              right: 1.25rem;
+            }
+            div:nth-of-type(4) {
+              right: 1.85rem;
+            }
+            div:nth-of-type(5) {
+              right: 2.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

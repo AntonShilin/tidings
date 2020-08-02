@@ -28,6 +28,7 @@ import {
   RadioPauseTypes,
   RadioMuteTypes,
   RadioMuteOffTypes,
+  changeVolumeRadioTypes,
 } from "../Types/Types";
 import { Dispatch } from "redux";
 import { RouteComponentProps } from "react-router-dom";
@@ -302,7 +303,10 @@ export const showSidebarArticleInfo = (
 };
 
 /*slider: arrow-left */
-export const clickToLeftArrow = (currentId:number,length: number):IArrowLeftAction => {
+export const clickToLeftArrow = (
+  currentId: number,
+  length: number
+): IArrowLeftAction => {
   return {
     type: ArrowLeftTypes.ARROWLEFT,
     nextId: currentId,
@@ -310,7 +314,10 @@ export const clickToLeftArrow = (currentId:number,length: number):IArrowLeftActi
 };
 
 /*slider: arrow-right */
-export const clickToRightArrow = (currentId:number,length: number): IArrowRightAction => {
+export const clickToRightArrow = (
+  currentId: number,
+  length: number
+): IArrowRightAction => {
   return {
     type: ArrowRightTypes.ARROWRIGHT,
     nextId: currentId,
@@ -320,16 +327,19 @@ export const clickToRightArrow = (currentId:number,length: number): IArrowRightA
 /*  get radio news*/
 export const getRadioNews = () => {
   return (dispatch: Dispatch) => {
-    fetch("https://coderadio-admin.freecodecamp.org/api/live/nowplaying/coderadio", {
-      "method": "GET",
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("HTTP error, status = " + response.status);
+    fetch(
+      "https://coderadio-admin.freecodecamp.org/api/live/nowplaying/coderadio",
+      {
+        method: "GET",
       }
-    })
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("HTTP error, status = " + response.status);
+        }
+      })
       .then((news) =>
         dispatch({
           type: GetRaioNewsTypes.GETRADIONEWS,
@@ -347,36 +357,50 @@ export const playRadioOn = (e: any) => {
   e.play();
   return {
     type: RadioPlayTypes.RADIOPLAY,
-    value: false
-  }
-} 
-
+    value: false,
+  };
+};
 
 /* pause in play radio */
 export const playRadioPause = (e: any) => {
   e.pause();
   return {
     type: RadioPauseTypes.RADIOPAUSE,
-    value: true
-  }
-} 
-
+    value: true,
+  };
+};
 
 /* mute on  radio play*/
 export const setRadioMuteOn = (e: any) => {
-  e.volume =0;
+  e.volume = 0;
   return {
     type: RadioMuteTypes.RADIOMUTE,
-    value: true
-  }
-} 
-
+    value: true,
+  };
+};
 
 /* mute off  radio play*/
 export const setRadioMuteOff = (e: any) => {
-  e.volume =1;
+  e.volume = 1;
   return {
     type: RadioMuteOffTypes.RADIOMUTEOFF,
-    value: false
+    value: false,
+  };
+};
+
+/* mute off  radio play*/
+export const changeVolumeRadio = (e: any, elem: any, arr: any) => {
+
+  for (let i = 0; i <= arr[0].children.length-1; i++) {
+    if (i <= e.target.dataset.id) {
+      arr[0].children[i].style.backgroundColor = "lightblue";
+    } else {
+      arr[0].children[i].style.backgroundColor = "white";
+    }
   }
-} 
+
+  elem.volume = e.target.dataset.volume;
+  return {
+    type: changeVolumeRadioTypes.CHANGEVOLUMERADIO,
+  };
+};

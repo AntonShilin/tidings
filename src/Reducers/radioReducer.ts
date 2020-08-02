@@ -5,6 +5,7 @@ import {
   RadioPauseTypes,
   RadioMuteTypes,
   RadioMuteOffTypes,
+  changeVolumeRadioTypes
 } from "../Types/Types";
 
 interface IRadioState {
@@ -56,6 +57,12 @@ export const radioReducer = (
       return {
         ...state,
         isRadioMute: action.value,
+      };
+    }
+      
+    case changeVolumeRadioTypes.CHANGEVOLUMERADIO: {
+      return {
+        ...state,
       };
     }
 

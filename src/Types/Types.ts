@@ -78,9 +78,17 @@ export enum RadioMuteOffTypes {
   RADIOMUTEOFF = "RADIOMUTEOFF",
 }
 
+export enum changeVolumeRadioTypes {
+  CHANGEVOLUMERADIO = "CHANGEVOLUMERADIO",
+}
+
 
 
 /* interfaces */
+export interface IChangeVolumeRadioAction {
+  type: changeVolumeRadioTypes.CHANGEVOLUMERADIO;
+}
+
 export interface IRadioMuteOffAction {
   type: RadioMuteOffTypes.RADIOMUTEOFF;
   value: boolean;
@@ -182,6 +190,7 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
+  |IChangeVolumeRadioAction
   |IRadioMuteOffAction
   |IRadioMuteAction
   |IRadioPauseAction

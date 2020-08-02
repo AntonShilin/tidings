@@ -1,7 +1,8 @@
 .slider {
   width: 100%;
-  max-height: 32rem;
+  height: 32rem;
   overflow: hidden;
+  background-color: #f1f1f1;
   button.arrow-left.btn {
     position: absolute;
     left: 0.2rem;
@@ -40,19 +41,19 @@
   }
   .navigation-panel {
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 0rem;
     left: 0;
     z-index: 4;
     width: 100%;
     p {
       text-align: center;
+      margin: 0;
       span {
         display: inline-block;
-        background-color: white;
+        background-color: rgb(127, 186, 241);
         margin: 0.1rem;
         width: 0.5rem;
         height: 0.5rem;
-        border-radius: 50%;
       }
        
     }
@@ -65,13 +66,16 @@
     cursor: pointer;
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
     }
     h1 {
       position: absolute;
       top: -1rem;
       font-size: 3rem;
       opacity: 0.7;
+      &:hover{
+        opacity: 1;
+      }
       mark {
         background-color: rgb(255, 0, 98);
         color: white;
