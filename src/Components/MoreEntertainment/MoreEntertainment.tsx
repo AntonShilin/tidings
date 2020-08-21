@@ -1,7 +1,7 @@
 import * as React from "react";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
-import { getEntertainment, showFullArticleInfo } from "../../Actions/Actions";
+import { getEntertainment } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreEntertainment.scss";
@@ -13,7 +13,6 @@ import { NavLink } from "react-router-dom";
 export interface IMoreEntertainmentProps {
   entertainmentNews: IData | null;
   getEntertainment: typeof getEntertainment;
-  showFullArticleInfo: typeof showFullArticleInfo;
   colors: string[];
   keyApi: string;
 }

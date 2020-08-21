@@ -5,11 +5,10 @@ import {
   getData,
   clickToLeftArrow,
   clickToRightArrow,
-  showFullArticleInfo,
 } from "../../../Actions/Actions";
 import Preloader from "../../Preloader/Preloader";
 import { IData, IDataDescription } from "../../../Types/Types";
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
 import { RootState } from "../../../Store/Store";
 
 export interface ITitlePageSliderProps {
@@ -17,10 +16,8 @@ export interface ITitlePageSliderProps {
   getData: typeof getData;
   clickToLeftArrow: typeof clickToLeftArrow;
   clickToRightArrow: typeof clickToRightArrow;
-  showFullArticleInfo: typeof showFullArticleInfo;
   currentId: number;
   keyApi: string;
-  url: any;
 }
 
 export interface State {}
@@ -74,12 +71,11 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
                 alt="news"
               />
               <h1
-                onClick={() =>
-                  this.props.showFullArticleInfo(currentId, this.props.url)
-                }
               >
-                <mark>
-                  {this.props.titlepageNews.articles[currentId].title}
+                  <mark>
+                    <NavLink to={`/titlenews/${currentId}`}>
+                      {this.props.titlepageNews.articles[currentId].title}
+                      </NavLink>
                 </mark>
               </h1>
             </div>
@@ -104,12 +100,11 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,
     currentId: state.data_news.currentId,
-    url,
   };
 };
 
@@ -120,8 +115,6 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(clickToLeftArrow(currentId, length)),
     clickToRightArrow: (currentId: number, length: number) =>
       dispatch(clickToRightArrow(currentId, length)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

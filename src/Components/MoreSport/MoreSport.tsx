@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./MoreSport.scss";
-import { getSport, showFullArticleInfo } from "../../Actions/Actions";
+import { getSport } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
@@ -14,7 +14,6 @@ export interface IMoreSportProps {
   sportNews: IData | null;
   getSport: typeof getSport;
   colors: string[];
-  showFullArticleInfo: typeof showFullArticleInfo;
   keyApi: string;
 }
 

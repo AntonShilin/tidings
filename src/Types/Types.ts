@@ -42,10 +42,6 @@ export enum GetPublisherPageTypes {
 }
 
 
-export enum GetShowFullArticleTypes {
-  GETSHOWFULLARTICLE = "GETSHOWFULLARTICLE",
-}
-
 export enum GetShowSidebarArticleTypes {
   GETSHOWSIDEBARARTICLE = "GETSHOWSIDEBARARTICLE",
 }
@@ -131,9 +127,6 @@ export interface IGetShowSidebarArticleAction {
   type: GetShowSidebarArticleTypes.GETSHOWSIDEBARARTICLE;
 }
 
-export interface IGetShowFullArticleAction {
-  type: GetShowFullArticleTypes.GETSHOWFULLARTICLE;
-}
 
 export interface IPublisherPageAction {
   type: GetPublisherPageTypes.GETPUBLISHERPAGE;
@@ -207,7 +200,6 @@ export type MainActions =
   | IHealthAction
   | ISidebarAction
   | IScienceAction
-  | IGetShowFullArticleAction
   | IPublisherPageAction
   | IArrowLeftAction
   | IArrowRightAction

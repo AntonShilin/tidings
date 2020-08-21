@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./MoreTech.scss";
-import { getTech, showFullArticleInfo } from "../../Actions/Actions";
+import { getTech } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
@@ -14,7 +14,6 @@ export interface IMoreTechProps {
   techNews: IData | null;
   getTech: typeof getTech;
   colors: string[];
-  showFullArticleInfo: typeof showFullArticleInfo;
   keyApi: string;
 }
 

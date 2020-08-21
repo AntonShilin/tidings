@@ -11,7 +11,6 @@ import {
   GetHeadlineNewsTypes,
   GetHealthTypes,
   GetScienceTypes,
-  GetShowFullArticleTypes,
   GetPublisherPageTypes,
   GetShowSidebarArticleTypes,
   GetSidebarTypes,
@@ -175,11 +174,6 @@ export const stateReducer = (
       };
     }
 
-    case GetShowFullArticleTypes.GETSHOWFULLARTICLE: {
-      return {
-        ...state,
-      };
-    }
 
     case GetPublisherPageTypes.GETPUBLISHERPAGE: {
       return {

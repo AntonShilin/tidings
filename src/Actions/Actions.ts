@@ -10,7 +10,6 @@ import {
   toggleMenu,
   GetHealthTypes,
   GetScienceTypes,
-  GetShowFullArticleTypes,
   GetPublisherPageTypes,
   GetShowSidebarArticleTypes,
   GetSidebarTypes,
@@ -18,7 +17,6 @@ import {
   ArrowRightTypes,
   ILoadingAction,
   IToggleMenuAction,
-  IGetShowFullArticleAction,
   IPublisherPageAction,
   IGetShowSidebarArticleAction,
   IArrowLeftAction,
@@ -271,16 +269,6 @@ export const toggleSmallScreenMenu = (
   };
 };
 
-export const showFullArticleInfo = (
-  id: number,
-  url: any
-): IGetShowFullArticleAction => {
-  url.history.push(`${url.match.url}/${id}`);
-  url.match.params.id = id;
-  return {
-    type: GetShowFullArticleTypes.GETSHOWFULLARTICLE,
-  };
-};
 
 export const goToPublisherPage = (adress: string): IPublisherPageAction => {
   if (window.confirm("Are your sure go to publisher page?") === true) {

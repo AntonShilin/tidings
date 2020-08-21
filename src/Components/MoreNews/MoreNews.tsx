@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getNews, showFullArticleInfo } from "../../Actions/Actions";
+import { getNews } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreNews.scss";
@@ -14,7 +14,6 @@ export interface IMoreNewsProps {
   headlineNews: IData | null;
   getNews: typeof getNews;
   colors: string[];
-  showFullArticleInfo: typeof showFullArticleInfo;
   keyApi: string;
 }
 

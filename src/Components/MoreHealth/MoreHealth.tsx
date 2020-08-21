@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getHealth, showFullArticleInfo } from "../../Actions/Actions";
+import { getHealth } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreHealth.scss";
@@ -14,7 +14,6 @@ export interface IMoreHealthProps {
   healthNews: IData | null;
   getHealth: typeof getHealth;
   colors: string[];
-  showFullArticleInfo: typeof showFullArticleInfo;
   keyApi: string;
 }
 

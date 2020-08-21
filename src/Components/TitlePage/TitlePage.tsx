@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./TitlePage.scss";
-import { getData, showFullArticleInfo } from "../../Actions/Actions";
+import { getData } from "../../Actions/Actions";
 import { connect } from "react-redux";
 import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
@@ -10,7 +10,7 @@ import PreviewBusiness from "../PreviewBusiness/PreviewBusiness";
 import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
 import defaultImage from "../Media/img/news.jpg";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, NavLink } from "react-router-dom";
 import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
 import { RootState } from "../../Store/Store";
 import { IData, IDataDescription } from "../../Types/Types";
@@ -19,8 +19,6 @@ export interface ITitlePageProps {
   titlepageNews: IData | null;
   colors: string[];
   getData: typeof getData;
-  showFullArticleInfo: typeof showFullArticleInfo;
-  url: RouteComponentProps;
   keyApi: string;
 }
 
@@ -50,17 +48,13 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
             <div className="col-lg-9 col-md-9 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest_articles"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.titlepageNews!.articles[7].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest_articles">
                     <h3>
-                      <mark>{this.props.titlepageNews.articles[7].title}</mark>
+                      <mark>
+                        <NavLink to="/titlenews/7">
+                          {this.props.titlepageNews.articles[7].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
@@ -74,7 +68,6 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                     <p>
                       {this.props.titlepageNews.articles[7].description}
                       <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
                       />
                     </p>
                   </div>
@@ -83,19 +76,12 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
               <div className="row main-news">
                 {this.props.titlepageNews.articles.map(
                   (article: IDataDescription, i: number) => (
-                    <div
-                      onClick={() =>
-                        this.props.showFullArticleInfo(
-                          article.source.id,
-                          this.props.url
-                        )
-                      }
-                      className="col-lg-6 col-md-6 col-sm-12"
-                      key={i}
-                    >
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                       <h5>
                         <mark style={{ backgroundColor: this.props.colors[i] }}>
-                          {article.title}
+                          <NavLink to={`/titlenews/${article.source.id}`}>
+                            {article.title}
+                            </NavLink>
                         </mark>
                       </h5>
                       <img
@@ -135,20 +121,17 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: RouteComponentProps) => {
+const mapStateToProps = (state: RootState) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
     keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getData: (url: string) => dispatch(getData(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 
