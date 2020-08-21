@@ -5,16 +5,16 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { getNews, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
-import { IData } from "../../../Types/Types";
+import { IData, RouteParams } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
 import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-export interface ISelectArticleProps {
+export interface ISelectArticleProps extends RouteComponentProps<RouteParams>{
   headlineNews: IData | null;
   getNews: typeof getNews;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
-  url: any;
   keyApi: string;
 }
 
@@ -30,7 +30,7 @@ class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
   }
 
   render() {
-    const id: number = this.props.url.match.params.id;
+    const id: number = +this.props.match.params.id;
 
     return this.props.headlineNews === null ? (
       <Preloader />
@@ -62,7 +62,7 @@ class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
               />
               <p>
                 {this.props.headlineNews.articles[id].content}
-                <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+                <FiChevronsRight />
               </p>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -76,12 +76,11 @@ class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     headlineNews: state.data_news.headlineNews,
     keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
-    url,
   };
 };
 
@@ -92,4 +91,5 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectArticleNews);
+const withRouterProps = withRouter(SelectArticleNews);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProps);

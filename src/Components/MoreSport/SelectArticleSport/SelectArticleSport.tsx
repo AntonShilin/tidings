@@ -7,22 +7,21 @@ import { getSport, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/question.jpg";
 import PreviewTech from "../../PreviewTech/PreviewTech";
-import { IData } from "../../../Types/Types";
+import { IData, RouteParams } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-export interface ISelectArticleProps {
+export interface ISelectArticleProps extends RouteComponentProps<RouteParams> {
   sportNews: IData | null;
   getSport: typeof getSport;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
-  url: any;
   keyApi: string;
 }
 
 export interface State {}
 
 class SelectArticleSport extends React.Component<ISelectArticleProps, State> {
-
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
@@ -32,7 +31,7 @@ class SelectArticleSport extends React.Component<ISelectArticleProps, State> {
   }
 
   render() {
-    const id: number = this.props.url.match.params.id;
+    const id: number = +this.props.match.params.id;
 
     return this.props.sportNews === null ? (
       <Preloader />
@@ -67,7 +66,7 @@ class SelectArticleSport extends React.Component<ISelectArticleProps, State> {
             />
             <p>
               {this.props.sportNews.articles[id].content}
-              <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+              <FiChevronsRight />
             </p>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-12">
@@ -80,21 +79,20 @@ class SelectArticleSport extends React.Component<ISelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSport: (url: string) => dispatch(getSport(url)),
-    goToPublisherPage: (adress: string) =>
-      dispatch(goToPublisherPage(adress)),
+    goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectArticleSport);
+const withRouterProps = withRouter(SelectArticleSport);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProps);

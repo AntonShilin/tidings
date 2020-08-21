@@ -6,6 +6,7 @@ import "./PreviewSport.scss";
 import sport from "../Media/img/sport.jpg";
 import { IData } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { NavLink } from "react-router-dom";
 
 export interface IPreviewSportProps {
   sportNews: IData | null;
@@ -16,7 +17,6 @@ export interface IPreviewSportProps {
 export interface State {}
 
 class PreviewSport extends React.Component<IPreviewSportProps, State> {
-  
   componentDidMount() {
     if (this.props.sportNews === null) {
       this.props.getSport(
@@ -25,46 +25,48 @@ class PreviewSport extends React.Component<IPreviewSportProps, State> {
     }
   }
   render() {
-    return this.props.sportNews === null ? (
-      null
-    ) : (
+    return this.props.sportNews === null ? null : (
       <div className="container-xl">
         <div className="row mt-3 sport-news-header">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <h3>
               <mark>
                 Sport
-                <FiChevronsRight style={{ color: "white", strokeWidth: 4 }} />
+                <FiChevronsRight />
               </mark>
             </h3>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <p className="text-right">
-              More sport stories
-              <FiChevronsRight style={{ color: "#070707", strokeWidth: 4 }} />
+              <NavLink to="/moresport">
+                More sport stories
+                <FiChevronsRight />
+              </NavLink>
             </p>
           </div>
         </div>
         <div className="row sport-news-article">
           {this.props.sportNews.articles.map(
             (article: any, i: number, arr: any) =>
-              i < 6 ? (
+              i < 6 && (
                 <div className="col-lg-4 col-md-6 col-sm-6" key={i}>
                   <h5>
                     <mark>
-                      {article.title}
-                      <FiChevronsRight
-                        style={{ color: "white", strokeWidth: 4 }}
-                      />
+                      <NavLink to={`/moresport/${article.source.id}`}>
+                        {article.title}
+                        <FiChevronsRight />
+                      </NavLink>
                     </mark>
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage !==null ?article.urlToImage :sport}
-                    alt=""
+                    src={
+                      article.urlToImage !== null ? article.urlToImage : sport
+                    }
+                    alt="img"
                   />
                 </div>
-              ) : null
+              )
           )}
         </div>
       </div>
@@ -75,7 +77,7 @@ class PreviewSport extends React.Component<IPreviewSportProps, State> {
 const mapStateToProps = (state: RootState) => {
   return {
     sportNews: state.data_news.sportNews,
-    keyApi: state.data_news.keyApi
+    keyApi: state.data_news.keyApi,
   };
 };
 

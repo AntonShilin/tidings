@@ -6,6 +6,7 @@ import "./PreviewBusiness.scss";
 import business from "../Media/img/business.jpg";
 import { IData } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { NavLink } from "react-router-dom";
 
 export interface IPreviewBusinessProps {
   businessNews: IData | null;
@@ -16,7 +17,6 @@ export interface IPreviewBusinessProps {
 export interface State {}
 
 class PreviewBusiness extends React.Component<IPreviewBusinessProps, State> {
-
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
@@ -25,46 +25,51 @@ class PreviewBusiness extends React.Component<IPreviewBusinessProps, State> {
     }
   }
   render() {
-    return this.props.businessNews === null ? (
-      null
-    ) : (
+    return this.props.businessNews === null ? null : (
       <div className="container-xl">
         <div className="row mt-3 business-header">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <h3>
               <mark>
                 Business
-                <FiChevronsRight style={{ color: "white", strokeWidth: 4 }} />
+                <FiChevronsRight/>
               </mark>
             </h3>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <p className="text-right">
-              More business stories
-              <FiChevronsRight style={{ color: "#070707", strokeWidth: 4 }} />
+              <NavLink to="/morebusiness">
+                More business stories
+                <FiChevronsRight />
+              </NavLink>
             </p>
           </div>
         </div>
         <div className="row business-article">
           {this.props.businessNews.articles.map(
             (article: any, i: number, arr: any) =>
-              i < 6 ? (
+              i < 6 && (
                 <div className="col-lg-4 col-md-6 col-sm-6" key={i}>
                   <h5>
                     <mark>
-                      {article.title}
-                      <FiChevronsRight
-                        style={{ color: "white", strokeWidth: 4 }}
-                      />
+                      <NavLink to={`/morebusiness/${article.source.id}`}>
+                        {article.title}
+                        <FiChevronsRight
+                        />
+                      </NavLink>
                     </mark>
                   </h5>
                   <img
                     className="img-fluid mb-1"
-                    src={article.urlToImage !==null ?article.urlToImage :business}
+                    src={
+                      article.urlToImage !== null
+                        ? article.urlToImage
+                        : business
+                    }
                     alt=""
                   />
                 </div>
-              ) : null
+              )
           )}
         </div>
       </div>
@@ -75,7 +80,7 @@ class PreviewBusiness extends React.Component<IPreviewBusinessProps, State> {
 const mapStateToProps = (state: RootState) => {
   return {
     businessNews: state.data_news.businessNews,
-    keyApi: state.data_news.keyApi
+    keyApi: state.data_news.keyApi,
   };
 };
 

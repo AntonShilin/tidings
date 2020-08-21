@@ -6,23 +6,21 @@ import "./MoreHealth.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import health from "../Media/img/health.jpg";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
-
+import { NavLink } from "react-router-dom";
 
 export interface IMoreHealthProps {
   healthNews: IData | null;
   getHealth: typeof getHealth;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
-  url: any;
   keyApi: string;
 }
 
 export interface State {}
 
 class MoreHealth extends React.Component<IMoreHealthProps, State> {
-
   componentDidMount() {
     if (this.props.healthNews === null) {
       this.props.getHealth(
@@ -40,81 +38,65 @@ class MoreHealth extends React.Component<IMoreHealthProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-health-article"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.healthNews!.articles[1].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-health-article">
                     <h3>
-                      <mark>{this.props.healthNews.articles[1].title}</mark>
+                      <mark>
+                        <NavLink to="/morehealth/7">
+                          {this.props.healthNews.articles[7].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
                       src={
-                        this.props.healthNews.articles[1].urlToImage !== null
-                          ? this.props.healthNews.articles[1].urlToImage
+                        this.props.healthNews.articles[7].urlToImage !== null
+                          ? this.props.healthNews.articles[7].urlToImage
                           : health
                       }
                       alt="img"
                     />
                     <p>
-                      {this.props.healthNews.articles[0].description}
-                      <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
-                      />
+                      {this.props.healthNews.articles[7].description}
+                      <FiChevronsRight />
                     </p>
                   </div>
                 </div>
               </div>
               <div className="row health-news-news">
                 {this.props.healthNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                      <div
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
-                        }
-                      >
-                        <h5>
-                          <mark
-                            style={{
-                              backgroundColor: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                            }}
-                          >
+                  (article: IDataDescription, i: number, arr: any) => (
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <h5>
+                        <mark
+                          style={{
+                            backgroundColor: this.props.colors[i],
+                          }}
+                        >
+                          <NavLink to={`/morehealth/${article.source.id}`}>
                             {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : health
-                          }
-                          alt="img"
+                          </NavLink>
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : health
+                        }
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[i],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -128,20 +110,17 @@ class MoreHealth extends React.Component<IMoreHealthProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     healthNews: state.data_news.healthNews,
     keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
-    url,
   };
 };
 
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     getHealth: (url: string) => dispatch(getHealth(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

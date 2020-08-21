@@ -12,16 +12,23 @@
       top: -1rem;
       mark {
         background-color: orange;
-        color: white;
         line-height: 2.5rem;
         opacity: 0.85;
         &:hover {
           opacity: 1;
         }
+        a {
+          color: white;
+          text-decoration: none;
+        }
       }
     }
     p {
       font-size: 0.95rem;
+      svg{
+        color: orange;
+         stroke-width: 4;
+      }
     }
   }
 
@@ -38,10 +45,13 @@
         top: -2rem;
         mark {
           line-height: 1.9rem;
-          color: white;
           opacity: 0.85;
           &:hover {
             opacity: 1;
+          }
+          a {
+            color: white;
+            text-decoration: none;
           }
         }
       }
@@ -53,9 +63,9 @@
 }
 
 @media only screen and (max-width: 767px) {
-  div.entertainment-article .latest-entertainment h3{
+  div.entertainment-article .latest-entertainment h3 {
     font-size: 1.25rem;
-    mark{
+    mark {
       line-height: 1.9rem !important;
     }
   }

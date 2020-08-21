@@ -6,7 +6,7 @@ import { FiChevronsRight } from "react-icons/fi";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
 import trends from "../Media/img/trends.jpg";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
 
 export interface IMoreTrendingProps {
@@ -19,7 +19,6 @@ export interface IMoreTrendingProps {
 export interface State {}
 
 class MoreTrending extends React.Component<IMoreTrendingProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
 
   componentDidMount() {
     if (this.props.trendingNews === null) {
@@ -39,7 +38,7 @@ class MoreTrending extends React.Component<IMoreTrendingProps, State> {
             <div className="col-lg-8">
               <div className="row main-trending-news">
                 {this.props.trendingNews.articles.map(
-                  (article: any, i: number, arr: any) => (
+                  (article: IDataDescription, i: number, arr: any) => (
                     <div className="col-12 mb-2" key={i}>
                       <div className="row">
                         <div className="col-6">

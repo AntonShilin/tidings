@@ -6,14 +6,14 @@ import "./MoreNews.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import news from "../Media/img/news.jpg";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { NavLink } from "react-router-dom";
 
 export interface IMoreNewsProps {
   headlineNews: IData | null;
   getNews: typeof getNews;
   colors: string[];
-  url: any;
   showFullArticleInfo: typeof showFullArticleInfo;
   keyApi: string;
 }
@@ -21,7 +21,6 @@ export interface IMoreNewsProps {
 export interface State {}
 
 class MoreNews extends React.Component<IMoreNewsProps, State> {
-
   componentDidMount() {
     if (this.props.headlineNews === null) {
       this.props.getNews(
@@ -29,7 +28,7 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
       );
     }
   }
-  
+
   render() {
     return this.props.headlineNews === null ? (
       <Preloader />
@@ -40,17 +39,13 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-headline-article"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.headlineNews!.articles[9].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-headline-article">
                     <h3>
-                      <mark>{this.props.headlineNews.articles[9].title}</mark>
+                      <mark>
+                        <NavLink to="/morenews/9">
+                          {this.props.headlineNews.articles[9].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
@@ -64,7 +59,6 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
                     <p>
                       {this.props.headlineNews.articles[9].description}
                       <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
                       />
                     </p>
                   </div>
@@ -72,49 +66,43 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
               </div>
               <div className="row headline-news-news">
                 {this.props.headlineNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                      <div
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
-                        }
-                      >
-                        <h5>
-                          <mark
-                            style={{
-                              backgroundColor: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                            }}
-                          >
+                  (article: IDataDescription, i: number, arr: any) => (
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <h5>
+                        <mark
+                          style={{
+                            backgroundColor: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                          }}
+                        >
+                          <NavLink to={`/morenews/${article.source.id}`}>
                             {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : news
-                          }
-                          alt="img"
+                          </NavLink>
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : news
+                        }
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -128,20 +116,17 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     headlineNews: state.data_news.headlineNews,
     keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getNews: (url: string) => dispatch(getNews(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

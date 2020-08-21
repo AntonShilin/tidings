@@ -8,13 +8,13 @@ import Preloader from "../Preloader/Preloader";
 import tech from "../Media/img/tech.jpg";
 import { IData } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { withRouter, RouteComponentProps, NavLink } from "react-router-dom";
 
 export interface IMoreTechProps {
   techNews: IData | null;
   getTech: typeof getTech;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
-  url: any;
   keyApi: string;
 }
 
@@ -39,17 +39,13 @@ class MoreTech extends React.Component<IMoreTechProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-tech-article"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.techNews!.articles[9].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-tech-article">
                     <h3>
-                      <mark>{this.props.techNews.articles[9].title}</mark>
+                      <mark>
+                        <NavLink to={`/moretech/9`}>
+                          {this.props.techNews.articles[9].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
@@ -63,7 +59,6 @@ class MoreTech extends React.Component<IMoreTechProps, State> {
                     <p>
                       {this.props.techNews.articles[9].description}
                       <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
                       />
                     </p>
                   </div>
@@ -72,16 +67,7 @@ class MoreTech extends React.Component<IMoreTechProps, State> {
               <div className="row main-tech-news">
                 {this.props.techNews.articles.map(
                   (article: any, i: number, arr: any) => (
-                    <div
-                      className="col-lg-6 col-md-6 col-sm-12"
-                      key={i}
-                      onClick={() =>
-                        this.props.showFullArticleInfo(
-                          article.source.id,
-                          this.props.url
-                        )
-                      }
-                    >
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                       <h5>
                         <mark
                           style={{
@@ -90,7 +76,9 @@ class MoreTech extends React.Component<IMoreTechProps, State> {
                             ],
                           }}
                         >
-                          {article.title}
+                          <NavLink to={`/moretech/${article.source.id}`}>
+                            {article.title}
+                          </NavLink>
                         </mark>
                       </h5>
                       <img
@@ -128,20 +116,17 @@ class MoreTech extends React.Component<IMoreTechProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getTech: (url: string) => dispatch(getTech(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

@@ -1,26 +1,25 @@
 import * as React from "react";
-import { getBusiness, showFullArticleInfo } from "../../Actions/Actions";
+import { getBusiness } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreBusiness.scss";
 import Preloader from "../Preloader/Preloader";
 import RightSidebar from "../RightSidebar/RightSidebar";
 import business from "../Media/img/business.jpg";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
+import { RootState } from "../../Store/Store";
+import {  NavLink } from "react-router-dom";
 
-export interface IMoreBusinessProps {
+export interface IMoreBusinessProps  {
   businessNews: IData | null;
   getBusiness: typeof getBusiness;
   colors: string[];
-  showFullArticleInfo: typeof showFullArticleInfo;
-  url: any;
   keyApi: string;
 }
 
 export interface State {}
 
 class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
-
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
@@ -28,6 +27,7 @@ class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
       );
     }
   }
+
   render() {
     return this.props.businessNews === null ? (
       <Preloader />
@@ -38,17 +38,13 @@ class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-business-article"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.businessNews!.articles[7].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-business-article">
                     <h3>
-                      <mark>{this.props.businessNews.articles[7].title}</mark>
+                      <mark>
+                        <NavLink to="/morebusiness/7">
+                          {this.props.businessNews.articles[7].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
@@ -62,7 +58,6 @@ class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
                     <p>
                       {this.props.businessNews.articles[7].description}
                       <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
                       />
                     </p>
                   </div>
@@ -70,49 +65,43 @@ class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
               </div>
               <div className="row business-news-news">
                 {this.props.businessNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                      <div
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
-                        }
-                      >
-                        <h5>
-                          <mark
-                            style={{
-                              backgroundColor: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                            }}
-                          >
+                  (article: IDataDescription, i: number, arr: any) => (
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <h5>
+                        <mark
+                          style={{
+                            backgroundColor: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                          }}
+                        >
+                          <NavLink to={`/morebusiness/${article.source.id}`}>
                             {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : business
-                          }
-                          alt="img"
+                          </NavLink>
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : business
+                        }
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[
+                              this.props.colors.length - i
+                            ],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -126,20 +115,17 @@ class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
   }
 }
 
-const mapStateToProps = (state: any, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     businessNews: state.data_news.businessNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getBusiness: (url: string) => dispatch(getBusiness(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

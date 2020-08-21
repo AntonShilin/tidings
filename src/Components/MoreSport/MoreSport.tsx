@@ -7,14 +7,14 @@ import RightSidebar from "../RightSidebar/RightSidebar";
 import Preloader from "../Preloader/Preloader";
 import sport from "../Media/img/sport.jpg";
 import { RootState } from "../../Store/Store";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
+import { NavLink } from "react-router-dom";
 
 export interface IMoreSportProps {
   sportNews: IData | null;
   getSport: typeof getSport;
   colors: string[];
   showFullArticleInfo: typeof showFullArticleInfo;
-  url: any;
   keyApi: string;
 }
 
@@ -39,17 +39,13 @@ class MoreSport extends React.Component<IMoreSportProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-sport-article"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.sportNews!.articles[0].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-sport-article">
                     <h3>
-                      <mark>{this.props.sportNews.articles[0].title}</mark>
+                      <mark>
+                        <NavLink to="/moresport/0">
+                          {this.props.sportNews.articles[0].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
@@ -62,35 +58,24 @@ class MoreSport extends React.Component<IMoreSportProps, State> {
                     />
                     <p>
                       {this.props.sportNews.articles[0].description}
-                      <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
-                      />
+                      <FiChevronsRight />
                     </p>
                   </div>
                 </div>
               </div>
               <div className="row main-sport-news">
                 {this.props.sportNews.articles.map(
-                  (article: any, i: number, arr: any) => (
-                    <div
-                      className="col-lg-6 col-md-6 col-sm-12"
-                      key={i}
-                      onClick={() =>
-                        this.props.showFullArticleInfo(
-                          article.source.id,
-                          this.props.url
-                        )
-                      }
-                    >
+                  (article: IDataDescription, i: number, arr: any) => (
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                       <h5>
                         <mark
                           style={{
-                            backgroundColor: this.props.colors[
-                              this.props.colors.length - i
-                            ],
+                            backgroundColor: this.props.colors[i],
                           }}
                         >
-                          {article.title}
+                          <NavLink to={`/moresport/${article.source.id}`}>
+                            {article.title}
+                          </NavLink>
                         </mark>
                       </h5>
                       <img
@@ -106,9 +91,7 @@ class MoreSport extends React.Component<IMoreSportProps, State> {
                         {article.description}
                         <FiChevronsRight
                           style={{
-                            color: this.props.colors[
-                              this.props.colors.length - i
-                            ],
+                            color: this.props.colors[i],
                             strokeWidth: 4,
                           }}
                         />
@@ -128,20 +111,17 @@ class MoreSport extends React.Component<IMoreSportProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     sportNews: state.data_news.sportNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSport: (url: string) => dispatch(getSport(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

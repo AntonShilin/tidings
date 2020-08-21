@@ -6,21 +6,24 @@ import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreEntertainment.scss";
 import entertainment from "../Media/img/entertainment.jpg";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { NavLink } from "react-router-dom";
 
 export interface IMoreEntertainmentProps {
   entertainmentNews: IData | null;
   getEntertainment: typeof getEntertainment;
   showFullArticleInfo: typeof showFullArticleInfo;
   colors: string[];
-  url: any;
   keyApi: string;
 }
 
 export interface State {}
 
-class MoreEntertainment extends React.Component<IMoreEntertainmentProps, State> {
+class MoreEntertainment extends React.Component<
+  IMoreEntertainmentProps,
+  State
+> {
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(
@@ -38,18 +41,12 @@ class MoreEntertainment extends React.Component<IMoreEntertainmentProps, State> 
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-entertainment"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.entertainmentNews!.articles[0].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-entertainment">
                     <h3>
                       <mark>
-                        {this.props.entertainmentNews.articles[0].title}
+                        <NavLink to="/moreentertainment/0">
+                          {this.props.entertainmentNews.articles[0].title}
+                        </NavLink>
                       </mark>
                     </h3>
                     <img
@@ -65,7 +62,6 @@ class MoreEntertainment extends React.Component<IMoreEntertainmentProps, State> 
                     <p>
                       {this.props.entertainmentNews.articles[0].description}
                       <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
                       />
                     </p>
                   </div>
@@ -73,49 +69,41 @@ class MoreEntertainment extends React.Component<IMoreEntertainmentProps, State> 
               </div>
               <div className="row entertainment-news">
                 {this.props.entertainmentNews.articles.map(
-                  (article: any, i: number, arr: any) =>
-                      <div
-                        className="col-lg-6 col-md-6 col-sm-12"
-                        key={i}
-                        onClick={() =>
-                          this.props.showFullArticleInfo(
-                            article.source.id,
-                            this.props.url
-                          )
-                        }
-                      >
-                        <h5>
-                          <mark
-                            style={{
-                              backgroundColor: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                            }}
+                  (article: IDataDescription, i: number, arr: any) => (
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                      <h5>
+                        <mark
+                          style={{
+                            backgroundColor: this.props.colors[i],
+                          }}
+                        >
+                          <NavLink
+                            to={`/moreentertainment/${article.source.id}`}
                           >
                             {article.title}
-                          </mark>
-                        </h5>
-                        <img
-                          className="img-fluid mb-1"
-                          src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
-                              : entertainment
-                          }
-                          alt="img"
+                          </NavLink>
+                        </mark>
+                      </h5>
+                      <img
+                        className="img-fluid mb-1"
+                        src={
+                          article.urlToImage !== null
+                            ? article.urlToImage
+                            : entertainment
+                        }
+                        alt="img"
+                      />
+                      <p>
+                        {article.description}
+                        <FiChevronsRight
+                          style={{
+                            color: this.props.colors[i],
+                            strokeWidth: 4,
+                          }}
                         />
-                        <p>
-                          {article.description}
-                          <FiChevronsRight
-                            style={{
-                              color: this.props.colors[
-                                this.props.colors.length - i
-                              ],
-                              strokeWidth: 4,
-                            }}
-                          />
-                        </p>
-                      </div>
+                      </p>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -129,20 +117,17 @@ class MoreEntertainment extends React.Component<IMoreEntertainmentProps, State> 
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     entertainmentNews: state.data_news.entertainmentNews,
     keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getEntertainment: (url: string) => dispatch(getEntertainment(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

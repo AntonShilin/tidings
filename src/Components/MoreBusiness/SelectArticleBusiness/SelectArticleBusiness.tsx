@@ -6,15 +6,15 @@ import { FiChevronsRight } from "react-icons/fi";
 import { getBusiness, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/business.jpg";
-import { IData } from "../../../Types/Types";
+import { IData, RouteParams } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
 import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-export interface ISelectArticleProps {
+export interface ISelectArticleProps extends RouteComponentProps<RouteParams>{
   businessNews: IData | null;
   getBusiness: typeof getBusiness;
   goToPublisherPage: typeof goToPublisherPage;
-  url: any;
   colors: string[];
   keyApi: string;
 }
@@ -34,7 +34,7 @@ class SelectArticleBusiness extends React.Component<
   }
 
   render() {
-    const id: number = this.props.url.match.params.id;
+    const id: number = +this.props.match.params.id;
 
     return this.props.businessNews === null ? (
       <Preloader />
@@ -70,7 +70,7 @@ class SelectArticleBusiness extends React.Component<
               />
               <p>
                 {this.props.businessNews.articles[id].content}
-                <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+                <FiChevronsRight />
               </p>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -84,12 +84,11 @@ class SelectArticleBusiness extends React.Component<
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     businessNews: state.data_news.businessNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
@@ -100,7 +99,8 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
+const withRouterProps = withRouter(SelectArticleBusiness);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectArticleBusiness);
+)(withRouterProps);

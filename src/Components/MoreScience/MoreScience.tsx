@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getScience, showFullArticleInfo } from "../../Actions/Actions";
+import { getScience } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import { connect } from "react-redux";
 import "./MoreScience.scss";
@@ -8,12 +8,12 @@ import RightSidebar from "../RightSidebar/RightSidebar";
 import science from "../Media/img/science.jpg";
 import { IData } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { NavLink } from "react-router-dom";
 
 export interface IMoreScienceProps {
   scienceNews: IData | null;
   getScience: typeof getScience;
   colors: string[];
-  showFullArticleInfo: typeof showFullArticleInfo;
   url: any;
   keyApi: string;
 }
@@ -38,17 +38,13 @@ class MoreScience extends React.Component<IMoreScienceProps, State> {
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
-                  <div
-                    className="latest-science-article"
-                    onClick={() =>
-                      this.props.showFullArticleInfo(
-                        this.props.scienceNews!.articles[0].source.id,
-                        this.props.url
-                      )
-                    }
-                  >
+                  <div className="latest-science-article">
                     <h3>
-                      <mark>{this.props.scienceNews.articles[0].title}</mark>
+                      <mark>
+                        <NavLink to="/morescience/0">
+                          {this.props.scienceNews.articles[0].title}
+                        </NavLink>
+                      </mark>
                     </h3>
                     <img
                       className="img-fluid mb-1"
@@ -57,13 +53,11 @@ class MoreScience extends React.Component<IMoreScienceProps, State> {
                           ? this.props.scienceNews.articles[0].urlToImage
                           : science
                       }
-                      alt=""
+                      alt="img"
                     />
                     <p>
                       {this.props.scienceNews.articles[0].description}
-                      <FiChevronsRight
-                        style={{ color: "orange", strokeWidth: 4 }}
-                      />
+                      <FiChevronsRight />
                     </p>
                   </div>
                 </div>
@@ -71,24 +65,16 @@ class MoreScience extends React.Component<IMoreScienceProps, State> {
               <div className="row science-news-news">
                 {this.props.scienceNews.articles.map(
                   (article: any, i: number, arr: any) => (
-                    <div
-                      className="col-lg-6 col-md-6 col-sm-12"
-                      key={i}
-                      onClick={() =>
-                        this.props.showFullArticleInfo(
-                          article.source.id,
-                          this.props.url
-                        )
-                      }
-                    >
+                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                       <h5>
                         <mark
                           style={{
                             backgroundColor: this.props.colors[i],
                           }}
                         >
-                          {article.title}
-                          {i}
+                          <NavLink to={`/morescience/${article.source.id}`}>
+                            {article.title}
+                            </NavLink>
                         </mark>
                       </h5>
                       <img
@@ -98,15 +84,13 @@ class MoreScience extends React.Component<IMoreScienceProps, State> {
                             ? article.urlToImage
                             : science
                         }
-                        alt=""
+                        alt="img"
                       />
                       <p>
                         {article.description}
                         <FiChevronsRight
                           style={{
-                            color: this.props.colors[
-                              this.props.colors.length - i
-                            ],
+                            color: this.props.colors[i],
                             strokeWidth: 4,
                           }}
                         />
@@ -126,20 +110,17 @@ class MoreScience extends React.Component<IMoreScienceProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     scienceNews: state.data_news.scienceNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getScience: (url: string) => dispatch(getScience(url)),
-    showFullArticleInfo: (id: number, url: any) =>
-      dispatch(showFullArticleInfo(id, url)),
   };
 };
 

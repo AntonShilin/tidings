@@ -12,16 +12,23 @@ div.business-news-article {
       top: -1rem;
       mark {
         background-color: orange;
-        color: white;
         line-height: 2.5rem;
         opacity: 0.85;
         &:hover {
           opacity: 1;
         }
+        a{
+          color: white;
+          text-decoration: none;
+        }
       }
     }
     p {
       font-size: 0.95rem;
+      svg{
+        color: orange;
+         stroke-width: 4;
+      }
     }
   }
 
@@ -38,10 +45,13 @@ div.business-news-article {
         top: -2rem;
         mark {
           line-height: 1.9rem;
-          color: white;
           opacity: 0.85;
           &:hover {
             opacity: 1;
+          }
+          a{
+            text-decoration: none;
+            color: white;
           }
         }
       }

@@ -18,10 +18,18 @@ div.headline-news-article {
         &:hover {
           opacity: 1;
         }
+        a {
+          color: white;
+          text-decoration: none;
+        }
       }
     }
     p {
       font-size: 0.95rem;
+      svg{
+        color: orange;
+         stroke-width: 4;
+      }
     }
   }
 
@@ -38,10 +46,13 @@ div.headline-news-article {
         top: -2rem;
         mark {
           line-height: 1.9rem;
-          color: white;
           opacity: 0.85;
           &:hover {
             opacity: 1;
+          }
+          a {
+            color: white;
+            text-decoration: none;
           }
         }
       }
@@ -53,14 +64,14 @@ div.headline-news-article {
 }
 
 @media only screen and (max-width: 767px) {
-  div.headline-news-article .latest-headline-article h3{
+  div.headline-news-article .latest-headline-article h3 {
     font-size: 1.25rem;
-    mark{
+    mark {
       line-height: 1.9rem !important;
     }
   }
   .headline-news-article {
-    .header-right-sidebar{
+    .header-right-sidebar {
       display: none;
     }
   }

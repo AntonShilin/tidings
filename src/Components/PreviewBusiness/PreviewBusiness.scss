@@ -1,40 +1,50 @@
 .business-header {
-    div:nth-of-type(1) {
-      h3 {
-        mark {
-          cursor: pointer;
-          color: #000;
-          text-transform: uppercase;
-          background-color: #6610f2;
-          font-size: 1.4375rem;
-          font-weight: 700;
+  div:nth-of-type(1) {
+    h3 {
+      mark {
+        color: #000;
+        text-transform: uppercase;
+        background-color: #6610f2;
+        font-size: 1.4375rem;
+        font-weight: 700;
+        svg{
+          color: white;
+           stroke-width: 4; 
         }
       }
     }
-    div:nth-of-type(2) {
-      p {
-        cursor: pointer;
-        color: #6610f2;
-        font-weight: 700;
-        font-size: 1.25rem;
-        text-align: center;
-        font-style: italic;
+  }
+  div:nth-of-type(2) {
+    p {
+      cursor: pointer;
+      color: #6610f2;
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-align: center;
+      font-style: italic;
+      a {
+        text-decoration: none;
+        svg {
+          color: #070707;
+          stroke-width: 4;
+        }
       }
     }
   }
-  
-  .business-article {
-    margin-top: 0.5rem;
-    div {
-      cursor: pointer;
-      height: 14rem;
-      width: 100%;
-      position: relative;
-      h5 {
-        position: absolute;
-        bottom: 1rem;
-        mark {
-          color: #000;
+}
+
+.business-article {
+  margin-top: 0.5rem;
+  div {
+    cursor: pointer;
+    height: 14rem;
+    width: 100%;
+    position: relative;
+    h5 {
+      position: absolute;
+      bottom: 1rem;
+      mark {
+        color: #000;
         font-size: 1rem;
         font-weight: 700;
         background-color: #6610f2;
@@ -42,26 +52,34 @@
         &:hover {
           opacity: 1;
         }
-      }
-    }
-  }
-  }
-  
-  @media screen and (max-width: 766px) {
-    .business-header {
-      div:nth-of-type(2) {
-        p {
-          display: none;
-        }
-      }
-    }
-    .business-article {
-      div {
-        overflow: hidden;
-        margin-bottom: 1rem;
-        h5 {
-          bottom: 0rem;
+        a {
+          color: white !important;
+          text-decoration: none;
+          svg {
+            color: red;
+            stroke-width: 4;
+          }
         }
       }
     }
   }
+}
+
+@media screen and (max-width: 766px) {
+  .business-header {
+    div:nth-of-type(2) {
+      p {
+        display: none;
+      }
+    }
+  }
+  .business-article {
+    div {
+      overflow: hidden;
+      margin-bottom: 1rem;
+      h5 {
+        bottom: 0rem;
+      }
+    }
+  }
+}

@@ -12,16 +12,23 @@ div.header-tech-article {
         top: -1rem;
         mark {
           background-color: orange;
-          color: white;
           line-height: 2.5rem;
           opacity: 0.85;
           &:hover {
             opacity: 1;
           }
+          a{
+            color: white;
+            text-decoration: none;
+          }
         }
       }
       p {
         font-size: 0.95rem;
+        svg{
+          color: orange;
+           stroke-width: 4;
+        }
       }
     }
   
@@ -42,6 +49,10 @@ div.header-tech-article {
             opacity: 0.85;
             &:hover {
               opacity: 1;
+            }
+            a{
+              color: white;
+              text-decoration: none;
             }
           }
         }

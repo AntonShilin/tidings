@@ -6,16 +6,16 @@ import { FiChevronsRight } from "react-icons/fi";
 import { getTech, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import defaultImage from "../../Media/img/tech.jpg";
-import { IData } from "../../../Types/Types";
+import { IData, RouteParams } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
 import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-export interface ISelectArticleProps {
+export interface ISelectArticleProps extends RouteComponentProps<RouteParams> {
   techNews: IData | null;
   goToPublisherPage: typeof goToPublisherPage;
   getTech: typeof getTech;
   colors: string[];
-  url: any;
   keyApi: string;
 }
 
@@ -31,7 +31,7 @@ class SelectArticleTech extends React.Component<ISelectArticleProps, State> {
   }
 
   render() {
-    const id: number = this.props.url.match.params.id;
+    const id: number = +this.props.match.params.id;
 
     return this.props.techNews === null ? (
       <Preloader />
@@ -67,7 +67,7 @@ class SelectArticleTech extends React.Component<ISelectArticleProps, State> {
               />
               <p>
                 {this.props.techNews.articles[id].content}
-                <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+                <FiChevronsRight />
               </p>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -81,12 +81,11 @@ class SelectArticleTech extends React.Component<ISelectArticleProps, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, url: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     techNews: state.data_news.techNews,
     colors: state.data_news.colors,
     keyApi: state.data_news.keyApi,
-    url,
   };
 };
 
@@ -97,4 +96,5 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectArticleTech);
+const withRouterProps = withRouter(SelectArticleTech);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProps);
