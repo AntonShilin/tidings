@@ -22,6 +22,7 @@ import RightSidebar from "../Components/RightSidebar/RightSidebar";
 import SelectArticleSidebar from "../Components/RightSidebar/SelectArticleSidebar/SelectArticleSidebar";
 import TitlePageSlider from "../Components/TitlePage/TitlePageSlider/TitlePageSlider";
 import RadioPage from "../Components/RadioPage/RadioPage";
+import SelectArticleTrending from "../Components/PreviewTrending/SelectArticleTrending/SelectArticleTrending";
 
 class Routes extends React.Component {
   render() {
@@ -87,6 +88,11 @@ class Routes extends React.Component {
           component={SelectArticleSidebar}
         />
         <Route exact={true} path="/moretrending" component={MoreTrending} />
+        <Route
+          exact={true}
+          path="/moretrending/:id"
+          component={SelectArticleTrending}
+        />
         <Route exact={true} path="/moretech" component={MoreTech} />
         <Route
           exact={true}

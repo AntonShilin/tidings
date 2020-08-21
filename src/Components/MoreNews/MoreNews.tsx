@@ -29,6 +29,7 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
       );
     }
   }
+  
   render() {
     return this.props.headlineNews === null ? (
       <Preloader />

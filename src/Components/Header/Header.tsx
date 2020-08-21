@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
-import { FaCaretSquareRight } from "react-icons/fa";
 import { FiChevronsDown } from "react-icons/fi";
 import HeaderSmallScreen from "../HeaderSmallScreen/HeaderSmallScreen";
 

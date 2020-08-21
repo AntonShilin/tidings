@@ -7,6 +7,7 @@ import { getNews, goToPublisherPage } from "../../../Actions/Actions";
 import RightSidebar from "../../RightSidebar/RightSidebar";
 import { IData } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
+import PreviewBusiness from "../../PreviewBusiness/PreviewBusiness";
 
 export interface ISelectArticleProps {
   headlineNews: IData | null;
@@ -20,7 +21,6 @@ export interface ISelectArticleProps {
 export interface State {}
 
 class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
-
   componentDidMount() {
     if (this.props.headlineNews === null) {
       this.props.getNews(
@@ -35,40 +35,43 @@ class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
     return this.props.headlineNews === null ? (
       <Preloader />
     ) : (
-      <div className="container-xl">
-        <div className="row selected-article">
-          <div
-            className="col-lg-8 col-md-8 col-sm-12"
-            onClick={() =>
-              this.props.goToPublisherPage(
-                this.props.headlineNews!.articles[id].url
-              )
-            }
-          >
-            <h1>{this.props.headlineNews.articles[id].title}</h1>
-            <p>
-              <b>{this.props.headlineNews.articles[id].author} </b>
-              <small>
-                {this.props.headlineNews.articles[id].publishedAt.match(
-                  /\d+\-\d+\d+\-\d+/g
-                )}
-              </small>
-            </p>
-            <img
-              src={this.props.headlineNews.articles[id].urlToImage}
-              alt="img_1"
-              className="img-fluid"
-            />
-            <p>
-              {this.props.headlineNews.articles[id].content}
-              <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
-            </p>
-          </div>
-          <div className="col-lg-4 col-md-4 col-sm-12">
-            <RightSidebar />
+      <React.Fragment>
+        <div className="container-xl">
+          <div className="row selected-article">
+            <div
+              className="col-lg-8 col-md-8 col-sm-12"
+              onClick={() =>
+                this.props.goToPublisherPage(
+                  this.props.headlineNews!.articles[id].url
+                )
+              }
+            >
+              <h1>{this.props.headlineNews.articles[id].title}</h1>
+              <p>
+                <b>{this.props.headlineNews.articles[id].author} </b>
+                <small>
+                  {this.props.headlineNews.articles[id].publishedAt.match(
+                    /\d+\-\d+\d+\-\d+/g
+                  )}
+                </small>
+              </p>
+              <img
+                src={this.props.headlineNews.articles[id].urlToImage}
+                alt="img_1"
+                className="img-fluid"
+              />
+              <p>
+                {this.props.headlineNews.articles[id].content}
+                <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
+              </p>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12">
+              <RightSidebar />
+            </div>
           </div>
         </div>
-      </div>
+        <PreviewBusiness />
+      </React.Fragment>
     );
   }
 }

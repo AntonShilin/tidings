@@ -253,3 +253,8 @@ export interface ISource {
   id: number;
   name: string;
 }
+
+
+export interface RouteParams {
+  id: string;
+}

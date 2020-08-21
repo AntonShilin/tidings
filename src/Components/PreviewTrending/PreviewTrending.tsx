@@ -4,10 +4,11 @@ import { getTrending } from "../../Actions/Actions";
 import { FiChevronsRight } from "react-icons/fi";
 import "./PreviewTrending.scss";
 import defaultImage from "../Media/img/trends.jpg";
-import { IData } from "../../Types/Types";
+import { IData, IDataDescription } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
+import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 
-export interface IPreviewTrendingProps {
+export interface IPreviewTrendingProps extends RouteComponentProps {
   trendingNews: IData | null;
   getTrending: typeof getTrending;
   keyApi: string;
@@ -32,27 +33,31 @@ class PreviewTrending extends React.Component<IPreviewTrendingProps, State> {
             <h3>
               <mark>
                 What is the trending now
-                <FiChevronsRight style={{ color: "white", strokeWidth: 4 }} />
+                <FiChevronsRight />
               </mark>
             </h3>
           </div>
           <div className="col-lg-6 col-md-5 d-none d-md-block d-lg-block">
-            <p className="text-right">
+            <NavLink to="/moretrending">
               More trending stories
-              <FiChevronsRight style={{ color: "#000", strokeWidth: 4 }} />
-            </p>
+              <FiChevronsRight />
+            </NavLink>
           </div>
         </div>
         <div className="row trending-news-article">
           {this.props.trendingNews.articles.map(
-            (article: any, i: number, arr: any) =>
-              i < 4 ? (
+            (article: IDataDescription, i: number, arr: any) =>
+              i < 4 && (
                 <div className="col-lg-3 col-md-6 col-sm-12" key={i}>
                   <div className="article-number">
                     <span>{i + 1}</span>
                   </div>
                   <h5>
-                    <mark>{article.title}</mark>
+                    <mark>
+                      <NavLink to={`/moretrending/${article.source.id}`}>
+                        {article.title}
+                      </NavLink>
+                    </mark>
                   </h5>
                   <img
                     className="img-fluid mb-1"
@@ -61,10 +66,10 @@ class PreviewTrending extends React.Component<IPreviewTrendingProps, State> {
                         ? article.urlToImage
                         : defaultImage
                     }
-                    alt=""
+                    alt="img"
                   />
                 </div>
-              ) : null
+              )
           )}
         </div>
       </div>
@@ -85,4 +90,5 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PreviewTrending);
+const withRouterProps = withRouter(PreviewTrending);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProps);
