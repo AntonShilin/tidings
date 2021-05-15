@@ -1,3 +1,4 @@
+import { BadConnectionTypes, IBadConnectionAction } from "./../Types/Types";
 import {
   GetDataTypes,
   isLoadingTypes,
@@ -29,17 +30,27 @@ import {
   changeVolumeRadioTypes,
 } from "../Types/Types";
 import { Dispatch } from "redux";
-import { RouteComponentProps } from "react-router-dom";
+
+const options = {
+  headers: { Accept: "application/json; odata=verbose" },
+  credentials: "include",
+};
+
+const errorCoonnectionWithServer = (value: boolean): IBadConnectionAction => {
+  return {
+    type: BadConnectionTypes.BADCONNECTION,
+    value,
+  };
+};
 
 export const getData = (url: string) => {
   return (dispatch: Dispatch) => {
-    fetch(url, {
-      method: "GET",
-    })
+    fetch(url)
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
+          errorCoonnectionWithServer(true);
           throw new Error("HTTP error, status = " + response.status);
         }
       })
@@ -50,6 +61,7 @@ export const getData = (url: string) => {
         });
       })
       .catch((err) => {
+        errorCoonnectionWithServer(true);
         throw new Error(err);
       });
   };
@@ -269,7 +281,6 @@ export const toggleSmallScreenMenu = (
   };
 };
 
-
 export const goToPublisherPage = (adress: string): IPublisherPageAction => {
   if (window.confirm("Are your sure go to publisher page?") === true) {
     window.open(adress);
@@ -378,8 +389,7 @@ export const setRadioMuteOff = (e: any) => {
 
 /* mute off  radio play*/
 export const changeVolumeRadio = (e: any, elem: any, arr: any) => {
-
-  for (let i = 0; i <= arr[0].children.length-1; i++) {
+  for (let i = 0; i <= arr[0].children.length - 1; i++) {
     if (i <= e.target.dataset.id) {
       arr[0].children[i].style.backgroundColor = "lightblue";
     } else {

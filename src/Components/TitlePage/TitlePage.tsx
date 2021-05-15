@@ -10,7 +10,7 @@ import PreviewBusiness from "../PreviewBusiness/PreviewBusiness";
 import PreviewSport from "../PreviewSport/PreviewSport";
 import Preloader from "../Preloader/Preloader";
 import defaultImage from "../Media/img/news.jpg";
-import { RouteComponentProps, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
 import { RootState } from "../../Store/Store";
 import { IData, IDataDescription } from "../../Types/Types";
@@ -38,85 +38,92 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
   }
 
   render() {
-    return this.props.titlepageNews === null ? (
-      <Preloader />
-    ) : (
-      <React.Fragment>
-        <div className="container-xl title-page">
-          <TitlePageSlider />
-          <div className="row mt-5">
-            <div className="col-lg-9 col-md-9 col-sm-12">
-              <div className="row">
-                <div className="col">
-                  <div className="latest_articles">
-                    <h3>
-                      <mark>
-                        <NavLink to="/titlenews/7">
-                          {this.props.titlepageNews.articles[7].title}
-                        </NavLink>
-                      </mark>
-                    </h3>
-                    <img
-                      className="img-fluid mb-1"
-                      src={
-                        this.props.titlepageNews.articles[7].urlToImage !== null
-                          ? this.props.titlepageNews.articles[7].urlToImage
-                          : defaultImage
-                      }
-                      alt="img"
-                    />
-                    <p>
-                      {this.props.titlepageNews.articles[7].description}
-                      <FiChevronsRight
-                      />
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="row main-news">
-                {this.props.titlepageNews.articles.map(
-                  (article: IDataDescription, i: number) => (
-                    <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
-                      <h5>
-                        <mark style={{ backgroundColor: this.props.colors[i] }}>
-                          <NavLink to={`/titlenews/${article.source.id}`}>
-                            {article.title}
-                            </NavLink>
+
+    if (this.props.titlepageNews === null) {
+      return <Preloader />;
+    }
+
+    return (
+      this.props.titlepageNews !== null && (
+        <React.Fragment>
+          <div className="container-xl title-page">
+            <TitlePageSlider />
+            <div className="row mt-5">
+              <div className="col-lg-9 col-md-9 col-sm-12">
+                <div className="row">
+                  <div className="col">
+                    <div className="latest_articles">
+                      <h3>
+                        <mark>
+                          <NavLink to="/titlenews/7">
+                            {this.props.titlepageNews.articles[7].title}
+                          </NavLink>
                         </mark>
-                      </h5>
+                      </h3>
                       <img
                         className="img-fluid mb-1"
                         src={
-                          article.urlToImage !== null
-                            ? article.urlToImage
+                          this.props.titlepageNews.articles[7].urlToImage !==
+                          null
+                            ? this.props.titlepageNews.articles[7].urlToImage
                             : defaultImage
                         }
                         alt="img"
                       />
                       <p>
-                        {article.description}
-                        <FiChevronsRight
-                          style={{
-                            color: this.props.colors[i],
-                            strokeWidth: 4,
-                          }}
-                        />
+                        {this.props.titlepageNews.articles[7].description}
+                        <FiChevronsRight />
                       </p>
                     </div>
-                  )
-                )}
+                  </div>
+                </div>
+                <div className="row main-news">
+                  {this.props.titlepageNews.articles.map(
+                    (article: IDataDescription, i: number) => (
+                      <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
+                        <h5>
+                          <mark
+                            style={{ backgroundColor: this.props.colors[i] }}
+                          >
+                            <NavLink to={`/titlenews/${article.source.id}`}>
+                              {article.title}
+                            </NavLink>
+                          </mark>
+                        </h5>
+                        <img
+                          className="img-fluid mb-1"
+                          src={
+                            article.urlToImage !== null
+                              ? article.urlToImage
+                              : defaultImage
+                          }
+                          alt="img"
+                        />
+                        <p>
+                          {article.description}
+                          <FiChevronsRight
+                            style={{
+                              color: this.props.colors[i],
+                              strokeWidth: 4,
+                            }}
+                          />
+                        </p>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-3 d-lg-block d-md-block d-none right-sidebar">
+                <RightSidebar />
               </div>
             </div>
-            <div className="col-lg-3 col-md-3 d-lg-block d-md-block d-none right-sidebar">
-              <RightSidebar />
-            </div>
           </div>
-        </div>
-        <PreviewTrending />
-        <PreviewTech />
-        <PreviewBusiness />
-        <PreviewSport />
-      </React.Fragment>
+          <PreviewTrending />
+          <PreviewTech />
+          <PreviewBusiness />
+          <PreviewSport />
+        </React.Fragment>
+      )
     );
   }
 }

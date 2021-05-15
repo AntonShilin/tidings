@@ -22,7 +22,7 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
     this.state = { isOpen: false };
   }
 
-  toggleMenu = () => {
+  toggleIconMenu = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
@@ -52,7 +52,7 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
             className="col-2"
             onClick={(e) => {
               this.props.toggleSmallScreenMenu(e, this.submenu.current!);
-              this.toggleMenu();
+              this.toggleIconMenu();
             }}
           >
             <NavLink to="#" className="">
@@ -68,9 +68,11 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
                     />
                   </>
                 ) : (
-                  <MdClose  style={{
-                    fontSize: "1.5rem",
-                  }}/>
+                  <MdClose
+                    style={{
+                      fontSize: "1.5rem",
+                    }}
+                  />
                 )}
               </p>
             </NavLink>
@@ -78,37 +80,86 @@ class HeaderSmallScreen extends React.Component<HeaderSmScreenProps, State> {
         </nav>
         <nav className="row  submenu-menu-xs-screen" ref={this.submenu}>
           <div className="col-12 text-center">
-            <NavLink to="/morebusiness" className="">
+            <NavLink
+              to="/morebusiness"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Business</p>
             </NavLink>
           </div>
           <div className="col-12 text-center">
-            <NavLink to="/moreentertainment" className="">
+            <NavLink
+              to="/moreentertainment"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Entertainment</p>
             </NavLink>
           </div>
           <div className="col-12 text-center">
-            <NavLink to="/moretech" className="">
+            <NavLink
+              to="/moretech"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Tech</p>
             </NavLink>
           </div>
           <div className="col-12 text-center">
-            <NavLink to="/morescience" className="">
+            <NavLink
+              to="/morescience"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Science</p>
             </NavLink>
           </div>
           <div className="col-12 text-center">
-            <NavLink to="/morehealth" className="">
+            <NavLink
+              to="/morehealth"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Health</p>
             </NavLink>
           </div>
           <div className="col-12 text-center">
-            <NavLink to="/moretrending" className="">
+            <NavLink
+              to="/moretrending"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Trending</p>
             </NavLink>
           </div>
           <div className="col-12 text-center">
-            <NavLink to="/moresport" className="">
+            <NavLink
+              to="/moresport"
+              className=""
+              onClick={(e) => {
+                this.props.toggleSmallScreenMenu(e, this.submenu.current!);
+                this.toggleIconMenu();
+              }}
+            >
               <p className="text-center">Sport</p>
             </NavLink>
           </div>

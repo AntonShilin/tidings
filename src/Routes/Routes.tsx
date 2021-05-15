@@ -23,6 +23,7 @@ import SelectArticleSidebar from "../Components/RightSidebar/SelectArticleSideba
 import TitlePageSlider from "../Components/TitlePage/TitlePageSlider/TitlePageSlider";
 import RadioPage from "../Components/RadioPage/RadioPage";
 import SelectArticleTrending from "../Components/PreviewTrending/SelectArticleTrending/SelectArticleTrending";
+import ServerError from "../Components/ServerError/ServerError";
 
 class Routes extends React.Component {
   render() {
@@ -139,6 +140,7 @@ class Routes extends React.Component {
         />
         <Redirect exact={true} from="/" to="/titlenews" />
         <Route exact={true} path="/404" component={NotFoundPage} />
+        <Route exact={true} path="/server-error" component={ServerError} />
         <Route component={NotFoundPage} />
       </Switch>
     );

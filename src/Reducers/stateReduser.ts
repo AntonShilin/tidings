@@ -1,3 +1,4 @@
+import { BadConnectionTypes } from './../Types/Types';
 import {
   IMainState,
   MainActions,
@@ -62,6 +63,7 @@ const initialState: IMainState = {
     "purple",
     "red",
   ],
+  serverUnconnected: false
 };
 
 export const stateReducer = (
@@ -214,6 +216,13 @@ export const stateReducer = (
         currentId:num,
       };
     }
+      
+    case BadConnectionTypes.BADCONNECTION: {
+      return {
+        ...state,
+        serverUnconnected:action.value
+      }
+      }
 
     default:
       return state;

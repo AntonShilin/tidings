@@ -78,9 +78,19 @@ export enum changeVolumeRadioTypes {
   CHANGEVOLUMERADIO = "CHANGEVOLUMERADIO",
 }
 
+export enum BadConnectionTypes{
+  BADCONNECTION="BADCONNECTION"
+}
+
 
 
 /* interfaces */
+export interface IBadConnectionAction{
+  type: BadConnectionTypes.BADCONNECTION;
+  value: boolean;
+}
+
+
 export interface IChangeVolumeRadioAction {
   type: changeVolumeRadioTypes.CHANGEVOLUMERADIO;
 }
@@ -183,6 +193,7 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
+  |IBadConnectionAction
   |IChangeVolumeRadioAction
   |IRadioMuteOffAction
   |IRadioMuteAction
@@ -220,6 +231,7 @@ export interface IMainState {
  colors: string[];
  currentId: number;
   keyApi: string;
+  serverUnconnected: boolean;
 }
 
 

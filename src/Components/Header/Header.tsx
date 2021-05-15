@@ -3,8 +3,17 @@ import "./Header.scss";
 import { NavLink } from "react-router-dom";
 import { FiChevronsDown } from "react-icons/fi";
 import HeaderSmallScreen from "../HeaderSmallScreen/HeaderSmallScreen";
+import { RootState } from "../../Store/Store";
+import { connect } from "react-redux";
+import ServerError from "../ServerError/ServerError";
 
-class Header extends React.Component<{}, {}> {
+export interface IHeaderProps {
+  serverUnconnected: boolean;
+}
+
+export interface State {}
+
+class Header extends React.Component<IHeaderProps, State> {
   render() {
     return (
       <React.Fragment>
@@ -99,9 +108,16 @@ class Header extends React.Component<{}, {}> {
           </nav>
         </header>
         <HeaderSmallScreen />
+        {this.props.serverUnconnected && <ServerError/>}
       </React.Fragment>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = (state: RootState) => {
+  return {
+    serverUnconnected: state.data_news.serverUnconnected,
+  };
+};
+
+export default connect(mapStateToProps, {})(Header);
