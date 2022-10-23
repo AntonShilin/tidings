@@ -8,7 +8,7 @@ import Preloader from "../Preloader/Preloader";
 import tech from "../Media/img/tech.jpg";
 import { IData } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
-import { withRouter, RouteComponentProps, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export interface IMoreTechProps {
   techNews: IData | null;
@@ -23,7 +23,7 @@ class MoreTech extends React.Component<IMoreTechProps, State> {
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }

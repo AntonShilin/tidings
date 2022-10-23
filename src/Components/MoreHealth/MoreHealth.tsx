@@ -23,7 +23,7 @@ class MoreHealth extends React.Component<IMoreHealthProps, State> {
   componentDidMount() {
     if (this.props.healthNews === null) {
       this.props.getHealth(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=ie&category=health&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=ie&category=health&apiKey=${this.props.keyApi}`
       );
     }
   }

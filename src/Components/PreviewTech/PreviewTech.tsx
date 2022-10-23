@@ -20,7 +20,7 @@ class PreviewTech extends React.Component<IPreviewTechProps, State> {
   componentDidMount() {
     if (this.props.techNews === null) {
       this.props.getTech(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }

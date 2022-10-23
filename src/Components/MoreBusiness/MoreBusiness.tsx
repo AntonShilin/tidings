@@ -23,7 +23,7 @@ class MoreBusiness extends React.Component<IMoreBusinessProps, State> {
   componentDidMount() {
     if (this.props.businessNews === null) {
       this.props.getBusiness(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.props.keyApi}`
       );
     }
   }

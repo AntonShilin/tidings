@@ -31,10 +31,6 @@ import {
 } from "../Types/Types";
 import { Dispatch } from "redux";
 
-const options = {
-  headers: { Accept: "application/json; odata=verbose" },
-  credentials: "include",
-};
 
 const errorCoonnectionWithServer = (value: boolean): IBadConnectionAction => {
   return {
@@ -62,7 +58,7 @@ export const getData = (url: string) => {
       })
       .catch((err) => {
         errorCoonnectionWithServer(true);
-        throw new Error(err);
+        throw new Error("HTTP error, status = " + err.status);
       });
   };
 };

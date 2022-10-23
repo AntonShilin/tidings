@@ -22,12 +22,12 @@ export interface ISelectArticleProps extends RouteComponentProps<RouteParams> {
 export interface State {}
 
 class SelectArticleHealth extends React.Component<ISelectArticleProps, State> {
-  keyAPI: string = "f22dba07b79e44d89a3acfbfb6d70463";
+  keyAPI: string = "3e174a1555d74566bf991d0c5a205679";
 
   componentDidMount() {
     if (this.props.healthNews === null) {
       this.props.getHealth(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
       );
     }
   }

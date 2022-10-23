@@ -24,7 +24,7 @@ class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
   componentDidMount() {
     if (this.props.headlineNews === null) {
       this.props.getNews(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
       );
     }
   }

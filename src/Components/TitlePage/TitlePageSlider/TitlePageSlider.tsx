@@ -26,7 +26,7 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
       this.props.getData(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
       );
     }
   }

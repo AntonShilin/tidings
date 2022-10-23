@@ -26,7 +26,7 @@ class MoreEntertainment extends React.Component<
   componentDidMount() {
     if (this.props.entertainmentNews === null) {
       this.props.getEntertainment(
-        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
+        `https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
       );
     }
   }
