@@ -17,13 +17,13 @@ export interface IPreviewSportProps {
 export interface State {}
 
 class PreviewSport extends React.Component<IPreviewSportProps, State> {
-  componentDidMount() {
-    if (this.props.sportNews === null) {
-      this.props.getSport(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.sportNews === null) {
+  //     this.props.getSport(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
   render() {
     return this.props.sportNews === null ? null : (
       <div className="container-xl">

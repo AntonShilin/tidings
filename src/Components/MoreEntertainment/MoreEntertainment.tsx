@@ -23,13 +23,13 @@ class MoreEntertainment extends React.Component<
   IMoreEntertainmentProps,
   State
 > {
-  componentDidMount() {
-    if (this.props.entertainmentNews === null) {
-      this.props.getEntertainment(
-        `https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.entertainmentNews === null) {
+  //     this.props.getEntertainment(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
   render() {
     return this.props.entertainmentNews === null ? (
       <Preloader />

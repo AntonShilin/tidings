@@ -17,13 +17,13 @@ export interface IPreviewTechProps {
 export interface State {}
 
 class PreviewTech extends React.Component<IPreviewTechProps, State> {
-  componentDidMount() {
-    if (this.props.techNews === null) {
-      this.props.getTech(
-        `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.techNews === null) {
+  //     this.props.getTech(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
   render() {
     return this.props.techNews === null ? null : (
       <div className="container-xl">

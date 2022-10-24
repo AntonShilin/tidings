@@ -25,13 +25,13 @@ class SelectArticleBusiness extends React.Component<
   ISelectArticleProps,
   State
 > {
-  componentDidMount() {
-    if (this.props.businessNews === null) {
-      this.props.getBusiness(
-        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.businessNews === null) {
+  //     this.props.getBusiness(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     const id: number = +this.props.match.params.id;

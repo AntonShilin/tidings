@@ -17,13 +17,13 @@ export interface IPreviewBusinessProps {
 export interface State {}
 
 class PreviewBusiness extends React.Component<IPreviewBusinessProps, State> {
-  componentDidMount() {
-    if (this.props.businessNews === null) {
-      this.props.getBusiness(
-        `https://newsapi.org/v2/top-headlines?country=gb&category=business&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.businessNews === null) {
+  //     this.props.getBusiness(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
   render() {
     return this.props.businessNews === null ? null : (
       <div className="container-xl">

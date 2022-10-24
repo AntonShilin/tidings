@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "news-b7729"
-  }
+    "default": "news-b7729",
+    "y": "news-b7729"
+  },
+  "targets": {},
+  "etags": {}
 }

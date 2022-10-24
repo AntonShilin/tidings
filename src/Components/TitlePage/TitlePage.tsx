@@ -13,30 +13,24 @@ import defaultImage from "../Media/img/news.jpg";
 import { NavLink } from "react-router-dom";
 import TitlePageSlider from "./TitlePageSlider/TitlePageSlider";
 import { RootState } from "../../Store/Store";
-import { IData, IDataDescription } from "../../Types/Types";
+import { ITitle, ITitleMore } from "../../Types/Types";
 
 export interface ITitlePageProps {
-  titlepageNews: IData | null;
+  titlepageNews: ITitle | null;
   colors: string[];
   getData: typeof getData;
-  keyApi: string;
 }
 
 export interface State {}
 
 class TitlePage extends React.Component<ITitlePageProps, State> {
-
-
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      this.props.getData(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
-      );
+      this.props.getData();
     }
   }
 
   render() {
-
     if (this.props.titlepageNews === null) {
       return <Preloader />;
     }
@@ -61,9 +55,9 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                       <img
                         className="img-fluid mb-1"
                         src={
-                          this.props.titlepageNews.articles[7].urlToImage !==
+                          this.props.titlepageNews.articles[7].image !==
                           null
-                            ? this.props.titlepageNews.articles[7].urlToImage
+                            ? this.props.titlepageNews.articles[7].image
                             : defaultImage
                         }
                         alt="img"
@@ -77,13 +71,13 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                 </div>
                 <div className="row main-news">
                   {this.props.titlepageNews.articles.map(
-                    (article: IDataDescription, i: number) => (
+                    (article: ITitleMore, i: number) => (
                       <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
                           <mark
                             style={{ backgroundColor: this.props.colors[i] }}
                           >
-                            <NavLink to={`/titlenews/${article.source.id}`}>
+                            <NavLink to={`/titlenews/${i}`}>
                               {article.title}
                             </NavLink>
                           </mark>
@@ -91,8 +85,8 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                         <img
                           className="img-fluid mb-1"
                           src={
-                            article.urlToImage !== null
-                              ? article.urlToImage
+                            article.image !== null
+                              ? article.image
                               : defaultImage
                           }
                           alt="img"
@@ -129,14 +123,13 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
 const mapStateToProps = (state: RootState) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
-    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getData: (url: string) => dispatch(getData(url)),
+    getData: () => dispatch(getData()),
   };
 };
 

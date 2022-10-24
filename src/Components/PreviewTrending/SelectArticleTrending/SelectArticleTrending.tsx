@@ -26,13 +26,13 @@ class SelectArticleTrending extends React.Component<
   ISelectArticleTrendingProps,
   State
 > {
-  componentDidMount() {
-    if (this.props.trendingNews === null) {
-      this.props.getTrending(
-        `https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.trendingNews === null) {
+  //     this.props.getTrending(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     const id: number = +this.props.match.params.id;

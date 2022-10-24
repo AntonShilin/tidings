@@ -8,25 +8,21 @@ import RightSidebar from "../../RightSidebar/RightSidebar";
 import { RouteComponentProps } from "react-router-dom";
 import defaultImage from "../../Media/img/news.jpg";
 import { RootState } from "../../../Store/Store";
-import { IData } from "../../../Types/Types";
+import {  ITitle } from "../../../Types/Types";
 
 export interface ISelectArticleProps {
-  titlepageNews: IData|null;
+  titlepageNews: ITitle | null;
   getData: typeof getData;
   goToPublisherPage: typeof goToPublisherPage;
   url: any;
-  keyApi: string;
 }
 
 export interface State {}
 
 class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
-
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      this.props.getData(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
-      );
+      this.props.getData();
     }
   }
 
@@ -48,17 +44,15 @@ class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
           >
             <h1>{this.props.titlepageNews.articles[id].title}</h1>
             <p>
-              <b>{this.props.titlepageNews.articles[id].author} </b>
+              <b>{this.props.titlepageNews.articles[id].source.name} </b>
               <small>
-                {this.props.titlepageNews.articles[id].publishedAt.match(
-                  /\d+\-\d+\d+\-\d+/g
-                )}
+                {this.props.titlepageNews.articles[id].publishedAt}
               </small>
             </p>
             <img
               src={
-                this.props.titlepageNews.articles[id].urlToImage !== null
-                  ? this.props.titlepageNews.articles[id].urlToImage
+                this.props.titlepageNews.articles[id].image !== null
+                  ? this.props.titlepageNews.articles[id].image
                   : defaultImage
               }
               alt="img_1"
@@ -78,12 +72,9 @@ class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
   }
 }
 
-
-
 const mapStateToProps = (state: RootState, url: RouteComponentProps) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
-    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };
@@ -91,7 +82,7 @@ const mapStateToProps = (state: RootState, url: RouteComponentProps) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getData: (url: string) => dispatch(getData(url)),
+    getData: () => dispatch(getData()),
     goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };

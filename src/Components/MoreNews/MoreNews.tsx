@@ -20,13 +20,13 @@ export interface IMoreNewsProps {
 export interface State {}
 
 class MoreNews extends React.Component<IMoreNewsProps, State> {
-  componentDidMount() {
-    if (this.props.headlineNews === null) {
-      this.props.getNews(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.headlineNews === null) {
+  //     this.props.getNews(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     return this.props.headlineNews === null ? (

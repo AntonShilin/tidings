@@ -19,13 +19,13 @@ export interface State {}
 
 class RightSidebar extends React.Component<IRightSidebarProps, State> {
 
-  componentDidMount() {
-    if (this.props.sidebarNews === null) {
-      this.props.getSidebarNews(
-        `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.sidebarNews === null) {
+  //     this.props.getSidebarNews(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     return (

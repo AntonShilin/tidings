@@ -20,13 +20,13 @@ export interface IMoreHealthProps {
 export interface State {}
 
 class MoreHealth extends React.Component<IMoreHealthProps, State> {
-  componentDidMount() {
-    if (this.props.healthNews === null) {
-      this.props.getHealth(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=health&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.healthNews === null) {
+  //     this.props.getHealth(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
   render() {
     return this.props.healthNews === null ? (
       <Preloader />

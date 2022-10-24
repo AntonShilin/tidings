@@ -7,17 +7,16 @@ import {
   clickToRightArrow,
 } from "../../../Actions/Actions";
 import Preloader from "../../Preloader/Preloader";
-import { IData, IDataDescription } from "../../../Types/Types";
+import { ITitle, ITitleMore } from "../../../Types/Types";
 import { withRouter, NavLink } from "react-router-dom";
 import { RootState } from "../../../Store/Store";
 
 export interface ITitlePageSliderProps {
-  titlepageNews: IData | null;
+  titlepageNews: ITitle | null;
   getData: typeof getData;
   clickToLeftArrow: typeof clickToLeftArrow;
   clickToRightArrow: typeof clickToRightArrow;
   currentId: number;
-  keyApi: string;
 }
 
 export interface State {}
@@ -25,9 +24,7 @@ export interface State {}
 class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      this.props.getData(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
-      );
+      this.props.getData();
     }
   }
 
@@ -64,25 +61,25 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
             <div className="window-images-slider">
               <img
                 src={
-                  this.props.titlepageNews.articles[currentId].urlToImage !==null
-                    ? this.props.titlepageNews.articles[currentId].urlToImage
+                  this.props.titlepageNews.articles[currentId].image !==
+                  null
+                    ? this.props.titlepageNews.articles[currentId].image
                     : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/BBC_World_News_red.svg/107px-BBC_World_News_red.svg.png"
                 }
                 alt="news"
               />
-              <h1
-              >
-                  <mark>
-                    <NavLink to={`/titlenews/${currentId}`}>
-                      {this.props.titlepageNews.articles[currentId].title}
-                      </NavLink>
+              <h1>
+                <mark>
+                  <NavLink to={`/titlenews/${currentId}`}>
+                    {this.props.titlepageNews.articles[currentId].title}
+                  </NavLink>
                 </mark>
               </h1>
             </div>
             <div className="navigation-panel">
               <p>
                 {this.props.titlepageNews!.articles.map(
-                  (n: IDataDescription, i: number) => (
+                  (n: ITitleMore, i: number) => (
                     <span
                       key={i}
                       className={currentId === i ? `currentImg` : undefined}
@@ -103,14 +100,13 @@ class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
 const mapStateToProps = (state: RootState) => {
   return {
     titlepageNews: state.data_news.titlepageNews,
-    keyApi: state.data_news.keyApi,
     currentId: state.data_news.currentId,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getData: (url: string) => dispatch(getData(url)),
+    getData: () => dispatch(getData()),
     clickToLeftArrow: (currentId: number, length: number) =>
       dispatch(clickToLeftArrow(currentId, length)),
     clickToRightArrow: (currentId: number, length: number) =>

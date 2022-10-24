@@ -21,13 +21,13 @@ export interface IMoreScienceProps {
 export interface State {}
 
 class MoreScience extends React.Component<IMoreScienceProps, State> {
-  componentDidMount() {
-    if (this.props.scienceNews === null) {
-      this.props.getScience(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=science&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.scienceNews === null) {
+  //     this.props.getScience(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
   render() {
     return this.props.scienceNews === null ? (
       <Preloader />

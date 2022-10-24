@@ -18,6 +18,8 @@ import {
   ArrowLeftTypes,
   ArrowRightTypes,
   IDataDescription,
+  ITitle,
+  ITitleMore,
 } from "../Types/Types";
 
 const initialState: IMainState = {
@@ -32,7 +34,6 @@ const initialState: IMainState = {
   healthNews: null,
   scienceNews: null,
   currentId: 0,
-  keyApi: "3e174a1555d74566bf991d0c5a205679",
   colors: [
     "blue",
     "indigo",
@@ -63,7 +64,8 @@ const initialState: IMainState = {
     "purple",
     "red",
   ],
-  serverUnconnected: false
+  serverUnconnected: false,
+  keyApi: ""
 };
 
 export const stateReducer = (
@@ -72,9 +74,9 @@ export const stateReducer = (
 ): IMainState => {
   switch (action.type) {
     case GetDataTypes.GETDATA: {
-      action.data!.articles.map(
-        (elem: IDataDescription, i: number) => (elem.source.id = i)
-      );
+      // action.data!.articles.map(
+      //   (elem: ITitleMore, i: number) => (elem.source.id = i)
+      // );
 
       return {
         ...state,

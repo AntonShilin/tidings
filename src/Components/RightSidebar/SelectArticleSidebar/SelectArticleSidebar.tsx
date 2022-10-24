@@ -3,17 +3,14 @@ import "./SelectArticleSidebar.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import {
-  goToPublisherPage,
-  getSidebarNews,
-} from "../../../Actions/Actions";
+import { goToPublisherPage, getSidebarNews } from "../../../Actions/Actions";
 import defaultImage from "../../Media/img/articles.jpg";
 import { IData } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
 import RightSidebar from "../RightSidebar";
 
 export interface ISelectArticleProps {
-    sidebarNews: IData | null;
+  sidebarNews: IData | null;
   getSidebarNews: typeof getSidebarNews;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
@@ -24,17 +21,15 @@ export interface ISelectArticleProps {
 export interface State {}
 
 class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
+  // componentDidMount() {
+  //   if (this.props.sidebarNews === null) {
+  //     this.props.getSidebarNews(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
-  componentDidMount() {
-    if (this.props.sidebarNews === null) {
-      this.props.getSidebarNews(
-        `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
-
-    render() {
-
+  render() {
     const id: number = this.props.url.match.params.id;
 
     return this.props.sidebarNews === null ? (

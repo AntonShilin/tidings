@@ -39,9 +39,9 @@ const errorCoonnectionWithServer = (value: boolean): IBadConnectionAction => {
   };
 };
 
-export const getData = (url: string) => {
+export const getData = () => {
   return (dispatch: Dispatch) => {
-    fetch(url)
+    fetch(`https://gnews.io/api/v4/search?q=example&token=bb1a0ecaa894c9f6d34ce1d0f534ffe7`)
       .then((response) => {
         if (response.ok) {
           return response.json();

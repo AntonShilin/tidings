@@ -17,13 +17,13 @@ export interface IPreviewTrendingProps extends RouteComponentProps {
 export interface State {}
 
 class PreviewTrending extends React.Component<IPreviewTrendingProps, State> {
-  componentDidMount() {
-    if (this.props.trendingNews === null) {
-      this.props.getTrending(
-        `https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.trendingNews === null) {
+  //     this.props.getTrending(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     return this.props.trendingNews === null ? null : (

@@ -21,13 +21,13 @@ export interface ISelectArticleProps extends RouteComponentProps<RouteParams>{
 export interface State {}
 
 class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
-  componentDidMount() {
-    if (this.props.headlineNews === null) {
-      this.props.getNews(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.headlineNews === null) {
+  //     this.props.getNews(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     const id: number = +this.props.match.params.id;

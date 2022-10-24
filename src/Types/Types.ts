@@ -78,14 +78,14 @@ export enum changeVolumeRadioTypes {
   CHANGEVOLUMERADIO = "CHANGEVOLUMERADIO",
 }
 
-export enum BadConnectionTypes{
-  BADCONNECTION="BADCONNECTION"
+export enum BadConnectionTypes {
+  BADCONNECTION = "BADCONNECTION"
 }
 
 
 
 /* interfaces */
-export interface IBadConnectionAction{
+export interface IBadConnectionAction {
   type: BadConnectionTypes.BADCONNECTION;
   value: boolean;
 }
@@ -184,7 +184,7 @@ export interface IToggleMenuAction {
 
 export interface IGetDataAction {
   type: GetDataTypes.GETDATA;
-  data: IData | null;
+  data: ITitle | null;
 }
 
 export interface IGetEntertainmentAction {
@@ -193,13 +193,13 @@ export interface IGetEntertainmentAction {
 }
 
 export type MainActions =
-  |IBadConnectionAction
-  |IChangeVolumeRadioAction
-  |IRadioMuteOffAction
-  |IRadioMuteAction
-  |IRadioPauseAction
-  |IRadioPlayAction
-  |IGetRaioNewsAction
+  | IBadConnectionAction
+  | IChangeVolumeRadioAction
+  | IRadioMuteOffAction
+  | IRadioMuteAction
+  | IRadioPauseAction
+  | IRadioPlayAction
+  | IGetRaioNewsAction
   | IToggleMenuAction
   | IGetDataAction
   | ILoadingAction
@@ -218,23 +218,40 @@ export type MainActions =
   | IGetEntertainmentAction;
 
 export interface IMainState {
- titlepageNews: IData | null;
- entertainmentNews: IData | null;
- sidebarNews: IData | null;
- trendingNews: IData | null;
- techNews: IData | null;
- businessNews: IData | null;
- sportNews: IData | null;
- headlineNews: IData | null;
- healthNews: IData | null;
- scienceNews: IData | null;
- colors: string[];
- currentId: number;
-  keyApi: string;
+  titlepageNews: ITitle | null;
+  entertainmentNews: IData | null;
+  sidebarNews: IData | null;
+  trendingNews: IData | null;
+  techNews: IData | null;
+  businessNews: IData | null;
+  sportNews: IData | null;
+  headlineNews: IData | null;
+  healthNews: IData | null;
+  scienceNews: IData | null;
+  colors: string[];
+  currentId: number;
   serverUnconnected: boolean;
+  keyApi: string;
 }
 
 
+export interface ITitle {
+  articles: ITitleMore[];
+  totalArticles: number;
+}
+
+export interface ITitleMore {
+  title: string,
+  description: string,
+  content: string,
+  url: string,
+  image: string,
+  publishedAt: string,
+  source: {
+    name: string,
+    url: string
+  }
+}
 
 export interface IData {
   articles: IDataDescription[];

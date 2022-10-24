@@ -20,13 +20,13 @@ export interface IMoreSportProps {
 export interface State {}
 
 class MoreSport extends React.Component<IMoreSportProps, State> {
-  componentDidMount() {
-    if (this.props.sportNews === null) {
-      this.props.getSport(
-        `https://newsapi.org/v2/top-headlines?country=ie&category=sports&apiKey=${this.props.keyApi}`
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.sportNews === null) {
+  //     this.props.getSport(
+  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //     );
+  //   }
+  // }
 
   render() {
     return this.props.sportNews === null ? (
