@@ -1,4 +1,4 @@
-import { BadConnectionTypes, IBadConnectionAction } from "./../Types/Types";
+import { BadConnectionTypes, IBadConnectionAction, ITitle } from "./../Types/Types";
 import {
   GetDataTypes,
   isLoadingTypes,
@@ -239,26 +239,11 @@ export const getHealth = (url: string) => {
   };
 };
 
-export const getSidebarNews = (url: string) => {
-  return (dispatch: Dispatch) => {
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("HTTP error, status = " + response.status);
-        }
-      })
-      .then((news) =>
-        dispatch({
-          type: GetSidebarTypes.GETSIDEBAR,
-          data: news,
-        })
-      )
-      .catch((err) => {
-        throw new Error(err);
-      });
-  };
+export const getSidebarNews = (news: ITitle | null) => {
+  return {
+    type: GetSidebarTypes.GETSIDEBAR,
+    data: news,
+  }
 };
 
 const loading = (): ILoadingAction => {

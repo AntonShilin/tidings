@@ -5,29 +5,27 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import { goToPublisherPage, getSidebarNews } from "../../../Actions/Actions";
 import defaultImage from "../../Media/img/articles.jpg";
-import { IData } from "../../../Types/Types";
+import { ITitle } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
 import RightSidebar from "../RightSidebar";
 
 export interface ISelectArticleProps {
-  sidebarNews: IData | null;
+  sidebarNews: ITitle | null;
   getSidebarNews: typeof getSidebarNews;
   goToPublisherPage: typeof goToPublisherPage;
   colors: string[];
   url: any;
-  keyApi: string;
 }
 
 export interface State {}
 
 class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
-  // componentDidMount() {
-  //   if (this.props.sidebarNews === null) {
-  //     this.props.getSidebarNews(
-  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
-  //     );
-  //   }
-  // }
+  componentDidMount() {
+    // if (this.props.sidebarNews === null) {
+    //   this.props.getSidebarNews(
+    //   );
+    // }
+  }
 
   render() {
     const id: number = this.props.url.match.params.id;
@@ -47,17 +45,17 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
           >
             <h1>{this.props.sidebarNews.articles[id].title}</h1>
             <p>
-              <b>{this.props.sidebarNews.articles[id].author} </b>
-              <small>
-                {this.props.sidebarNews.articles[id].publishedAt.match(
-                  /\d+\-\d+\d+\-\d+/g
-                )}
-              </small>
+              <b>{this.props.sidebarNews.articles[id].source.name} </b>
+              {
+                <small>
+                  {this.props.sidebarNews.articles[id].publishedAt}
+                </small>
+              }
             </p>
             <img
               src={
-                this.props.sidebarNews.articles[id].urlToImage !== null
-                  ? this.props.sidebarNews.articles[id].urlToImage
+                this.props.sidebarNews.articles[id].image !== null
+                  ? this.props.sidebarNews.articles[id].image
                   : defaultImage
               }
               alt="img_1"
@@ -77,7 +75,6 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
 const mapStateToProps = (state: RootState, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
-    keyApi: state.data_news.keyApi,
     colors: state.data_news.colors,
     url,
   };
@@ -85,7 +82,7 @@ const mapStateToProps = (state: RootState, url: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getSidebarNews: (url: string) => dispatch(getSidebarNews(url)),
+    getSidebarNews: (news: ITitle | null) => dispatch(getSidebarNews(news)),
     goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };

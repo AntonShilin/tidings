@@ -26,11 +26,13 @@ export interface State {}
 class TitlePage extends React.Component<ITitlePageProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      // this.props.getData();
+      this.props.getData();
     }
   }
 
   render() {
+    const { colors , titlepageNews} = this.props;
+
     if (this.props.titlepageNews === null) {
       return <Preloader />;
     }
@@ -48,22 +50,21 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                       <h3>
                         <mark>
                           <NavLink to="/titlenews/7">
-                            {this.props.titlepageNews.articles[7].title}
+                            {titlepageNews!.articles[titlepageNews!.articles.length-1].title}
                           </NavLink>
                         </mark>
                       </h3>
                       <img
                         className="img-fluid mb-1"
                         src={
-                          this.props.titlepageNews.articles[7].image !==
-                          null
-                            ? this.props.titlepageNews.articles[7].image
+                        titlepageNews!.articles[titlepageNews!.articles.length-1].image !== null
+                            ? titlepageNews!.articles[7].image
                             : defaultImage
                         }
                         alt="img"
                       />
                       <p>
-                        {this.props.titlepageNews.articles[7].description}
+                        {titlepageNews!.articles[titlepageNews!.articles.length-1].description}
                         <FiChevronsRight />
                       </p>
                     </div>
@@ -74,9 +75,7 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                     (article: ITitleMore, i: number) => (
                       <div className="col-lg-6 col-md-6 col-sm-12" key={i}>
                         <h5>
-                          <mark
-                            style={{ backgroundColor: this.props.colors[i] }}
-                          >
+                          <mark style={{ backgroundColor: colors[i] }}>
                             <NavLink to={`/titlenews/${i}`}>
                               {article.title}
                             </NavLink>
@@ -95,7 +94,7 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
                           {article.description}
                           <FiChevronsRight
                             style={{
-                              color: this.props.colors[i],
+                              color: colors[i],
                               strokeWidth: 4,
                             }}
                           />

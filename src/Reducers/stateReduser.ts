@@ -74,15 +74,23 @@ export const stateReducer = (
 ): IMainState => {
   switch (action.type) {
     case GetDataTypes.GETDATA: {
-      // action.data!.articles.map(
-      //   (elem: ITitleMore, i: number) => (elem.source.id = i)
-      // );
-
       return {
         ...state,
         titlepageNews: action.data,
       };
     }
+
+
+    case GetSidebarTypes.GETSIDEBAR: {
+      // action.data!.articles.map(
+      //   (elem: IDataDescription, i: number) => (elem.source.id = i)
+      // );
+      return {
+        ...state,
+        sidebarNews: action.data,
+      };
+    }
+
 
     case GetEntertainmentTypes.GETENTERTAINMENT: {
       action.data!.articles.map(
@@ -140,16 +148,6 @@ export const stateReducer = (
       };
     }
 
-    case GetSidebarTypes.GETSIDEBAR: {
-      action.data!.articles.map(
-        (elem: IDataDescription, i: number) => (elem.source.id = i)
-      );
-      return {
-        ...state,
-        sidebarNews: action.data,
-      };
-    }
-
     case GetHealthTypes.GETHEALTH: {
       action.data!.articles.map(
         (elem: IDataDescription, i: number) => (elem.source.id = i)
@@ -192,9 +190,9 @@ export const stateReducer = (
     }
 
     case ArrowLeftTypes.ARROWLEFT: {
-      let num:number = action.nextId;
+      let num: number = action.nextId;
       if (num <= 0) {
-        num = state.titlepageNews!.articles.length-1;
+        num = state.titlepageNews!.articles.length - 1;
       } else {
         --num;
       }
@@ -206,8 +204,8 @@ export const stateReducer = (
     }
 
     case ArrowRightTypes.ARROWRIGHT: {
-      let num:number =  action.nextId;
-      if (num >= state.titlepageNews!.articles.length-1) {
+      let num: number = action.nextId;
+      if (num >= state.titlepageNews!.articles.length - 1) {
         num = 0;
       } else {
         ++num;
@@ -215,16 +213,16 @@ export const stateReducer = (
 
       return {
         ...state,
-        currentId:num,
+        currentId: num,
       };
     }
-      
+
     case BadConnectionTypes.BADCONNECTION: {
       return {
         ...state,
-        serverUnconnected:action.value
+        serverUnconnected: action.value
       }
-      }
+    }
 
     default:
       return state;

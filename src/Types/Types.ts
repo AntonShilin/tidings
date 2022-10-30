@@ -149,7 +149,7 @@ export interface IScienceAction {
 }
 export interface ISidebarAction {
   type: GetSidebarTypes.GETSIDEBAR;
-  data: IData | null;
+  data: ITitle | null;
 }
 export interface IHealthAction {
   type: GetScienceTypes.GETSCIENCE;
@@ -220,7 +220,7 @@ export type MainActions =
 export interface IMainState {
   titlepageNews: ITitle | null;
   entertainmentNews: IData | null;
-  sidebarNews: IData | null;
+  sidebarNews: ITitle | null;
   trendingNews: IData | null;
   techNews: IData | null;
   businessNews: IData | null;

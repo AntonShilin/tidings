@@ -4,28 +4,25 @@ import { connect } from "react-redux";
 import "./RightSidebar.scss";
 import { withRouter } from "react-router";
 import defaultImage from "../Media/img/articles.jpg";
-import { IData } from "../../Types/Types";
+import { ITitle } from "../../Types/Types";
 import { RootState } from "../../Store/Store";
 
 export interface IRightSidebarProps {
-  sidebarNews: IData | null;
+  sidebarNews: ITitle | null;
+  titlepageNews: ITitle | null;
   getSidebarNews: typeof getSidebarNews;
   showSidebarArticleInfo: typeof showSidebarArticleInfo;
   url: any;
-  keyApi: string;
 }
 
 export interface State {}
 
 class RightSidebar extends React.Component<IRightSidebarProps, State> {
-
-  // componentDidMount() {
-  //   if (this.props.sidebarNews === null) {
-  //     this.props.getSidebarNews(
-  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
-  //     );
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.sidebarNews === null) {
+      this.props.getSidebarNews(this.props.titlepageNews);
+    }
+  }
 
   render() {
     return (
@@ -37,30 +34,33 @@ class RightSidebar extends React.Component<IRightSidebarProps, State> {
         </div>
         <div className="row">
           {this.props.sidebarNews !== null
-            ? this.props.sidebarNews.articles.map(
-                (article: any, i: number) => (
+            ? this.props.sidebarNews.articles
+                .reverse()
+                .map((article: any, i: number) => (
                   <div
                     key={i}
-                    className="col-12 article_right_sidebar  mb-2"
-                    onClick={() =>
-                      this.props.showSidebarArticleInfo(
-                        this.props.sidebarNews!.articles[i].source.id,
-                        this.props.url
-                      )
-                    }
-                >
-                   <p>
-                    <img
-                      src={this.props.sidebarNews!.articles[i].urlToImage !== null
-                        ? this.props.sidebarNews!.articles[i].urlToImage
-                        : defaultImage}
-                      className="img-fluid"
-                      alt="img"
-                    />
-                   {article.description}</p>
+                    className="col-12 article_right_sidebar mb-2"
+                    // onClick={() =>
+                    //   this.props.showSidebarArticleInfo(
+                    //     this.props.sidebarNews!.articles[i].source.id,
+                    //     this.props.url
+                    //   )
+                    // }
+                  >
+                    <p>
+                      <img
+                        src={
+                          this.props.sidebarNews!.articles[i].image !== null
+                            ? this.props.sidebarNews!.articles[i].image
+                            : defaultImage
+                        }
+                        className="img-fluid"
+                        alt="img"
+                      />
+                      {article.description}
+                    </p>
                   </div>
-                )
-              )
+                ))
             : null}
         </div>
       </div>
@@ -71,14 +71,14 @@ class RightSidebar extends React.Component<IRightSidebarProps, State> {
 const mapStateToProps = (state: RootState, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
-    keyApi: state.data_news.keyApi,
+    titlepageNews: state.data_news.titlepageNews,
     url,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getSidebarNews: (url: string) => dispatch(getSidebarNews(url)),
+    getSidebarNews: (news: ITitle | null) => dispatch(getSidebarNews(news)),
     showSidebarArticleInfo: (id: number, url: any) =>
       dispatch(showSidebarArticleInfo(id, url)),
   };
