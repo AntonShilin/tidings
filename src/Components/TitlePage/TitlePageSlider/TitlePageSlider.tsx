@@ -24,7 +24,7 @@ export interface State {}
 class TitlePageSlider extends React.Component<ITitlePageSliderProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      this.props.getData();
+      // this.props.getData();
     }
   }
 

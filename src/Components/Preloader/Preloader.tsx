@@ -1,22 +1,60 @@
 import * as React from "react";
 import "./Preloader.scss";
 
-export interface Props {}
+export interface IPreloaderProps {}
 
-export interface State {
+export interface IPreloaderState {
+  stroke: number[];
+  progressBar: number;
 }
 
-class Preloader extends React.Component<Props, State> {
+class Preloader extends React.Component<IPreloaderProps, IPreloaderState> {
+  private progress: any;
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      stroke: [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7],
+      progressBar: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.progress = setInterval(() => this.tick(), 100);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.progress);
+  }
+
+  tick() {
+    if (this.state.progressBar < 100) {
+      this.setState({
+        progressBar: this.state.progressBar + 1,
+      });
+    } else {
+      this.setState({
+        progressBar: 0,
+      });
+    }
+  }
 
   render() {
+    const { stroke, progressBar } = this.state;
+
     return (
       <div className="container-xl preloader">
         <div className="row">
-          <div className="col-12">
-            <h1 className="text-warning text-center">
-            Loading ...
-            </h1>
-          </div>
+          {stroke.map((el, i) => (
+            <div className={"progress col-" + el} key={i}>
+              <div
+                className="progress-bar"
+                style={{ width: el + progressBar + "%" }}
+              >
+                {progressBar}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

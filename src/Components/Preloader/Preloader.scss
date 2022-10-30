@@ -1,7 +1,23 @@
-div.preloader{
-    height: 90vh;
-    padding-top:20rem !important;
-    div{
-        height: 100%;
+div.preloader {
+  min-height: 90vh;
+  padding-top: 5rem !important;
+  overflow: hidden;
+  div {
+    height: auto;
+    div.progress {
+      background-color: #fff;
+      height: 2rem;
+      margin: 0.75rem 0 0 0.75rem;
+      padding-right: 0px;
+      padding-left: 0px;
+      border: 1px solid lightgray;
+      div.progress-bar {
+        background-color: #888888 !important;
+        background-image: linear-gradient(to right, white, gray);
+      }
     }
+    div.progress:last-of-type {
+      margin-bottom: 0.5rem;
+    }
+  }
 }

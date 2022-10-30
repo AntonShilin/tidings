@@ -22,7 +22,7 @@ export interface State {}
 class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      this.props.getData();
+      // this.props.getData();
     }
   }
 
