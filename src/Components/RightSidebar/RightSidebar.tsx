@@ -25,7 +25,7 @@ class RightSidebar extends React.Component<IRightSidebarProps, State> {
   }
 
   render() {
-    return (
+    const sidebar = (
       <div className="container-xl header-right-sidebar">
         <div className="row">
           <h3 className="text-start mb-4">
@@ -41,10 +41,7 @@ class RightSidebar extends React.Component<IRightSidebarProps, State> {
                   key={i}
                   className="col-12 article_right_sidebar mb-2"
                   onClick={() =>
-                    this.props.showSidebarArticleInfo(
-                      i,
-                      this.props.url
-                    )
+                    this.props.showSidebarArticleInfo(i, this.props.url)
                   }
                 >
                   <p>
@@ -64,6 +61,7 @@ class RightSidebar extends React.Component<IRightSidebarProps, State> {
         </div>
       </div>
     );
+    return sidebar;
   }
 }
 

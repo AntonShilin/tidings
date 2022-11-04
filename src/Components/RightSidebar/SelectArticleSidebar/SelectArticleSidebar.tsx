@@ -5,7 +5,6 @@ import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
 import {
   goToPublisherPage,
-  getData,
   getSidebarNews,
 } from "../../../Actions/Actions";
 import defaultImage from "../../Media/img/articles.jpg";
@@ -15,8 +14,6 @@ import RightSidebar from "../RightSidebar";
 
 export interface ISelectArticleProps {
   sidebarNews: ITitle | null;
-  titlepageNews: ITitle | null;
-  getData: typeof getData;
   goToPublisherPage: typeof goToPublisherPage;
   getSidebarNews: typeof getSidebarNews;
   colors: string[];
@@ -28,6 +25,7 @@ export interface State {}
 class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
   componentDidMount() {
     if (this.props.sidebarNews === null) {
+      this.props.url.history.goBack();
     }
   }
 
@@ -38,7 +36,7 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
       return <Preloader />;
     }
 
-    return (
+    const selectArticle = (
       <div className="container-xl">
         <div className="row selected-article">
           <div
@@ -74,13 +72,14 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
         </div>
       </div>
     );
+
+    return selectArticle;
   }
 }
 
 const mapStateToProps = (state: RootState, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
-    titlepageNews: state.data_news.titlepageNews,
     colors: state.data_news.colors,
     url,
   };
@@ -88,7 +87,6 @@ const mapStateToProps = (state: RootState, url: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getData: () => dispatch(getData()),
     getSidebarNews: (news: ITitle | null) => getSidebarNews(news),
     goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
