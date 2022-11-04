@@ -39,7 +39,7 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
 
     return (
       this.props.titlepageNews !== null && (
-        <React.Fragment>
+        <>
           <div className="container-xl title-page">
             <TitlePageSlider />
             <div className="row mt-5">
@@ -113,7 +113,7 @@ class TitlePage extends React.Component<ITitlePageProps, State> {
           <PreviewTech />
           <PreviewBusiness />
           <PreviewSport />
-        </React.Fragment>
+        </>
       )
     );
   }

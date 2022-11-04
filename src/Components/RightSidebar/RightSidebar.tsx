@@ -33,35 +33,34 @@ class RightSidebar extends React.Component<IRightSidebarProps, State> {
           </h3>
         </div>
         <div className="row">
-          {this.props.sidebarNews !== null
-            ? this.props.sidebarNews.articles
-                .reverse()
-                .map((article: any, i: number) => (
-                  <div
-                    key={i}
-                    className="col-12 article_right_sidebar mb-2"
-                    // onClick={() =>
-                    //   this.props.showSidebarArticleInfo(
-                    //     this.props.sidebarNews!.articles[i].source.id,
-                    //     this.props.url
-                    //   )
-                    // }
-                  >
-                    <p>
-                      <img
-                        src={
-                          this.props.sidebarNews!.articles[i].image !== null
-                            ? this.props.sidebarNews!.articles[i].image
-                            : defaultImage
-                        }
-                        className="img-fluid"
-                        alt="img"
-                      />
-                      {article.description}
-                    </p>
-                  </div>
-                ))
-            : null}
+          {this.props.sidebarNews !== null &&
+            this.props.sidebarNews.articles
+              .reverse()
+              .map((article: any, i: number) => (
+                <div
+                  key={i}
+                  className="col-12 article_right_sidebar mb-2"
+                  onClick={() =>
+                    this.props.showSidebarArticleInfo(
+                      i,
+                      this.props.url
+                    )
+                  }
+                >
+                  <p>
+                    <img
+                      src={
+                        this.props.sidebarNews!.articles[i].image !== null
+                          ? this.props.sidebarNews!.articles[i].image
+                          : defaultImage
+                      }
+                      className="img-fluid"
+                      alt="img"
+                    />
+                    {article.description}
+                  </p>
+                </div>
+              ))}
         </div>
       </div>
     );

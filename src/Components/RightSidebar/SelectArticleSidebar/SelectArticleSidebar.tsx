@@ -3,7 +3,11 @@ import "./SelectArticleSidebar.scss";
 import { connect } from "react-redux";
 import Preloader from "../../Preloader/Preloader";
 import { FiChevronsRight } from "react-icons/fi";
-import { goToPublisherPage, getSidebarNews } from "../../../Actions/Actions";
+import {
+  goToPublisherPage,
+  getData,
+  getSidebarNews,
+} from "../../../Actions/Actions";
 import defaultImage from "../../Media/img/articles.jpg";
 import { ITitle } from "../../../Types/Types";
 import { RootState } from "../../../Store/Store";
@@ -11,8 +15,10 @@ import RightSidebar from "../RightSidebar";
 
 export interface ISelectArticleProps {
   sidebarNews: ITitle | null;
-  getSidebarNews: typeof getSidebarNews;
+  titlepageNews: ITitle | null;
+  getData: typeof getData;
   goToPublisherPage: typeof goToPublisherPage;
+  getSidebarNews: typeof getSidebarNews;
   colors: string[];
   url: any;
 }
@@ -21,18 +27,18 @@ export interface State {}
 
 class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
   componentDidMount() {
-    // if (this.props.sidebarNews === null) {
-    //   this.props.getSidebarNews(
-    //   );
-    // }
+    if (this.props.sidebarNews === null) {
+    }
   }
 
   render() {
     const id: number = this.props.url.match.params.id;
 
-    return this.props.sidebarNews === null ? (
-      <Preloader />
-    ) : (
+    if (this.props.sidebarNews === null) {
+      return <Preloader />;
+    }
+
+    return (
       <div className="container-xl">
         <div className="row selected-article">
           <div
@@ -46,11 +52,7 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
             <h1>{this.props.sidebarNews.articles[id].title}</h1>
             <p>
               <b>{this.props.sidebarNews.articles[id].source.name} </b>
-              {
-                <small>
-                  {this.props.sidebarNews.articles[id].publishedAt}
-                </small>
-              }
+              {<small>{this.props.sidebarNews.articles[id].publishedAt}</small>}
             </p>
             <img
               src={
@@ -66,6 +68,9 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
               <FiChevronsRight style={{ color: "orange", strokeWidth: 4 }} />
             </p>
           </div>
+          <div className="col-lg-4 col-md-4 col-sm-none">
+            <RightSidebar />
+          </div>
         </div>
       </div>
     );
@@ -75,6 +80,7 @@ class SelectArticleSidebar extends React.Component<ISelectArticleProps, State> {
 const mapStateToProps = (state: RootState, url: any) => {
   return {
     sidebarNews: state.data_news.sidebarNews,
+    titlepageNews: state.data_news.titlepageNews,
     colors: state.data_news.colors,
     url,
   };
@@ -82,7 +88,8 @@ const mapStateToProps = (state: RootState, url: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getSidebarNews: (news: ITitle | null) => dispatch(getSidebarNews(news)),
+    getData: () => dispatch(getData()),
+    getSidebarNews: (news: ITitle | null) => getSidebarNews(news),
     goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };

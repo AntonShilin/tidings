@@ -20,7 +20,7 @@ class Preloader extends React.Component<IPreloaderProps, IPreloaderState> {
   }
 
   componentDidMount() {
-    this.progress = setInterval(() => this.tick(), 100);
+    this.progress = setInterval(() => this.tick(), 60);
   }
 
   componentWillUnmount() {
@@ -51,7 +51,6 @@ class Preloader extends React.Component<IPreloaderProps, IPreloaderState> {
                 className="progress-bar"
                 style={{ width: el + progressBar + "%" }}
               >
-                {progressBar}
               </div>
             </div>
           ))}

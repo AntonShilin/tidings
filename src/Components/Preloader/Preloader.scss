@@ -5,15 +5,15 @@ div.preloader {
   div {
     height: auto;
     div.progress {
-      background-color: #fff;
+      background-color: #d3d3d35e;
       height: 2rem;
       margin: 0.75rem 0 0 0.75rem;
       padding-right: 0px;
       padding-left: 0px;
-      border: 1px solid lightgray;
       div.progress-bar {
+        box-shadow: inset 0px 0px 20px 0px;
         background-color: #888888 !important;
-        background-image: linear-gradient(to right, white, gray);
+        background-image: linear-gradient(to right, #f8f8f8, #d3d3d36b);
       }
     }
     div.progress:last-of-type {
