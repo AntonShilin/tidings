@@ -58,7 +58,7 @@ export const getData = () => {
       })
       .catch((err) => {
         errorCoonnectionWithServer(true);
-        throw new Error("HTTP error, status = " + err.status);
+        throw new Error("HTTP error, status = " + err);
       });
   };
 };

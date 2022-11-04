@@ -8,7 +8,7 @@ import RightSidebar from "../../RightSidebar/RightSidebar";
 import { RouteComponentProps } from "react-router-dom";
 import defaultImage from "../../Media/img/news.jpg";
 import { RootState } from "../../../Store/Store";
-import {  ITitle } from "../../../Types/Types";
+import { ITitle } from "../../../Types/Types";
 
 export interface ISelectArticleProps {
   titlepageNews: ITitle | null;
@@ -22,16 +22,18 @@ export interface State {}
 class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      // this.props.getData();
+      this.props.getData();
     }
   }
 
   render() {
     const id: number = this.props.url.match.params.id;
 
-    return this.props.titlepageNews === null ? (
-      <Preloader />
-    ) : (
+    if (this.props.titlepageNews === null) {
+      return <Preloader />;
+    }
+
+    return (
       <div className="container-xl">
         <div className="row selected-article">
           <div
@@ -45,9 +47,7 @@ class TitleSelectArticle extends React.Component<ISelectArticleProps, State> {
             <h1>{this.props.titlepageNews.articles[id].title}</h1>
             <p>
               <b>{this.props.titlepageNews.articles[id].source.name} </b>
-              <small>
-                {this.props.titlepageNews.articles[id].publishedAt}
-              </small>
+              <small>{this.props.titlepageNews.articles[id].publishedAt}</small>
             </p>
             <img
               src={
