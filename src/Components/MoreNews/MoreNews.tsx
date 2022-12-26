@@ -20,21 +20,20 @@ export interface IMoreNewsProps {
 export interface State {}
 
 class MoreNews extends React.Component<IMoreNewsProps, State> {
-  // componentDidMount() {
-  //   if (this.props.headlineNews === null) {
-  //     this.props.getNews(
-  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
-  //     );
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.headlineNews === null) {
+      this.props.getNews(
+      );
+    }
+  }
 
   render() {
     return this.props.headlineNews === null ? (
       <Preloader />
     ) : (
-      <React.Fragment>
+      <>
         <div className="container-xl mt-5 headline-news-article">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-12">
               <div className="row">
                 <div className="col">
@@ -108,9 +107,9 @@ class MoreNews extends React.Component<IMoreNewsProps, State> {
             <div className="col-lg-4 col-md-4 col-sm-12">
               <RightSidebar />
             </div>
-          </div>
+          </div> */}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -125,7 +124,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getNews: (url: string) => dispatch(getNews(url)),
+    getNews: () => dispatch(getNews()),
   };
 };
 

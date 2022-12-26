@@ -26,7 +26,7 @@ export interface State {}
 class TitlePage extends React.Component<ITitlePageProps, State> {
   componentDidMount() {
     if (this.props.titlepageNews === null) {
-      this.props.getData();
+      // this.props.getData();
     }
   }
 

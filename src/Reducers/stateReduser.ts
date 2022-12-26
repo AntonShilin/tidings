@@ -91,6 +91,14 @@ export const stateReducer = (
       };
     }
 
+    case GetHeadlineNewsTypes.GETHEADLINENEWS: {
+      return {
+        ...state,
+        headlineNews: action.data,
+      };
+    }
+
+
 
     case GetEntertainmentTypes.GETENTERTAINMENT: {
       action.data!.articles.map(
@@ -165,17 +173,6 @@ export const stateReducer = (
         sportNews: action.data,
       };
     }
-
-    case GetHeadlineNewsTypes.GETHEADLINENEWS: {
-      action.data!.articles.map(
-        (elem: IDataDescription, i: number) => (elem.source.id = i)
-      );
-      return {
-        ...state,
-        headlineNews: action.data,
-      };
-    }
-
 
     case GetPublisherPageTypes.GETPUBLISHERPAGE: {
       return {

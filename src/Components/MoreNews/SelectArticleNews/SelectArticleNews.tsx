@@ -24,7 +24,7 @@ class SelectArticleNews extends React.Component<ISelectArticleProps, State> {
   // componentDidMount() {
   //   if (this.props.headlineNews === null) {
   //     this.props.getNews(
-  //       `https://gnews.io/api/v4/search?q=example&token=${this.props.keyApi}`
+  //    
   //     );
   //   }
   // }
@@ -86,7 +86,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getNews: (url: string) => dispatch(getNews(url)),
+    getNews: () => dispatch(getNews()),
     goToPublisherPage: (adress: string) => dispatch(goToPublisherPage(adress)),
   };
 };

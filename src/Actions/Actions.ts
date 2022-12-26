@@ -195,14 +195,24 @@ export const getSport = (url: string) => {
   };
 };
 
-export const getNews = (url: string) => {
+export const getNews = () => {
   return (dispatch: Dispatch) => {
-    fetch(url)
+
+    fetch(`https://content.guardianapis.com/search?q=debates&dc2d3945-f403-401a-8e84-4aaf4c75b98c=test`, {
+      method: 'GET',  
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': 'true',
+        'Accept': 'application/json'
+      }
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("HTTP error, status = " + response.status);
+          throw new Error("HTTP error, status = " + response.statusText);
         }
       })
       .then((news) =>

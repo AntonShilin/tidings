@@ -5,19 +5,42 @@ div.preloader {
   div {
     height: auto;
     div.progress {
-      background-color: #d3d3d35e;
+      background-color: #fff !important; 
       height: 2rem;
       margin: 0.75rem 0 0 0.75rem;
       padding-right: 0px;
       padding-left: 0px;
-      div.progress-bar {
-        box-shadow: inset 0px 0px 20px 0px;
-        background-color: #888888 !important;
-        background-image: linear-gradient(to right, #f8f8f8, #d3d3d36b);
-      }
+      animation-name: loading;
+      animation-duration: 1.5s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      border: 0.25px solid #e8e8e8;
+
     }
     div.progress:last-of-type {
       margin-bottom: 0.5rem;
     }
   }
+}
+
+@keyframes loading {
+  0% {
+    background-image: linear-gradient(to right, #fff 0%, #a2a2a2);
+  }
+  25% {
+    background-image: linear-gradient(to right, #fff 25%, #a2a2a2);
+  }
+  50% {
+    background-image: linear-gradient(to right, #fff 50%, #a2a2a2);
+  }
+  75% {
+    background-image: linear-gradient(to right, #fff 75%, #a2a2a2);
+  }
+  90% {
+    background-image: linear-gradient(to right, #fff 90%, #a2a2a2);
+  }
+  100% {
+    background-image: linear-gradient(to right,  #fff 100%, #a2a2a2);
+  }
+
 }
